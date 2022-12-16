@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/16 11:18:08 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:41:53 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*ft_bufferjoin(char *s1, char *s2);
 char	*ft_linetrim(char *str);
 char	*month_is(char *src);
 char	*day_is(char *src);
+void	calculate_log(char **date);
 
 #endif

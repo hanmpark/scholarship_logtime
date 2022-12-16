@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/16 11:40:06 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:07:31 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ char	**parse_month(int month, int fd) {
 		str_month = month_is(str[index]);
 		str_day = day_is(str[index]);
 	}
-	if (atoi(str_month) != month - 1 || (atoi(str_month) == month - 1 && atoi(str_day) <= 26)) {
-		free(str[--index]);
-		str[--index] = 0;
+	if (atoi(str_month) == month - 1 && atoi(str_day) <= 26) {
+		free(str[index]);
+		str[index] = 0;
 	}
 	return (str);
 }
@@ -85,11 +85,15 @@ int	main(void) {
 	}
 	fd = open("text_file.txt", O_RDONLY);
 	date = parse_month(month, fd);
-	while (date[i]) {
-		printf("%s", date[i++]);
-		free(date[i]);
-	}
-	free(date);
+	close(fd);
+	printf("\n");
+	//printf("\033[0;34m");
+	printf("\033[1;34mTHE CHOSEN MONTH'S LOGTIMES:\n\033[0m");
+	//printf("\033[0m");
+	while (date[i])
+		printf("\t- %s", date[i++]);
+	printf("\n");
+	calculate_log(date);
 	return (0);
 }
 /**/
