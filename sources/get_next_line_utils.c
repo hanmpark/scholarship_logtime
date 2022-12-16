@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:46:43 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/05 07:14:41 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:17:13 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "scholarship_logtime.h"
 
 size_t	ft_strlen(char *str)
 {
