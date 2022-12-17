@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/16 23:37:23 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 11:20:34 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,15 @@ char	*day_is(char *src) {
 		dest[i++] = src[j++];
 	dest[i] = 0;
 	return (dest);
+}
+
+// CLEAR DATE
+void	free_date(char **date) {
+	int	i = 0;
+
+	while (date[i]) {
+		free(date[i++]);
+	}
+	free(date);
 }
 /**/
