@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 17:48:41 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:32:41 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,21 @@ void	parse_calculation(char **date, char **bonus_date) {
 		printf("\033[1;31mCan't calculate for bonus logtime...\n\033[0m");
 	}
 	ttlog = ccl_total_time(date, bnlog);
-	printf("\033[1;36m~~~~ Logged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
-	if (ttlog[2] < 140)
+	printf("\033[1;36m~~~~ Logged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
+	if (ttlog[2] < 140) {
 		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 139 - stdlog[2], 60 - stdlog[1], 60 - stdlog[0]);
-	if (stdlog[2] >= 140 && stdlog[2] < 210) {
+	} else if (stdlog[2] >= 140 && stdlog[2] < 210) {
 		stdlog[2] -= 140;
+		printf("--> \033[1mYou are good for this month !\n\n\033[0m");
 		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
 	} else if (stdlog[2] >= 210) {
 		stdlog[2] = 70;
 		stdlog[1] = 0;
 		stdlog[0] = 0;
+		printf("--> \033[1mYou are good for this month !\n\033[0m");
 		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
-	}
+	} else
+		printf("--> \033[1mYou are good for this month !\n\n\033[0m");
 	free(ttlog);
 	free(stdlog);
 }
@@ -73,7 +76,7 @@ int	main(void) {
 	printf("\033[1;34mTHE CHOSEN MONTH'S LOGTIMES:\n\033[0m");
 	while (date[i])
 		printf("\t- %s", date[i++]);
-	printf("\n\n");
+	printf("\n");
 	parse_calculation(date, bonus_date);
 	if (bonus_date)
 		free_date(bonus_date);

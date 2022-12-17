@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 17:49:15 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:33:30 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ int	*ccl_total_time(char **date, int *bnlog) {
 
 	if (bnlog[2] >= 140 && bnlog[2] < 210) {
 		bnlog[2] -= 140;
-		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
 	} else if (bnlog[2] >= 210) {
-		bnlog[0] = 70;
+		bnlog[0] = 0;
 		bnlog[1] = 0;
-		bnlog[2] = 0;
-		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+		bnlog[2] = 70;
+		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
 	} else {
 		bnlog[0] = 0;
 		bnlog[1] = 0;
 		bnlog[2] = 0;
-		printf("\033[1;31m| No bonus logtime |\n\033[0m");
+		printf("\033[1;31m| No bonus logtime |\n\n\033[0m");
 	}
 	ttlog = ccl_log(date);
 	ttlog[0] += bnlog[0];
