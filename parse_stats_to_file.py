@@ -6,7 +6,7 @@
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/15 19:38:23 by hanmpark          #+#    #+#              #
-#    Updated: 2022/12/16 00:12:07 by hanmpark         ###   ########.fr        #
+#    Updated: 2022/12/16 22:22:48 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,10 @@ def parsing(value):
 	result.append(adder)
 	return result
 
-f = open("text_file.txt", "r")
+f = open("texts/text_file.txt", "r")
 string = parsing(f.read()) [::-1]
 f.close()
-f = open("text_file.txt", "w")
+f = open("texts/text_file.txt", "w")
 for i in string:
 	i = re.sub('[<>]', '', i)
 	i = ''.join(i.partition('.')[0])

@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/16 17:53:22 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 00:34:49 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sources/scholarship_logtime.h"
+#include "scholarship_logtime.h"
 /*\*/
 int	ccl_time(char **date, int itype) {
 	int		idate = -1;
@@ -31,28 +31,31 @@ int	ccl_time(char **date, int itype) {
 }
 
 void	calculate_log(char **date) {
-	int		ihours = 12;
-	int		iminutes = 15;
-	int		iseconds = 18;
-
 	int		res_min = 0;
 	int		res_hour = 0;
 	int		res_sec = 0;
 
 	// CALCULATES SECONDS
-	res_sec = ccl_time(date, iseconds);
+	res_sec = ccl_time(date, 18);
 	res_min = res_sec / 60;
 	res_sec %= 60;
-	printf("%d seconds\n", res_sec);
-
 	// CALCULATES MINUTES
-	res_min += ccl_time(date, iminutes);
+	res_min += ccl_time(date, 15);
 	res_hour = res_min / 60;
 	res_min %= 60;
-	printf("%d minutes\n", res_min);
-
-	//CALCULATES HOURS
-	res_hour += ccl_time(date, ihours);
-	printf("%d hours\n", res_hour);
+	// CALCULATES HOURS
+	res_hour += ccl_time(date, 12);
+	printf("\033[1;36m~~~~ Logged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\n\033[0m", res_hour, res_min, res_sec);
+	if (res_hour < 140)
+		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 139 - res_hour, 60 - res_min, 60 - res_sec);
+	else {
+		res_hour -= 140;
+		if (res_hour > 70) {
+			res_hour = 70;
+			res_min = 0;
+			res_sec = 0;
+		}
+		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", res_hour, res_min, res_sec);
+	}
 }
 /**/

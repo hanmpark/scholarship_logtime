@@ -9,4 +9,4 @@ client = OAuth2::Client.new(UID, SECRET, site: "https://api.intra.42.fr")
 token = client.client_credentials.get_token
 print("Login: ")
 login = scanf("%s")
-File.open("text_file.txt", "w") { |file| file.write token.get("/v2/users/%s/locations_stats" % login).parsed()}
+File.open("texts/text_file.txt", "w") { |file| file.write token.get("/v2/users/%s/locations_stats" % login).parsed()}

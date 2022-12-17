@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/16 18:07:31 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 00:39:44 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,37 @@
 
 /*\*/
 // FINDS THE 26TH OR LESS DAY
-char	*find_day(int month, int fd) {
+char	*find_day(int month, int lastmonth, int fd) {
 	char	*str;
 	char	*str_month;
-
-	while (1) {
-		str = get_next_line(fd);
-		str_month = month_is(str);
-		if (atoi(str_month) == month || atoi(str_month) == month - 1)
+	char	*str_day;
+	
+	str = get_next_line(fd);
+	str_month = month_is(str);
+	while (atoi(str_month) != month) {
+		if (atoi(str_month) == lastmonth)
 			break ;
 		free(str);
+		str = get_next_line(fd);
+		if (!str)
+			return(NULL);
+		free(str_month);
+		str_month = month_is(str);
+	}
+	str_day = day_is(str);
+	while (atoi(str_month) == month && atoi(str_day) > 26) {
+		free(str);
+		str = get_next_line(fd);
+		free(str_day);
+		str_day = day_is(str);
+	}
+	if (atoi(str_month) == lastmonth && atoi(str_day) < 27) {
+		free(str_month);
+		free(str_day);
+		return (NULL);
 	}
 	free(str_month);
+	free(str_day);
 	return (str);
 }
 
@@ -34,20 +53,20 @@ char	**parse_month(int month, int fd) {
 	char	*str_day;
 	char	*str_month;
 	char	**str;
+	int		lastmonth = month - 1;
 	int		index = 0;
 
 	str = calloc(32, sizeof(char *));
 	if (!str)
 		return (NULL);
-	str[index] = find_day(month, fd);
+	if (month == 1)
+		lastmonth = 12;
+	str[index] = find_day(month, lastmonth, fd);
+	if (!str[index])
+		return (NULL);
 	str_day = day_is(str[index]);
 	str_month = month_is(str[index]);
-	while (atoi(str_day) > 26) {
-		free(str[index]);
-		str[index] = get_next_line(fd);
-		free(str_day);
-		str_day = day_is(str[index]);
-	}
+	
 	while (atoi(str_month) == month && atoi(str_day) < 27) {
 		str[++index] = get_next_line(fd);
 		free(str_month);
@@ -55,16 +74,14 @@ char	**parse_month(int month, int fd) {
 		str_month = month_is(str[index]);
 		str_day = day_is(str[index]);
 	}
-	if (index == 0)
-		index--;
-	while (atoi(str_month) == month - 1 && atoi(str_day) > 26) {
+	while (atoi(str_month) == lastmonth && atoi(str_day) > 26) {
 		str[++index] = get_next_line(fd);
 		free(str_month);
 		free(str_day);
 		str_month = month_is(str[index]);
 		str_day = day_is(str[index]);
 	}
-	if (atoi(str_month) == month - 1 && atoi(str_day) <= 26) {
+	if (atoi(str_month) == lastmonth && atoi(str_day) <= 26) {
 		free(str[index]);
 		str[index] = 0;
 	}
@@ -80,16 +97,18 @@ int	main(void) {
 	printf("Month: ");
 	scanf("%d", &month);
 	if (month < 1 || month > 12) {
-		printf("Month doesn't exist...\n");
+		printf("\033[1;31mMonth doesn't exist...\n\033[0m");
 		return (-1);
 	}
-	fd = open("text_file.txt", O_RDONLY);
+	fd = open("texts/text_file.txt", O_RDONLY);
 	date = parse_month(month, fd);
+	if (!date) {
+		printf("\033[1;31mCan't calculate for this month...\n\033[0m");
+		return (-1);
+	}
 	close(fd);
 	printf("\n");
-	//printf("\033[0;34m");
 	printf("\033[1;34mTHE CHOSEN MONTH'S LOGTIMES:\n\033[0m");
-	//printf("\033[0m");
 	while (date[i])
 		printf("\t- %s", date[i++]);
 	printf("\n");
