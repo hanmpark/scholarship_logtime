@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 12:18:43 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:38:49 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scholarship_logtime.h"
+#include "../includes/scholarship_logtime.h"
 /*\*/
 char	*get_day(int month, int lastmonth, int fd) {
 	char	*str;
@@ -18,25 +18,27 @@ char	*get_day(int month, int lastmonth, int fd) {
 	char	*str_day;
 	
 	str = get_next_line(fd);
+	if (!str)
+		return (NULL);
 	str_month = month_is(str);
 	while (atoi(str_month) != month) {
 		if (atoi(str_month) == lastmonth)
 			break ;
 		free(str);
+		free(str_month);
 		str = get_next_line(fd);
 		if (!str)
 			return(NULL);
-		free(str_month);
 		str_month = month_is(str);
 	}
 	str_day = day_is(str);
 	while (atoi(str_month) == month && atoi(str_day) > 26) {
 		free(str);
-		str = get_next_line(fd);
 		free(str_day);
+		str = get_next_line(fd);
 		str_day = day_is(str);
 	}
-	if (atoi(str_month) == lastmonth && atoi(str_day) < 27) {
+	if (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) > 26)) {
 		free(str_month);
 		free(str_day);
 		return (NULL);
@@ -56,7 +58,7 @@ void	get_month(char **str, int month, int lastmonth, int fd) {
 		free(str_month);
 		free(str_day);
 		if (!str[i])
-			break ;
+			return ;
 		str_month = month_is(str[i]);
 		str_day = day_is(str[i]);
 	}
@@ -65,11 +67,11 @@ void	get_month(char **str, int month, int lastmonth, int fd) {
 		free(str_month);
 		free(str_day);
 		if (!str[i])
-			break ;
+			return ;
 		str_month = month_is(str[i]);
 		str_day = day_is(str[i]);
 	}
-	if (str[i] && atoi(str_month) == lastmonth && atoi(str_day) <= 26) {
+	if (str[i] && (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27))) {
 		free(str[i]);
 		str[i] = 0;
 	}

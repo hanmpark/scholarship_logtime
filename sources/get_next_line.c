@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:35:29 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/16 11:17:19 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:42:19 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scholarship_logtime.h"
+#include "../includes/scholarship_logtime.h"
 
 int	ft_is_nl(char *str)
 {

@@ -17,4 +17,4 @@ gcc main.c scholarship_logtime.a
 ./a.out
 make fclean
 rm a.out
-truncate -s 0 texts/text_file.txt
+#truncate -s 0 texts/text_file.txt

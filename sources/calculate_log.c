@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 00:34:49 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:49:15 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scholarship_logtime.h"
+#include "../includes/scholarship_logtime.h"
 /*\*/
 int	ccl_time(char **date, int itype) {
 	int		idate = -1;
@@ -30,32 +30,58 @@ int	ccl_time(char **date, int itype) {
 	return (res);
 }
 
-void	calculate_log(char **date) {
-	int		res_min = 0;
-	int		res_hour = 0;
-	int		res_sec = 0;
+int	*ccl_log(char **date) {
+	int	*res;
 
+	res = malloc(3 * sizeof(int));
+	if (!res)
+		return (NULL);
+	res[0] = 0; // seconds
+	res[1] = 0; // minutes
+	res[2] = 0; // hours
 	// CALCULATES SECONDS
-	res_sec = ccl_time(date, 18);
-	res_min = res_sec / 60;
-	res_sec %= 60;
+	res[0] = ccl_time(date, 18);
+	res[1] = res[0] / 60;
+	res[0] %= 60;
 	// CALCULATES MINUTES
-	res_min += ccl_time(date, 15);
-	res_hour = res_min / 60;
-	res_min %= 60;
+	res[1] += ccl_time(date, 15);
+	res[2] = res[1] / 60;
+	res[1] %= 60;
 	// CALCULATES HOURS
-	res_hour += ccl_time(date, 12);
-	printf("\033[1;36m~~~~ Logged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\n\033[0m", res_hour, res_min, res_sec);
-	if (res_hour < 140)
-		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 139 - res_hour, 60 - res_min, 60 - res_sec);
-	else {
-		res_hour -= 140;
-		if (res_hour > 70) {
-			res_hour = 70;
-			res_min = 0;
-			res_sec = 0;
-		}
-		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", res_hour, res_min, res_sec);
+	res[2] += ccl_time(date, 12);
+	return (res);
+}
+
+int	*ccl_total_time(char **date, int *bnlog) {
+	int	*ttlog;
+
+	if (bnlog[2] >= 140 && bnlog[2] < 210) {
+		bnlog[2] -= 140;
+		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+	} else if (bnlog[2] >= 210) {
+		bnlog[0] = 70;
+		bnlog[1] = 0;
+		bnlog[2] = 0;
+		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+	} else {
+		bnlog[0] = 0;
+		bnlog[1] = 0;
+		bnlog[2] = 0;
+		printf("\033[1;31m| No bonus logtime |\n\033[0m");
 	}
+	ttlog = ccl_log(date);
+	ttlog[0] += bnlog[0];
+	if (ttlog[0] > 59) {
+		ttlog[1] += ttlog[0] / 60;
+		ttlog[0] %= 60;
+	}
+	ttlog[1] += bnlog[1];
+	if (ttlog[1] > 59) {
+		ttlog[2] += ttlog[1] / 60;
+		ttlog[1] %= 60;
+	}
+	ttlog[2] += bnlog[2];
+	free(bnlog);
+	return (ttlog);
 }
 /**/
