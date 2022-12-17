@@ -6,14 +6,15 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 16:30:45 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:50:38 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
 /*\*/
 // TELLS WHAT THE MONTH IS
-char	*month_is(char *src) {
+char	*month_is(char *src)
+{
 	char	*dest;
 	int		i = 0;
 	int		j = 5;
@@ -28,7 +29,8 @@ char	*month_is(char *src) {
 }
 
 // TELLS WHAT THE DAY IS
-char	*day_is(char *src) {
+char	*day_is(char *src)
+{
 	char	*dest;
 	int		i = 0;
 	int		j = 8;
@@ -43,12 +45,12 @@ char	*day_is(char *src) {
 }
 
 // CLEAR DATE
-void	free_date(char **date) {
+void	free_date(char **date)
+{
 	int	i = 0;
 
-	while (date[i]) {
+	while (date[i])
 		free(date[i++]);
-	}
 	free(date);
 }
 /**/

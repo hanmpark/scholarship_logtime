@@ -6,13 +6,14 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 17:38:49 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:55:40 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
 /*\*/
-char	*get_day(int month, int lastmonth, int fd) {
+char	*get_day(int month, int lastmonth, int fd)
+{
 	char	*str;
 	char	*str_month;
 	char	*str_day;
@@ -21,7 +22,8 @@ char	*get_day(int month, int lastmonth, int fd) {
 	if (!str)
 		return (NULL);
 	str_month = month_is(str);
-	while (atoi(str_month) != month) {
+	while (atoi(str_month) != month)
+	{
 		if (atoi(str_month) == lastmonth)
 			break ;
 		free(str);
@@ -32,7 +34,8 @@ char	*get_day(int month, int lastmonth, int fd) {
 		str_month = month_is(str);
 	}
 	str_day = day_is(str);
-	while (atoi(str_month) == month && atoi(str_day) > 26) {
+	while (atoi(str_month) == month && atoi(str_day) > 26)
+	{
 		free(str);
 		free(str_day);
 		str = get_next_line(fd);
@@ -48,30 +51,34 @@ char	*get_day(int month, int lastmonth, int fd) {
 	return (str);
 }
 
-void	get_month(char **str, int month, int lastmonth, int fd) {
+void	get_month(char **str, int month, int lastmonth, int fd)
+{
 	int		i = 0;
 	char	*str_month = month_is(str[i]);
 	char	*str_day = day_is(str[i]);
 
-	while (str[i] && atoi(str_month) == month && atoi(str_day) < 27) {
+	while (str[i] && atoi(str_month) == month && atoi(str_day) < 27)
+	{
 		str[++i] = get_next_line(fd);
+		if (!str[i])
+			break;
 		free(str_month);
 		free(str_day);
-		if (!str[i])
-			return ;
 		str_month = month_is(str[i]);
 		str_day = day_is(str[i]);
 	}
-	while (str[i] && atoi(str_month) == lastmonth && atoi(str_day) > 26) {
+	while (str[i] && atoi(str_month) == lastmonth && atoi(str_day) > 26)
+	{
 		str[++i] = get_next_line(fd);
+		if (!str[i])
+			break;
 		free(str_month);
 		free(str_day);
-		if (!str[i])
-			return ;
 		str_month = month_is(str[i]);
 		str_day = day_is(str[i]);
 	}
-	if (str[i] && (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27))) {
+	if (str[i] && (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27)))
+	{
 		free(str[i]);
 		str[i] = 0;
 	}
@@ -79,7 +86,8 @@ void	get_month(char **str, int month, int lastmonth, int fd) {
 	free(str_day);
 }
 
-char	**parse_month(int month, int fd) {
+char	**parse_month(int month, int fd)
+{
 	char	**str;
 	int		lastmonth;
 
@@ -91,7 +99,8 @@ char	**parse_month(int month, int fd) {
 	else
 		lastmonth = month - 1;
 	str[0] = get_day(month, lastmonth, fd);
-	if (!str[0]) {
+	if (!str[0])
+	{
 		free(str);
 		return (NULL);
 	}

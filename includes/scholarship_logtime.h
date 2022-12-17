@@ -6,13 +6,14 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 17:53:51 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:17:56 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCHOLARSHIP_LOGTIME_H
 # define SCHOLARSHIP_LOGTIME_H
 # include <stdlib.h>
+# include <stdint.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -35,6 +36,7 @@ void	free_date(char **date);
 // CALCULATE_LOG
 int		*ccl_log(char **date);
 int		*ccl_total_time(char **date, int *bnlog);
+void	parse_calculation(char **date, char **bonus_date);
 // PARSE_MONTH
 char	**parse_month(int month, int fd);
 
