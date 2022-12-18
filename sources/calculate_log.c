@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 09:57:26 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/18 11:33:02 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,13 @@ int	*ccl_log(char **date)
 	return (res);
 }
 
-int	*ccl_total_time(char **date, int *bnlog)
+void	set_bnlog(int *stdlog, int *bnlog)
 {
-	int	*ttlog;
-	int	*stdlog;
-
-	stdlog = ccl_log(date);
 	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
 		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
-		printf("\033[0;36m~~~~ without bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
+		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else if (bnlog[2] >= 210)
 	{
@@ -73,7 +69,7 @@ int	*ccl_total_time(char **date, int *bnlog)
 		bnlog[1] = 0;
 		bnlog[2] = 70;
 		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
-		printf("\033[0;36m~~~~ without bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
+		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else
 	{
@@ -82,6 +78,15 @@ int	*ccl_total_time(char **date, int *bnlog)
 		bnlog[2] = 0;
 		printf("\033[1;31m| No bonus logtime |\n\n\033[0m");
 	}
+}
+
+int	*ccl_total_time(char **date, int *bnlog)
+{
+	int	*ttlog;
+	int	*stdlog;
+
+	stdlog = ccl_log(date);
+	set_bnlog(stdlog, bnlog);
 	ttlog = ccl_log(date);
 	ttlog[0] += bnlog[0];
 	if (ttlog[0] > 59)
@@ -120,9 +125,9 @@ void	parse_calculation(char **date, char **bonus_date)
 		printf("\033[0;31mCan't calculate for bonus logtime...\n\033[0m");
 	}
 	ttlog = ccl_total_time(date, bnlog);
-	printf("\033[1;36m~~~~ Logged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
+	printf("\033[1;36mLogged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
 	if (ttlog[2] < 140)
-		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 139 - stdlog[2], 60 - stdlog[1], 60 - stdlog[0]);
+		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 139 - ttlog[2], 60 - ttlog[1], 60 - ttlog[0]);
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
