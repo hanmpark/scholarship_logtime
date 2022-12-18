@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_month.c                                      :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 09:50:10 by hanmpark         ###   ########.fr       */
+/*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
+/*   Updated: 2022/12/18 18:08:00 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ char	*get_day(int month, int lastmonth, int fd)
 		str = get_next_line(fd);
 		str_day = day_is(str);
 	}
-	if (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27)) {
-		free(str_month);
-		free(str_day);
+	if (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27))
 		return (NULL);
-	}
 	free(str_month);
 	free(str_day);
 	return (str);
@@ -77,34 +74,9 @@ void	get_month(char **str, int month, int lastmonth, int fd)
 		str_month = month_is(str[i]);
 		str_day = day_is(str[i]);
 	}
-	if (str[i] && (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27)))
-	{
-		free(str[i]);
-		str[i] = 0;
-	}
+	free(str[i]);
+	str[i] = 0;
 	free(str_month);
 	free(str_day);
-}
-
-char	**parse_month(int month, int fd)
-{
-	char	**str;
-	int		lastmonth;
-
-	str = calloc(32, sizeof(char *));
-	if (!str)
-		return (NULL);
-	if (month == 1)
-		lastmonth = 12;
-	else
-		lastmonth = month - 1;
-	str[0] = get_day(month, lastmonth, fd);
-	if (!str[0])
-	{
-		free(str);
-		return (NULL);
-	}
-	get_month(str, month, lastmonth, fd);
-	return (str);
 }
 /**/

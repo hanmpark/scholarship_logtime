@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 22:50:38 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/18 17:12:53 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,20 @@ void	free_date(char **date)
 	while (date[i])
 		free(date[i++]);
 	free(date);
+}
+
+// CALCULATES THE TIME LEFT
+void	ccl_timeleft(int *ttlog)
+{
+	if (ttlog[0] > 0)
+		{
+			ttlog[0] = 60 - ttlog[0];
+			ttlog[1]++;
+		}
+	if (ttlog[1] > 0)
+	{
+		ttlog[1] = 60 - ttlog[1];
+		ttlog[2]++;
+	}
 }
 /**/

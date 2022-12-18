@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 11:33:02 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:08:51 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	*ccl_log(char **date)
 
 void	set_bnlog(int *stdlog, int *bnlog)
 {
-	if (bnlog[2] >= 140 && bnlog[2] < 210)
+	if (bnlog[2] >= 140 && bnlog[2] <= 210)
 	{
 		bnlog[2] -= 140;
 		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
 		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
-	else if (bnlog[2] >= 210)
+	else if (bnlog[2] > 210)
 	{
 		bnlog[0] = 0;
 		bnlog[1] = 0;
@@ -106,28 +106,13 @@ int	*ccl_total_time(char **date, int *bnlog)
 	return (ttlog);
 }
 
-void	parse_calculation(char **date, char **bonus_date)
+void	check_logtime(int *stdlog, int *ttlog)
 {
-	int	*stdlog;
-	int	*bnlog;
-	int	*ttlog;
-	
-	stdlog = ccl_log(date);
-	if (bonus_date)
-		bnlog = ccl_log(bonus_date);
-	else
-	{
-		(void)bonus_date;
-		bnlog = malloc(3 * sizeof(char));
-		bnlog[0] = 0;
-		bnlog[1] = 0;
-		bnlog[2] = 0;
-		printf("\033[0;31mCan't calculate for bonus logtime...\n\033[0m");
-	}
-	ttlog = ccl_total_time(date, bnlog);
-	printf("\033[1;36mLogged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
 	if (ttlog[2] < 140)
-		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 139 - ttlog[2], 60 - ttlog[1], 60 - ttlog[0]);
+	{
+		ccl_timeleft(ttlog);
+		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 140 - ttlog[2], ttlog[1], ttlog[0]);
+	}
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
@@ -144,7 +129,5 @@ void	parse_calculation(char **date, char **bonus_date)
 	}
 	else
 		printf("--> \033[1mYou are good for this month !\n\n\033[0m");
-	free(ttlog);
-	free(stdlog);
 }
 /**/

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 22:47:17 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:19:52 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int	main(void)
 		printf("\033[1;31mMonth doesn't exist...\n\033[0m");
 		return (-1);
 	}
+	lastmonth = month - 1;
 	if (month == 1)
 		lastmonth = 12;
-	else
-		lastmonth = month - 1;
 	fd = open("texts/text_file.txt", O_RDONLY);
 	date = parse_month(month, fd);
 	close(fd);
@@ -42,7 +41,7 @@ int	main(void)
 		return (-1);
 	}
 	fd = open("texts/text_file.txt", O_RDONLY);
-	bonus_date = parse_month(month - 1, fd);
+	bonus_date = parse_month(lastmonth, fd);
 	close(fd);
 	printf("\n");
 	printf("\033[1;34mTHE CHOSEN MONTH'S LOGTIMES:\n\033[0m");
