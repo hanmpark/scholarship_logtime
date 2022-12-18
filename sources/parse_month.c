@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 22:55:40 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/18 09:50:10 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_day(int month, int lastmonth, int fd)
 		str = get_next_line(fd);
 		str_day = day_is(str);
 	}
-	if (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) > 26)) {
+	if (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27)) {
 		free(str_month);
 		free(str_day);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 22:56:21 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/18 09:57:26 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,14 @@ int	*ccl_log(char **date)
 int	*ccl_total_time(char **date, int *bnlog)
 {
 	int	*ttlog;
+	int	*stdlog;
 
+	stdlog = ccl_log(date);
 	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
 		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+		printf("\033[0;36m~~~~ without bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else if (bnlog[2] >= 210)
 	{
@@ -70,6 +73,7 @@ int	*ccl_total_time(char **date, int *bnlog)
 		bnlog[1] = 0;
 		bnlog[2] = 70;
 		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+		printf("\033[0;36m~~~~ without bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m ~~~~\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else
 	{
@@ -93,6 +97,7 @@ int	*ccl_total_time(char **date, int *bnlog)
 	}
 	ttlog[2] += bnlog[2];
 	free(bnlog);
+	free(stdlog);
 	return (ttlog);
 }
 
@@ -121,7 +126,7 @@ void	parse_calculation(char **date, char **bonus_date)
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
-		printf("--> \033[1mYou are good for this month !\n\n\033[0m");
+		printf("--> \033[1mYou are good for this month !\n\033[0m");
 		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else if (stdlog[2] >= 210)
