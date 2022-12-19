@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 00:57:19 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:28:32 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	set_bnlog(int *stdlog, int *bnlog)
 	if (bnlog[2] >= 140 && bnlog[2] <= 210)
 	{
 		bnlog[2] -= 140;
-		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
 		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else if (bnlog[2] > 210)
@@ -70,7 +70,7 @@ void	set_bnlog(int *stdlog, int *bnlog)
 		bnlog[0] = 0;
 		bnlog[1] = 0;
 		bnlog[2] = 70;
-		printf("\033[1mBonus logtime added from previous month = %dh %dmin %ds\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
+		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
 		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else
@@ -118,8 +118,8 @@ void	check_logtime(int *stdlog, int *ttlog)
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
-		printf("--> \033[1mYou are good for this month !\n\033[0m");
-		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
+		printf("--> You are good for this month !\n");
+		printf("--> \033[1;32m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else if (stdlog[2] >= 210)
 	{
@@ -127,7 +127,7 @@ void	check_logtime(int *stdlog, int *ttlog)
 		stdlog[1] = 0;
 		stdlog[0] = 0;
 		printf("--> \033[1mYou are good for this month !\n\033[0m");
-		printf("--> \033[1m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
+		printf("--> \033[1;32m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else
 		printf("--> \033[1mYou are good for this month !\n\n\033[0m");

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 18:10:02 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:22:33 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parse_calculation(char **date, char **bonus_date)
 		printf("\033[0;31mCan't calculate for bonus logtime...\n\033[0m");
 	}
 	ttlog = ccl_total_time(date, bnlog);
-	printf("\033[1;36mLogged time = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
+	printf("\033[1;36mTotal logtime = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
 	check_logtime(stdlog, ttlog);
 	free(ttlog);
 	free(stdlog);
