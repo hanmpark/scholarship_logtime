@@ -11,10 +11,8 @@ echo "
 
 "
 ruby connect_api.rb
-python3 parse_stats_to_file.py
 make
 gcc main.c scholarship_logtime.a
 ./a.out
 make fclean
 rm a.out
-#truncate -s 0 texts/text_file.txt

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 17:12:53 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 00:17:29 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,35 @@ void	ccl_timeleft(int *ttlog)
 		ttlog[1] = 60 - ttlog[1];
 		ttlog[2]++;
 	}
+}
+
+// SIMPLE PUTSTR
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	while (*s)
+	{
+		write(fd, &*s, 1);
+		s++;
+	}
+}
+
+// SUBSTR FOR PARSING THE LOGTIME
+char	*ft_substr(char *str, int len)
+{
+	char	*dest;
+	int		i = 0;
+
+	dest = malloc((len + 2) * sizeof(char));
+	while (i < len)
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	free(str);
+	dest[i++] = '"';
+	dest[i] = 0;
+	return (dest);
 }
 /**/

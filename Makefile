@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 11:59:19 by hanmpark          #+#    #+#              #
-#    Updated: 2022/12/18 18:09:35 by hanmpark         ###   ########.fr        #
+#    Updated: 2022/12/19 00:59:15 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS_DIR	= sources/
 
 # SOURCES / OBJECTS
 SRCS_FILES	=	get_next_line.c get_next_line_utils.c utils.c calculate_log.c \
-				parse.c get_time.c
+				parse.c get_time.c parse_stats.c
 SRCS		=	${addprefix ${SRCS_DIR}, ${SRCS_FILES}}
 
 OBJS		=	${SRCS:.c=.o}

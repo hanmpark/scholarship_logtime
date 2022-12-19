@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_logtime.c                                    :+:      :+:    :+:   */
+/*   parse_stats.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 19:48:26 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 01:14:39 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/scholarship_logtime.h"
+#include "../includes/scholarship_logtime.h"
 
 size_t	count_words(char const *str, char c)
 {
@@ -79,21 +79,28 @@ char	**ft_split(char const *s, char c)
 	return (tab - count);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int	trim_tab(char **tab)
 {
-	if (!s)
-		return ;
-	while (*s)
+	int		i;
+	size_t	len;
+
+	i = 0;
+	while (tab[i])
 	{
-		write(fd, &*s, 1);
-		s++;
+		len = ft_strlen(tab[i]) - 1;
+		while (len != 0 && tab[i][len] != '.')
+			len--;
+		if (len > 0)
+			tab[i] = ft_substr(tab[i], len);
+		i++;
 	}
+	return (i);
 }
 
-int	main(void)
+int	parse_stats(void)
 {
 	int		fd;
-	int		i = 0;
+	int		i;
 	char	*str;
 	char	**res;
 
@@ -107,13 +114,19 @@ int	main(void)
 	close(fd);
 	res = ft_split(str, ' ');
 	free(str);
-	fd = open("texts/text_file.txt", O_WRONLY);
-	while (res[i])
-		i++;
-	while (i && res[--i])
+	i = trim_tab(res);
+	fd = open("texts/text_file.txt", O_WRONLY | O_TRUNC);
+	free(res[i]);
+	i--;
+	while (i > 0)
 	{
 		ft_putstr_fd(res[i], fd);
+		free(res[i]);
 		ft_putstr_fd("\n", fd);
+		i--;
 	}
+	free(res[i]);
+	close(fd);
+	free(res);
 	return (0);
 }

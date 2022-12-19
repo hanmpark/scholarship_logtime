@@ -6,12 +6,13 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 18:08:51 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 00:57:19 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
 /*\*/
+// CALCULATES TIME NOT PARSED
 int	ccl_time(char **date, int itype)
 {
 	int		idate = -1;
@@ -32,6 +33,7 @@ int	ccl_time(char **date, int itype)
 	return (res);
 }
 
+// PARSING OF LOGTIME
 int	*ccl_log(char **date)
 {
 	int	*res;
