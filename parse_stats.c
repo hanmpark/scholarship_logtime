@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 01:14:39 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:37:53 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "includes/scholarship_logtime.h"
 
 size_t	count_words(char const *str, char c)
 {
@@ -97,7 +97,7 @@ int	trim_tab(char **tab)
 	return (i);
 }
 
-int	parse_stats(void)
+int	main(void)
 {
 	int		fd;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 14:34:54 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:46:31 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ int	main(void)
 	char	**date;
 	char	**bonus_date;
 
-	parse_stats();
 	printf("Month: ");
 	scanf("%d", &month);
-	if (month < 1 || month > 12)
+	if (month < 1 || month > 12 || !month)
 	{
-		printf("\033[1;31mMonth doesn't exist...\n\033[0m");
+		printf("\033[1;31mMonth doesn't exist...\n\n\033[0m");
 		return (0);
 	}
 	lastmonth = month - 1;
@@ -53,7 +52,7 @@ int	main(void)
 	close(fd);
 	if (!date)
 	{
-		printf("\033[1;31mCan't calculate for this month...\n\033[0m");
+		printf("\033[1;31mCan't calculate for this month...\n\n\033[0m");
 		return (0);
 	}
 	fd = open("texts/text_file.txt", O_RDONLY);

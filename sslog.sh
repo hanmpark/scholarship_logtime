@@ -1,7 +1,17 @@
 #!/bin/sh
 set -e
-clear
-echo "
+
+ruby connect_api.rb << EOF
+$1
+EOF
+make
+gcc parse_stats.c scholarship_logtime.a
+./a.out
+rm a.out
+while [ -z $response ] || [ $response != 'quit' ]
+do
+    clear
+    echo "
                                                                             
  _____     _       _             _   _        __            _   _           
 |   __|___| |_ ___| |___ ___ ___| |_|_|___   |  |   ___ ___| |_|_|_____ ___ 
@@ -10,9 +20,9 @@ echo "
                                       |_|              |___|                
 
 "
-ruby connect_api.rb
-make
-gcc main.c scholarship_logtime.a
-./a.out
+    gcc scholarship_logtime.a
+    ./a.out
+    read -p 'Type "quit" or ENTER to continue: ' response
+done
 make fclean
 rm a.out
