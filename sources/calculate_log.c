@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 02:28:32 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:31:36 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void	check_logtime(int *stdlog, int *ttlog)
 		stdlog[2] = 70;
 		stdlog[1] = 0;
 		stdlog[0] = 0;
-		printf("--> \033[1mYou are good for this month !\n\033[0m");
+		printf("--> You are good for this month !\n");
 		printf("--> \033[1;32m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else
-		printf("--> \033[1mYou are good for this month !\n\n\033[0m");
+		printf("--> You are good for this month !\n\n");
 }
 /**/
