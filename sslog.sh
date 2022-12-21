@@ -2,6 +2,11 @@
 set -e
 
 make
+ruby connect_api.rb << EOF
+$1
+EOF
+gcc parse_stats.c scholarship_logtime.a
+./a.out
 while [ -z $response ] || [ $response != 'quit' ]
 do
 clear
@@ -14,11 +19,6 @@ echo "
                                       |_|              |___|                
 
 "
-ruby connect_api.rb << EOF
-$1
-EOF
-gcc parse_stats.c scholarship_logtime.a
-./a.out
 gcc scholarship_logtime.a
 ./a.out
 read -p 'Type "quit" or ENTER to continue: ' response

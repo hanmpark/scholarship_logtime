@@ -6,12 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/18 18:08:00 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/21 04:45:48 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
-/*\*/
+
 char	*get_day(int month, int lastmonth, int fd)
 {
 	char	*str;
@@ -41,8 +41,13 @@ char	*get_day(int month, int lastmonth, int fd)
 		str = get_next_line(fd);
 		str_day = day_is(str);
 	}
-	if (atoi(str_month) < lastmonth || (atoi(str_month) == lastmonth && atoi(str_day) < 27))
+	if ((atoi(str_month) != lastmonth && atoi(str_month) != month) ||
+		(atoi(str_month) == lastmonth && atoi(str_day) < 27))
+	{
+		free(str_month);
+		free(str_day);
 		return (NULL);
+	}
 	free(str_month);
 	free(str_day);
 	return (str);
@@ -79,4 +84,3 @@ void	get_month(char **str, int month, int lastmonth, int fd)
 	free(str_month);
 	free(str_day);
 }
-/**/

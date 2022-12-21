@@ -6,12 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 02:31:36 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/21 04:22:54 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
-/*\*/
+
 // CALCULATES TIME NOT PARSED
 int	ccl_time(char **date, int itype)
 {
@@ -57,13 +57,14 @@ int	*ccl_log(char **date)
 	return (res);
 }
 
+// MAX BONUS = 70 AND BONUS = EXTRA TIME AFTER 140 HOURS
 void	set_bnlog(int *stdlog, int *bnlog)
 {
 	if (bnlog[2] >= 140 && bnlog[2] <= 210)
 	{
 		bnlog[2] -= 140;
 		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
-		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
+		printf("\033[0;36m\twithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else if (bnlog[2] > 210)
 	{
@@ -71,7 +72,7 @@ void	set_bnlog(int *stdlog, int *bnlog)
 		bnlog[1] = 0;
 		bnlog[2] = 70;
 		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
-		printf("\033[0;36mwithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
+		printf("\033[0;36m\twithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
 	else
 	{
@@ -108,12 +109,17 @@ int	*ccl_total_time(char **date, int *bnlog)
 	return (ttlog);
 }
 
+// CHECKS TIME LEFT OR ADDITIONAL TIME OR DONE
 void	check_logtime(int *stdlog, int *ttlog)
 {
+	int	dleft;
+
 	if (ttlog[2] < 140)
 	{
 		ccl_timeleft(ttlog);
-		printf("--> \033[1m%dh %dmin %ds\033[0m left\n\n", 140 - ttlog[2], ttlog[1], ttlog[0]);
+		dleft = day_left();
+		printf("--> \033[1m%dh %dmin %ds\033[0m left\n", ttlog[2], ttlog[1], ttlog[0]);
+		printf("--> \033[1mYou have %d days left\n\n", dleft);
 	}
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
@@ -132,4 +138,3 @@ void	check_logtime(int *stdlog, int *ttlog)
 	else
 		printf("--> You are good for this month !\n\n");
 }
-/**/

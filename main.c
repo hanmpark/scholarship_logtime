@@ -6,13 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 16:46:31 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/21 04:35:46 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/scholarship_logtime.h"
 
-/*\*/
 void	print_result(char **date, char **bonus_date)
 {
 	int	i;
@@ -21,7 +20,10 @@ void	print_result(char **date, char **bonus_date)
 	printf("\n");
 	printf("\033[1;34mTHE CHOSEN MONTH'S LOGTIMES:\n\033[0m");
 	while (date[i])
-		printf("\t- %s", date[i++]);
+	{
+		printf("  - %s", date[i]);
+		i++;
+	}
 	printf("\n");
 	parse_calculation(date, bonus_date);
 	if (bonus_date)
@@ -61,4 +63,3 @@ int	main(void)
 	print_result(date, bonus_date);
 	return (0);
 }
-/**/
