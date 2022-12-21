@@ -23,7 +23,7 @@ Go to the project directory
 
 ### Ruby
 
-To run this project, you will have to install Ruby if it's not installed yet. Note that on mac it is already installed. To check it, do:
+To run this project, you will have to install Ruby if it's not installed yet. Note that on mac it is already pre-installed. To check it, do:
 
 ```bash
   which ruby
@@ -35,7 +35,7 @@ You should get something like
   /usr/bin/ruby
 ```
 
-Then, run the following command line in your terminal to create your **Gemfile**:
+Once you have it, run the following command line in scholarship_logtime/ to create your **Gemfile**:
 
 ```bash
   bundle init
