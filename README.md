@@ -76,7 +76,7 @@ Now, add the following environment variables with the _export_ command:
 Now execute the shell script by using the following command line:
 
 ```bash
-  ./sslog your_42_login
+  ./sslog.sh your_42_login
 ```
 
 ## Documentation
