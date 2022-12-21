@@ -23,12 +23,32 @@ Go to the project directory
 
 ### Ruby
 
-To run this project, you will have to install Ruby if it's not installed yet.
+To run this project, you will have to install Ruby if it's not installed yet. Note that on mac it is already installed. To check it, do:
 
-Then, run the following command line in your terminal:
+```bash
+  which ruby
+```
 
-``` bash
-  bundle install oauth2
+You should get something like
+
+```bash
+  /usr/bin/ruby
+```
+
+Then, run the following command line in your terminal to create your **Gemfile**:
+
+```bash
+  bundle init
+```
+
+Now we need the **Gemfile.lock** to add dependencies we need in our program.
+
+```bash
+  bundle add oauth2
+```
+
+```bash
+  bundle add scanf
 ```
 
 ### API
@@ -49,13 +69,14 @@ Now, add the following environment variables:
   UID_42="UID_of_your_application"
   SECRET_42="SECRET_of_your_application"
 ```
-## You are good to go !
+## You are finally good to go !
 
 Now execute the shell script by using the following command line:
 
 ```bash
   ./sslog your_42_login
 ```
+
 ## Documentation
 
 [Documentation](https://api.intra.42.fr/apidoc/guides/getting_started)
