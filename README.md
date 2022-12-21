@@ -1,6 +1,6 @@
 ![time banner](https://kiwiorthoticservices.com/wp-content/uploads/saving-time-banner.jpg)
 
-# scholarship_logtime
+<h1 align="center"> scholarship_logtime</h1>
 
 Hi there !  
 I made a program that calculates the total logtime from the 27th to the 26th of the chosen month to the nearest second with and without the bonus logtime if there's any.  
