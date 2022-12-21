@@ -53,9 +53,9 @@ Now we need the **Gemfile.lock** to add dependencies we need in our program.
 
 ### API
 
-To access the 42 API, you will have to create an application v2.
+As the program needs to access the 42 API, you will have to create an application v2 in your intra.
 
-Go to your intra, click on your profile, settings, API, register a new app.
+For that, go on your intra, click on your profile, settings, API, register a new app.
 
 - **Name** = _scholarship_logtime_
 
@@ -63,11 +63,11 @@ Go to your intra, click on your profile, settings, API, register a new app.
 
 The others you can skip.
 
-Now, add the following environment variables:
+Now, add the following environment variables with the _export_ command:
 
 ```bash
-  UID_42="UID_of_your_application"
-  SECRET_42="SECRET_of_your_application"
+  export UID_42="UID_of_your_application"
+  export SECRET_42="SECRET_of_your_application"
 ```
 ## You are finally good to go !
 
