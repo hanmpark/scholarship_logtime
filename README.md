@@ -6,7 +6,8 @@ Hi there !
 I made a program that calculates the total logtime from the 27th to the 26th of the chosen month to the nearest second with and without the bonus logtime if there's any.  
 You have to do 140 hours between those dates to complete the attendance requirements of the GEN scholarship.
 Therefore, the bonus logtime is the extra hours you did !  
-**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**
+**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**. 
+**My program is only able to look up for the last 4 months yet**
 
 ## Installation
 
@@ -37,6 +38,8 @@ You should get something like
   /usr/bin/ruby
 ```
 
+Else, follow the [this link](https://www.ruby-lang.org/en/documentation/installation/)
+
 Once you have it, run the following command line in scholarship_logtime/ to create your **Gemfile**:
 
 ```bash
@@ -57,7 +60,7 @@ Now we need the **Gemfile.lock** to add dependencies we need in our program.
 
 As the program needs to access the 42 API, you will have to create an application v2 in your intra.
 
-For that, go on your intra, click on your profile, settings, API, register a new app.
+For that, go on your intra, click on your profile, settings, API, register a new app at the top right on your screen.
 
 - **Name** = _scholarship_logtime_
 
@@ -65,7 +68,7 @@ For that, go on your intra, click on your profile, settings, API, register a new
 
 The others you can skip.
 
-Now, add the following environment variables with the _export_ command:
+Now go back to your terminal and add the following environment variables with the _export_ command:
 
 ```bash
   export UID_42="UID_of_your_application"
@@ -87,3 +90,5 @@ Now execute the shell script by using the following command line:
 ## Authors
 
 - [@Nonino42](https://www.github.com/Nonino42)
+
+Feel free to contact me if you have anything to say about the program !
