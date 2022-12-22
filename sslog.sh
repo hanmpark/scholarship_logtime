@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 clear
 echo "
@@ -11,10 +10,17 @@ echo "
                                       |_|              |___|                
 
 "
-make
-ruby connect_api.rb << EOF
+ruby connect_api.rb 2> /dev/null << EOF
 $1
 EOF
+if [ $? -eq 0 ]
+then
+  echo "login: $1"
+else
+  echo "\033[1;31mThe login doesn't exist !\033[0m"
+  exit 1
+fi
+make
 gcc parse_stats.c scholarship_logtime.a
 ./a.out
 gcc scholarship_logtime.a
