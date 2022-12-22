@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/22 18:55:50 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:46:10 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	set_bnlog(int *stdlog, int *bnlog)
 		bnlog[0] = 0;
 		bnlog[1] = 0;
 		bnlog[2] = 0;
-		printf("\033[1;31m| No bonus logtime |\n\n\033[0m");
+		printf("\033[1;31m| No bonus logtime from previous month |\n\n\033[0m");
 	}
 }
 
