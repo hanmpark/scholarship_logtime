@@ -6,11 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/21 04:22:35 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:20:28 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
+#include <time.h>
 
 // TELLS WHAT THE MONTH IS
 char	*month_is(char *src)
@@ -98,22 +99,4 @@ char	*ft_substr(char *str, int len)
 	dest[i++] = '"';
 	dest[i] = 0;
 	return (dest);
-}
-
-#include <time.h>
-
-int	day_left(void)
-{
-	time_t	t;
-	char	*str;
-	int		n;
-
-	time(&t);
-	str = calloc(25, 1);
-	str = ctime(&t);
-	str[10] = 0;
-	str += 8;
-	n = atoi(str);
-	n = 26 - n;
-	return (n);
 }

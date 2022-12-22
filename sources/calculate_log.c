@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/21 04:22:54 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:55:50 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void	check_logtime(int *stdlog, int *ttlog)
 		ccl_timeleft(ttlog);
 		dleft = day_left();
 		printf("--> \033[1m%dh %dmin %ds\033[0m left\n", ttlog[2], ttlog[1], ttlog[0]);
-		printf("--> \033[1mYou have %d days left\n\n", dleft);
+		printf("--> You have \033[1m%d days\033[0m left ", dleft);
+		printf("so \033[1m≈ %dh %dmin %ds\033[0m each day until the 26th\n\n", ttlog[2] / dleft, ttlog[1] / dleft, ttlog[0] / dleft);
 	}
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
