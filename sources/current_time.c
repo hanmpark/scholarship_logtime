@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/22 20:44:25 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/22 23:40:59 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	day_left(void)
 			month--;
 		days_in_month = number_of_days(year, month);
 	}
-	days_left = (days_in_month - 27 + 26) - (days_in_month - 27) - current_day;
+	days_left = (days_in_month - 1) - (days_in_month - 27) - current_day;
 	return (days_left);
 }
 
@@ -81,5 +81,5 @@ int	current_month(void)
 	
 	time(&t);
 	tm = localtime(&t);
-	return (tm->tm_mon+1);
+	return (tm->tm_mon + 1);
 }
