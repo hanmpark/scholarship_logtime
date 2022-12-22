@@ -17,7 +17,7 @@ if [ $? -eq 0 ]
 then
   echo "login: $1"
 else
-  echo "\033[1;31mThe login doesn't exist !\033[0m"
+  echo "\033[1;31mThe login doesn't exist ! Or you need to set your UID_42 and SECRET_42 environment variables\033[0m"
   exit 1
 fi
 make
