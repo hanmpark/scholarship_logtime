@@ -50,7 +50,7 @@ Configure your shell to load rbenv, for zsh it is:
 ```bash
   echo 'eval "$(~/.rbenv/bin/rbenv init - zsh)"' >> ~/.zshrc
 ```
-Else follow this [link](https://github.com/rbenv/rbenv)
+If you don't have zsh, follow this [link](https://github.com/rbenv/rbenv)
 
 Then restart your terminal or simply _exec zsh_ and do
 ```bash
