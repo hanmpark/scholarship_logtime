@@ -5,13 +5,14 @@
 Hello there !
 
 Here's my first personal project which is a program that may be interesting to **GEN scholarship students**:  
-It calculates how much longtime a person has done from the 27th to the 26th of the current month, counting bonus time from the previous month if there is any !
-The program also tells you how many days are left and how many hours per day you should do before the 26th. Else, it tells you the bonus hours that will apply for the next month.  
-I don’t recommend showing this project to the Norminette tho…  
+It calculates how much logtime a person has done from the 27th to the 26th of the current month, counting bonus time from the previous month if there is any !
+The program also tells you how many days are left and how many hours per day you should do before the 26th. Else, it tells you the bonus hours that will apply for the next month.   
 
 **Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**
 
 **If the logs of the day are not displayed, you have to wait until midnight.**
+
+**The program doesn’t calculate manually added logtimes (not sure).**
 
 ## Installation
 
