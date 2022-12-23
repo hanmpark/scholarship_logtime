@@ -2,11 +2,16 @@
 
 <h1 align="center"> scholarship_logtime</h1>
 
-Hi there !  
-I made a program that calculates the total logtime from the 27th to the 26th of the chosen month to the nearest second with and without the bonus logtime if there's any.  
-You have to do 140 hours between those dates to complete the attendance requirements of the **GEN scholarship**.
-Therefore, the bonus logtime is the extra hours you did !  
-**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**. 
+Hello there !
+
+Here's my first personal project which is a program that may be interesting to **GEN scholarship students**:  
+It calculates how much longtime a person has done from the 27th to the 26th of the current month, counting bonus time from the previous month if there is any !
+The program also tells you how many days are left and how many hours per day you should do before the 26th. Else, it tells you the bonus hours that will apply for the next month.  
+I don’t recommend showing this project to the Norminette tho…  
+
+**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**
+
+**If the logs of the day are not displayed, you have to wait until midnight.**
 
 ## Installation
 
