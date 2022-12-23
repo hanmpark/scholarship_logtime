@@ -52,11 +52,11 @@ Else, follow [this link](https://www.ruby-lang.org/en/documentation/installation
   curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
 ```
 
-Configure your shell to load rbenv, for zsh it is:
+Once you have installed rbenv, it should tell you how to configure your shell to load rbenv and the command should look **_something like this_**:
 ```bash
   echo 'eval "$(~/.rbenv/bin/rbenv init - zsh)"' >> ~/.zshrc
 ```
-If you don't have zsh, follow this [link](https://github.com/rbenv/rbenv)
+Or if you don't find the command please follow this [link](https://github.com/rbenv/rbenv)
 
 Then restart your terminal or simply _exec zsh_ and do
 ```bash
