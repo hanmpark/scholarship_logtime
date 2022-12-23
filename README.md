@@ -2,11 +2,17 @@
 
 <h1 align="center"> scholarship_logtime</h1>
 
-Hi there !  
-I made a program that calculates the total logtime from the 27th to the 26th of the chosen month to the nearest second with and without the bonus logtime if there's any.  
-You have to do 140 hours between those dates to complete the attendance requirements of the **GEN scholarship**.
-Therefore, the bonus logtime is the extra hours you did !  
-**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**. 
+Hello there !
+
+Here's my first personal project which is a program that may be interesting to **GEN scholarship students**:  
+It calculates how much logtime a person has done from the 27th to the 26th of the current month, counting bonus time from the previous month if there is any !
+The program also tells you how many days are left and how many hours per day you should do before the 26th. Else, it tells you the bonus hours that will apply for the next month.   
+
+**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**
+
+**If the logs of the day are not displayed, you have to wait until midnight.**
+
+**The program doesn’t calculate manually added logtimes (not sure).**
 
 ## Installation
 
@@ -50,7 +56,7 @@ Configure your shell to load rbenv, for zsh it is:
 ```bash
   echo 'eval "$(~/.rbenv/bin/rbenv init - zsh)"' >> ~/.zshrc
 ```
-Else follow this [link](https://github.com/rbenv/rbenv)
+If you don't have zsh, follow this [link](https://github.com/rbenv/rbenv)
 
 Then restart your terminal or simply _exec zsh_ and do
 ```bash
