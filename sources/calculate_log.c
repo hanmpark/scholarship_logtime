@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/22 20:46:10 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:19:33 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	*ccl_log(char **date)
 // MAX BONUS = 70 AND BONUS = EXTRA TIME AFTER 140 HOURS
 void	set_bnlog(int *stdlog, int *bnlog)
 {
-	if (bnlog[2] >= 140 && bnlog[2] <= 210)
+	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
 		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
 		printf("\033[0;36m\twithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
 	}
-	else if (bnlog[2] > 210)
+	else if (bnlog[2] >= 210)
 	{
 		bnlog[0] = 0;
 		bnlog[1] = 0;

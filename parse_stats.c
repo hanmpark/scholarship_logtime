@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/19 16:37:53 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:18:35 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,8 @@ int	trim_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		len = ft_strlen(tab[i]) - 1;
-		while (len != 0 && tab[i][len] != '.')
-			len--;
-		if (len > 0)
-			tab[i] = ft_substr(tab[i], len);
+		len = 20;
+		tab[i] = ft_substr(tab[i], len);
 		i++;
 	}
 	return (i);
