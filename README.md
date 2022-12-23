@@ -14,25 +14,9 @@ The program also tells you how many days are left and how many hours per day you
 
 **The program doesn’t calculate manually added logtimes (not sure).**
 
-## Installation
-
-Git clone my repo !
-
-```bash
-  git clone https://github.com/Nonino42/scholarship_logtime.git
-```
-
-Go to the project directory
-
-```bash
-  cd scholarship_logtime
-```
-
-## Configuration
-
 ### Ruby
 
-To run this project, you will have to install Ruby if it's not installed yet. Note that on mac it is already pre-installed. To check it, do:
+First of all, to run this project, you will have to install Ruby if it's not installed yet. Note that on mac it is already pre-installed. To check it, do:
 
 ```bash
   which ruby
@@ -65,6 +49,22 @@ Then restart your terminal or simply _exec zsh_ and do
 ```
 
 Now when you do _ruby -v_ you should get the version you just installed.
+
+## Installation
+
+Git clone my repo !
+
+```bash
+  git clone https://github.com/Nonino42/scholarship_logtime.git
+```
+
+Go to the project directory
+
+```bash
+  cd scholarship_logtime
+```
+
+## Configuration
 
 Once you have it, run the following command line in scholarship_logtime/ to create your **Gemfile**:
 
