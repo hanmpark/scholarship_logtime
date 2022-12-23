@@ -30,7 +30,7 @@ You should get something like
 
 Else, follow [this link](https://www.ruby-lang.org/en/documentation/installation/)
 
-**Note that at school, you don't have the permission to change versions, or add and install gems so please follow the next command lines to install rbenv:**
+**Note that at school, you don't have permission to change versions, or add and install gems so please follow the next command lines to install rbenv:**
 
 ```bash
   curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
