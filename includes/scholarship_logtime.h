@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/22 18:07:56 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/27 16:57:22 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	free_date(char **date);
 void	ccl_timeleft(int *ttlog);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(char *str, int len);
-int		day_left(void);
-int		current_month(void);
 // PARSE_STATS
 int		parse_stats(void);
 // CALCULATE_LOG
@@ -49,5 +47,9 @@ int		*ccl_log(char **date);
 char	**parse_month(int month, int fd);
 void	get_month(char **str, int month, int lastmonth, int fd);
 char	*get_day(int month, int lastmonth, int fd);
+// CURRENT_TIME
+int		day_left(void);
+int		current_month(void);
+int		current_day(void);
 
 #endif

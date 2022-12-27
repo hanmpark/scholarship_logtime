@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/23 11:58:39 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/27 16:56:30 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,14 @@ int	current_month(void)
 	time(&t);
 	tm = localtime(&t);
 	return (tm->tm_mon + 1);
+}
+
+int	current_day(void)
+{
+	time_t		t;
+	struct tm	*tm;
+
+	time(&t);
+	tm = localtime(&t);
+	return (tm->tm_mday);
 }

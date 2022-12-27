@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/23 11:06:45 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/27 16:58:17 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(void)
 	char	**bonus_date;
 
 	month = current_month();
+	if (current_day() >= 27 && current_day() <= 31)
+		month++;
 	if (!month)
 	{
 		printf("\033[1;31mThere was a problem looking for the current month...\n\n\033[0m");
