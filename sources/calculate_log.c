@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/26 15:59:41 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:49:45 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,17 @@ void	check_logtime(int *stdlog, int *ttlog)
 		dleft = day_left();
 		if (dleft > 0)
 		{
+			int	hours_left;
+			int	minutes_left;
+			int	seconds_left;
+			hours_left = ttlog[2] / dleft;
+			minutes_left = ((ttlog[2] % dleft) * 60) / dleft;
+			minutes_left += ttlog[1] / dleft;
+			seconds_left = ((ttlog[1] % dleft) * 60) / dleft;
+			seconds_left += ttlog[0] / dleft;
 			printf("--> \033[1m%dh %dmin %ds\033[0m left\n", ttlog[2], ttlog[1], ttlog[0]);
 			printf("--> You have \033[1m%d days\033[0m left ", dleft);
-			printf("so \033[1m≈ %dh %dmin %ds\033[0m each day until the 26th\n\n", ttlog[2] / dleft, ttlog[1] / dleft, ttlog[0] / dleft);
+			printf("so \033[1m≈ %dh %dmin %ds\033[0m each day until the 26th\n\n", hours_left, minutes_left, seconds_left);
 		}
 		else if (dleft == 0)
 			printf("--> You have to do \033[1m%dh %dmin %ds\033[0m today\n\n", ttlog[2], ttlog[1], ttlog[0]);
