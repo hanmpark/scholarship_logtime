@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/27 16:58:17 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:21:24 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ int	main(void)
 	month = current_month();
 	if (current_day() >= 27 && current_day() <= 31)
 		month++;
-	if (!month)
-	{
-		printf("\033[1;31mThere was a problem looking for the current month...\n\n\033[0m");
-		return (0);
-	}
 	lastmonth = month - 1;
 	if (month == 1)
 		lastmonth = 12;
+	if (!month)
+	{
+		printf("\033[1;31mThere was a problem looking for the current month...\n\n\033[0m");
+		return (-1);
+	}
 	fd = open("texts/text_file.txt", O_RDONLY);
 	date = parse_month(month, fd);
 	close(fd);
 	if (!date)
 	{
 		printf("\033[1;31mCan't calculate for this month...\n\n\033[0m");
-		return (0);
+		return (-1);
 	}
 	fd = open("texts/text_file.txt", O_RDONLY);
 	bonus_date = parse_month(lastmonth, fd);
