@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/29 10:49:45 by hanmpark         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:57:28 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void	check_logtime(int *stdlog, int *ttlog)
 			hours_left = ttlog[2] / dleft;
 			minutes_left = ((ttlog[2] % dleft) * 60) / dleft;
 			minutes_left += ttlog[1] / dleft;
-			seconds_left = ((ttlog[1] % dleft) * 60) / dleft;
-			seconds_left += ttlog[0] / dleft;
+			seconds_left = ((minutes_left % dleft) * 60) / dleft;
+			seconds_left += (seconds_left % dleft) + (ttlog[0] / dleft);
 			printf("--> \033[1m%dh %dmin %ds\033[0m left\n", ttlog[2], ttlog[1], ttlog[0]);
 			printf("--> You have \033[1m%d days\033[0m left ", dleft);
 			printf("so \033[1m≈ %dh %dmin %ds\033[0m each day until the 26th\n\n", hours_left, minutes_left, seconds_left);
