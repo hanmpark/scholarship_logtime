@@ -48,7 +48,7 @@ Then restart your terminal or simply _exec zsh_ and do
   rbenv global 2.6.10
 ```
 
-Now when you do _ruby -v_ you should get the version you just installed.
+_exec zsh_ again and now when you do _ruby -v_ you should get the version you just installed.
 
 ## Installation
 

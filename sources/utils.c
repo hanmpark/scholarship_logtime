@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/22 18:20:28 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/04 13:29:51 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	free_date(char **date)
 void	ccl_timeleft(int *ttlog)
 {
 	if (ttlog[0] > 0)
-		{
-			ttlog[0] = 60 - ttlog[0];
-			ttlog[1]++;
-		}
+	{
+		ttlog[0] = 60 - ttlog[0];
+		ttlog[1]++;
+	}
 	if (ttlog[1] > 0)
 	{
 		ttlog[1] = 60 - ttlog[1];
