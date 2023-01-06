@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/23 11:07:20 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:58:51 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parse_calculation(char **date, char **bonus_date)
 	int	*stdlog;
 	int	*bnlog;
 	int	*ttlog;
-	
+
 	stdlog = ccl_log(date);
 	if (bonus_date)
 		bnlog = ccl_log(bonus_date);

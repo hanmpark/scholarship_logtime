@@ -5,7 +5,7 @@
 Hello there !
 
 Here's my first personal project which is a program that may be interesting to **GEN scholarship students**:  
-It calculates the total logtime a person has done from the 27th to the 26th of the current month, counting bonus time from the previous month if there is any !
+It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting bonus time from the previous month if there is any !
 The program also tells you how many days are left and how many hours per day you should do before the 26th. Else, it tells you the bonus hours that will apply for the next month.   
 
 **Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**
@@ -13,6 +13,8 @@ The program also tells you how many days are left and how many hours per day you
 **If the logs of the day are not displayed, you have to wait until midnight.**
 
 **The program doesn’t calculate manually added logtimes (not sure).**
+
+**You can't choose a month that is older than 4 months**
 
 ## Prerequisite
 
@@ -103,8 +105,10 @@ Now go back to your terminal and add the following environment variables with th
 Now execute the program by using the simple command line:
 
 ```bash
-  ./sslog.sh your_42_login
+  ./sslog.sh your_42_login chosen_month
 ```
+
+If you don't put anything for the chosen_month, it will automatically choose the current month.
 
 ## Documentation
 
