@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/29 13:12:10 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 08:17:00 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	*ccl_total_time(char **date, int *bnlog)
 	return (ttlog);
 }
 
-// CHECKS TIME LEFT OR ADDITIONAL TIME OR DONE
+/* CHECKS TIME LEFT OR ADDITIONAL TIME OR DONE */
 void	check_logtime(int *stdlog, int *ttlog)
 {
 	int	dleft;

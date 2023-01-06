@@ -6,14 +6,14 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/04 13:29:51 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 08:21:03 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
 #include <time.h>
 
-// TELLS WHAT THE MONTH IS
+/* TELLS WHAT THE MONTH IS */
 char	*month_is(char *src)
 {
 	char	*dest;
@@ -29,7 +29,7 @@ char	*month_is(char *src)
 	return (dest);
 }
 
-// TELLS WHAT THE DAY IS
+/* TELLS WHAT THE DAY IS */
 char	*day_is(char *src)
 {
 	char	*dest;
@@ -45,7 +45,7 @@ char	*day_is(char *src)
 	return (dest);
 }
 
-// CLEAR DATE
+/* CLEAR DATE */
 void	free_date(char **date)
 {
 	int	i = 0;
@@ -55,7 +55,7 @@ void	free_date(char **date)
 	free(date);
 }
 
-// CALCULATES THE TIME LEFT
+/* CALCULATES THE TIME LEFT */
 void	ccl_timeleft(int *ttlog)
 {
 	if (ttlog[0] > 0)
@@ -71,7 +71,6 @@ void	ccl_timeleft(int *ttlog)
 	ttlog[2] = 140 - ttlog[2];
 }
 
-// SIMPLE PUTSTR
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
@@ -83,7 +82,7 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-// SUBSTR FOR PARSING THE LOGTIME
+/* SUBSTR FOR PARSING THE LOGTIME */
 char	*ft_substr(char *str, int len)
 {
 	char	*dest;

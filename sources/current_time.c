@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/29 09:57:30 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 08:17:48 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	number_of_days(int year, int month)
 {
-	int			days_in_month;
+	int	days_in_month;
 
 	switch (month) {
 		case 0:  days_in_month = 31; break; // January
