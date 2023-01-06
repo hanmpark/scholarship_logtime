@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/06 10:59:27 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:58:32 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static int	set_month(int argc, char *month)
 	if (argc == 2 && (atoi(month) >= 1 && atoi(month) <= 12))
 	{
 		res = atoi(month);
-		printf("Chosen month is: %d\n", res);
+		printf("\033[1mChosen month is:\033[0m %d\n", res);
 	}
 	else if (argc == 2 && (atoi(month) < 1 || atoi(month) > 12))
 		return (0);
 	else
 	{
 		res = current_month();
-		printf("Current month: %d\n", res);
+		printf("\033[1mCurrent month:\033[0m %d\n", res);
 	}
 	if (res == current_month())
 	{
