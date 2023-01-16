@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/16 15:22:23 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:40:31 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,24 @@ int	*ccl_total_time(char **date, int *bnlog)
 	return (ttlog);
 }
 
+static void	print_progress_bn(int tthours)
+{
+	int		i;
+	int		prct;
+	int		printprct;
+
+	i = 0;
+	printf("|");
+	prct = 100 * tthours / 70;
+	printprct = 23 * prct / 100;
+	while (i++ < printprct && i < 23)
+		printf("%s▰%s", YELLOW, DEF);
+	while (i++ < 23)
+		printf("-");
+	printf("| ");
+	printf("%s%d%%%s\n", YELLOW, prct, DEF);
+}
+
 /* CHECKS TIME LEFT OR ADDITIONAL TIME OR DONE */
 void	check_logtime(int *stdlog, int *ttlog)
 {
@@ -144,6 +162,7 @@ void	check_logtime(int *stdlog, int *ttlog)
 		printf("%s%s\tLOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
 		printf("-----------------------------\n");
 		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN, stdlog[2], stdlog[1], stdlog[0], DEF);
+		print_progress_bn(stdlog[2]);
 		printf("-----------------------------\n\n");
 	}
 	else if (stdlog[2] >= 210)
@@ -154,6 +173,7 @@ void	check_logtime(int *stdlog, int *ttlog)
 		printf("%s%s\tLOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
 		printf("-----------------------------\n");
 		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN, stdlog[2], stdlog[1], stdlog[0], DEF);
+		print_progress_bn(stdlog[2]);
 		printf("-----------------------------\n\n");
 	}
 	else

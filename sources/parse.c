@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/16 15:27:51 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:31:31 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	print_progress(int tthours)
 	i = 0;
 	printf("%s%sProgress log:%s\t|", UL, PURPLE, DEF);
 	prct = 100 * tthours / 140;
-	printprct = 23 * (int)prct / 100;
+	printprct = 23 * prct / 100;
 	if (prct < 26)
 		color = RED;
 	else if (prct < 76)
