@@ -6,11 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/06 11:58:32 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:43:34 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/scholarship_logtime.h"
+#include <string.h>
 
 static int	print_result(char **date, char **bonus_date)
 {

@@ -22,7 +22,7 @@ fi
 make
 gcc parse_stats.c scholarship_logtime.a
 ./a.out
-gcc -fsanitize=address -g3 scholarship_logtime.a
-./a.out $2
+gcc scholarship_logtime.a
+./a.out $2 $3
 make fclean
 rm a.out

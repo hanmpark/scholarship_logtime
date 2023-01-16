@@ -6,13 +6,13 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/06 08:17:00 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:22:23 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
 
-// CALCULATES TIME NOT PARSED
+/* CALCULATES TIME NOT PARSED */
 int	ccl_time(char **date, int itype)
 {
 	int		idate = -1;
@@ -33,7 +33,7 @@ int	ccl_time(char **date, int itype)
 	return (res);
 }
 
-// PARSING OF LOGTIME
+/* PARSING OF LOGTIME */
 int	*ccl_log(char **date)
 {
 	int	*res;
@@ -41,45 +41,44 @@ int	*ccl_log(char **date)
 	res = malloc(3 * sizeof(int));
 	if (!res)
 		return (NULL);
+	/* CALCULATES SECONDS */
 	res[0] = 0; // seconds
 	res[1] = 0; // minutes
 	res[2] = 0; // hours
-	// CALCULATES SECONDS
+	/* CALCULATES MINUTES */
 	res[0] = ccl_time(date, 18);
 	res[1] = res[0] / 60;
 	res[0] %= 60;
-	// CALCULATES MINUTES
+	/* CALCULATES HOURS */
 	res[1] += ccl_time(date, 15);
 	res[2] = res[1] / 60;
 	res[1] %= 60;
-	// CALCULATES HOURS
 	res[2] += ccl_time(date, 12);
 	return (res);
 }
 
-// MAX BONUS = 70 AND BONUS = EXTRA TIME AFTER 140 HOURS
+/* MAX BONUS = 70 AND BONUS = EXTRA TIME AFTER 140 HOURS */
 void	set_bnlog(int *stdlog, int *bnlog)
 {
 	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
-		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
-		printf("\033[0;36m\twithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
+		printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN, bnlog[2], bnlog[1], bnlog[0], DEF);
+		printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL, stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else if (bnlog[2] >= 210)
 	{
 		bnlog[0] = 0;
 		bnlog[1] = 0;
 		bnlog[2] = 70;
-		printf("\033[1mBonus logtime added from previous month = \033[1;32m%dh %dmin %ds\033[0m\n\n\033[0m", bnlog[2], bnlog[1], bnlog[0]);
-		printf("\033[0;36m\twithout bonus = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\033[0m", stdlog[2], stdlog[1], stdlog[0]);
+		printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN, bnlog[2], bnlog[1], bnlog[0], DEF);
+		printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL, stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else
 	{
 		bnlog[0] = 0;
 		bnlog[1] = 0;
 		bnlog[2] = 0;
-		printf("\033[1;31m| No bonus logtime from previous month |\n\n\033[0m");
 	}
 }
 
@@ -126,27 +125,37 @@ void	check_logtime(int *stdlog, int *ttlog)
 			hours_left = ttlog[2] / dleft;
 			minutes_left = ((ttlog[2] % dleft) * 60 + ttlog[1]) / dleft;
 			seconds_left = ((((ttlog[2] % dleft) * 60 + ttlog[1]) % dleft) * 60 + ttlog[0]) / dleft;
-			printf("--> \033[1m%dh %dmin %ds\033[0m left\n", ttlog[2], ttlog[1], ttlog[0]);
-			printf("--> You have \033[1m%d days\033[0m left ", dleft);
-			printf("so \033[1m≈ %dh %dmin %ds\033[0m each day until the 26th\n\n", hours_left, minutes_left, seconds_left);
+			printf("-----------------------------\n");
+			printf("%sTime left: %s%dh %dmin %ds%s\n", BOLD, GREEN, ttlog[2], ttlog[1], ttlog[0], DEF);
+			printf("%sDays left: %s%d days%s\n", BOLD, GREEN, dleft, DEF);
+			printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, GREEN, hours_left, minutes_left, seconds_left, DEF);
+			printf("-----------------------------\n\n");
 		}
 		else if (dleft == 0)
-			printf("--> You have to do \033[1m%dh %dmin %ds\033[0m today\n\n", ttlog[2], ttlog[1], ttlog[0]);
+		{
+			printf("-----------------------------\n");
+			printf("%sTo do log: %s%dh %dmin %ds%s\n", BOLD, GREEN, ttlog[2], ttlog[1], ttlog[0], DEF);
+			printf("-----------------------------\n\n");
+		}
 	}
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
-		printf("--> You are good for this month !\n");
-		printf("--> \033[1;32m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
+		printf("%s%s\tLOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
+		printf("-----------------------------\n");
+		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN, stdlog[2], stdlog[1], stdlog[0], DEF);
+		printf("-----------------------------\n\n");
 	}
 	else if (stdlog[2] >= 210)
 	{
 		stdlog[2] = 70;
 		stdlog[1] = 0;
 		stdlog[0] = 0;
-		printf("--> You are good for this month !\n");
-		printf("--> \033[1;32m%dh %dmin %ds\033[0m additional time for next month\n\n", stdlog[2], stdlog[1], stdlog[0]);
+		printf("%s%s\tLOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
+		printf("-----------------------------\n");
+		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN, stdlog[2], stdlog[1], stdlog[0], DEF);
+		printf("-----------------------------\n\n");
 	}
 	else
-		printf("--> You are good for this month !\n\n");
+		printf("%s%s\tLOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
 }

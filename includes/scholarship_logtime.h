@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/27 16:57:22 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:53:13 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@
 #  define BUFFER_SIZE 22
 # endif
 
+/* colors / sets */
+# define DEF "\033[0m"
+# define BOLD "\033[1m"
+# define ITALIC "\033[3m"
+# define UL "\033[4m"
+
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define PURPLE "\033[1;35m"
+# define CYAN "\033[0;36m"
+
 // GET_NEXT_LINE
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
@@ -36,8 +48,6 @@ void	free_date(char **date);
 void	ccl_timeleft(int *ttlog);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(char *str, int len);
-// PARSE_STATS
-int		parse_stats(void);
 // CALCULATE_LOG
 int		*ccl_total_time(char **date, int *bnlog);
 void	parse_calculation(char **date, char **bonus_date);

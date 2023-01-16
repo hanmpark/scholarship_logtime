@@ -6,11 +6,36 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:53:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/06 10:58:51 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:27:51 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
+
+static void	print_progress(int tthours)
+{
+	int		i;
+	int		prct;
+	int		printprct;
+	char	*color;
+
+	i = 0;
+	printf("%s%sProgress log:%s\t|", UL, PURPLE, DEF);
+	prct = 100 * tthours / 140;
+	printprct = 23 * (int)prct / 100;
+	if (prct < 26)
+		color = RED;
+	else if (prct < 76)
+		color = YELLOW;
+	else
+		color = GREEN;
+	while (i++ < printprct && i < 23)
+		printf("%s▰%s", color, DEF);
+	while (i++ < 23)
+		printf("-");
+	printf("| ");
+	printf("%s%d%%%s\n\n", color, prct, DEF);
+}
 
 void	parse_calculation(char **date, char **bonus_date)
 {
@@ -28,11 +53,14 @@ void	parse_calculation(char **date, char **bonus_date)
 		bnlog[0] = 0;
 		bnlog[1] = 0;
 		bnlog[2] = 0;
-		printf("\033[0;31mCan't calculate for bonus logtime...\n\033[0m");
+		printf("%sCan't calculate for bonus logtime...\n%s", RED, DEF);
 	}
 	ttlog = ccl_total_time(date, bnlog);
-	printf("\033[1;36m\tTotal logtime = \033[4m%dh %dmin %ds\033[0m\033[1;36m\n\n\033[0m", ttlog[2], ttlog[1], ttlog[0]);
+	printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL, ttlog[2], ttlog[1], ttlog[0], DEF);
+	int	tthours;
+	tthours = ttlog[2];
 	check_logtime(stdlog, ttlog);
+	print_progress(tthours);
 	free(ttlog);
 	free(stdlog);
 }
