@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/16 15:43:34 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:47:55 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ static int	print_result(char **date, char **bonus_date)
 	i = 0;
 	if (!date)
 	{
-		printf("\033[1;31mThere was a problem looking for the current month...\n\n\033[0m");
+		printf("%sCouldn't find the month...\n\n%s", RED, DEF);
 		return (0);
 	}
-	printf("\n");
-	printf("\033[1;34mTHE CHOSEN MONTH'S LOGTIMES:\n\033[0m");
+	printf("%s\nTHE CHOSEN MONTH'S LOGTIMES:\n%s", BLUE, DEF);
 	while (date[i])
 	{
 		printf("  - %s", date[i]);
@@ -38,24 +37,21 @@ static int	print_result(char **date, char **bonus_date)
 	return (1);
 }
 
-static int	set_month(int argc, char *month)
+static int	find_month(int argc, char *month)
 {
 	int	res;
 
 	if (argc == 2 && (atoi(month) >= 1 && atoi(month) <= 12))
 	{
 		res = atoi(month);
-		printf("\033[1mChosen month is:\033[0m %d\n", res);
+		printf("%sChosen month is:%s %d\n", BOLD, DEF, res);
 	}
 	else if (argc == 2 && (atoi(month) < 1 || atoi(month) > 12))
 		return (0);
 	else
 	{
 		res = current_month();
-		printf("\033[1mCurrent month:\033[0m %d\n", res);
-	}
-	if (res == current_month())
-	{
+		printf("%sCurrent month:%s %d\n", BOLD, DEF, res);
 		if (current_day() >= 27 && current_day() <= 31)
 			res++;
 		if (res == 13)
@@ -68,16 +64,20 @@ static int	set_dates(int month, int lastmonth, char ***date, char ***bonus_date)
 {
 	int	fd;
 
-	fd = open("texts/text_file.txt", O_RDONLY);
-	*date = parse_month(month, fd);
+	fd = open("dates.txt", O_RDONLY);
+	*date = parse_month(month, lastmonth, fd);
 	close(fd);
 	if (!date)
 	{
-		printf("\033[1;31mCan't calculate for this month...\n\n\033[0m");
-		return (-1);
+		printf("%sCan't calculate for this month...\n\n%s", RED, DEF);
+		return (0);
 	}
-	fd = open("texts/text_file.txt", O_RDONLY);
-	*bonus_date = parse_month(lastmonth, fd);
+	month = lastmonth;
+	lastmonth = month - 1;
+	if (month == 1)
+		lastmonth = 12;
+	fd = open("dates.txt", O_RDONLY);
+	*bonus_date = parse_month(month, lastmonth, fd);
 	close(fd);
 	return (1);
 }
@@ -86,13 +86,13 @@ int	main(int argc, char **argv)
 {
 	int		month;
 	int		lastmonth;
-	char	**date = NULL;
-	char	**bonus_date = NULL;
+	char	**date;
+	char	**bonus_date;
 
-	month = set_month(argc, argv[1]);
+	month = find_month(argc, argv[1]);
 	if (!month)
 	{
-		printf("\033[1;31mThere was a problem looking for the current month...\n\n\033[0m");
+		printf("%sMonth doesn't exist...\n\n%s", RED, DEF);
 		return (-1);
 	}
 	lastmonth = month - 1;

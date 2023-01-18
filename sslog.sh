@@ -20,7 +20,7 @@ else
   exit 1
 fi
 make
-gcc parse_stats.c scholarship_logtime.a
+gcc parse_data.c scholarship_logtime.a
 ./a.out
 gcc scholarship_logtime.a
 ./a.out $2 $3

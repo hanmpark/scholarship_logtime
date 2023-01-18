@@ -6,37 +6,34 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/06 08:17:48 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:52:44 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/scholarship_logtime.h"
-#include <time.h>
 
-int	number_of_days(int year, int month)
+static int	number_of_days(int year, int month)
 {
 	int	days_in_month;
 
 	switch (month) {
-		case 0:  days_in_month = 31; break; // January
-		case 2:  days_in_month = 31; break; // March
-		case 3:  days_in_month = 30; break; // April
-		case 4:  days_in_month = 31; break; // May
-		case 5:  days_in_month = 30; break; // June
-		case 6:  days_in_month = 31; break; // July
-		case 7:  days_in_month = 31; break; // August
-		case 8:  days_in_month = 30; break; // September
-		case 9:  days_in_month = 31; break; // October
-		case 10: days_in_month = 30; break; // November
-		case 11: days_in_month = 31; break; // December
-	}
-	if (month == 1) // February
-	{
-		// Check leap year
-		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-			days_in_month = 29;
-		else
-			days_in_month = 28;
+		case 0: days_in_month = 31; break;
+		case 1:
+			if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+				days_in_month = 29;
+			else
+				days_in_month = 28;
+			break ;
+		case 2: days_in_month = 31; break;
+		case 3: days_in_month = 30; break;
+		case 4: days_in_month = 31; break;
+		case 5: days_in_month = 30; break;
+		case 6: days_in_month = 31; break;
+		case 7: days_in_month = 31; break;
+		case 8: days_in_month = 30; break;
+		case 9: days_in_month = 31; break;
+		case 10: days_in_month = 30; break;
+		case 11: days_in_month = 31; break;
 	}
 	return (days_in_month);
 }
@@ -45,25 +42,18 @@ int	day_left(void)
 {
 	time_t		t;
 	struct tm	*tm;
-	int			days_in_month;
-	int			current_day;
 	int			year;
 	int			month;
 	int			days_left;
 	
 	time(&t);
 	tm = localtime(&t);
-	current_day = tm->tm_mday;
 	year = tm->tm_year + 1900;
 	month = tm->tm_mon;
-	days_in_month = 0;
 	days_left = 0;
-	if (current_day >= 27 && current_day <= 31)
-	{
-		days_in_month = number_of_days(year, month);
-		days_left = (days_in_month - 1) - (current_day - 27);
-	}
-	else if (current_day >= 1 && current_day <= 26)
+	if (tm->tm_mday >= 27 && tm->tm_mday <= 31)
+		days_left = (number_of_days(year, month) - 1) - (tm->tm_mday - 27);
+	else if (tm->tm_mday >= 1 && tm->tm_mday <= 26)
 	{
 		if (month == 0)
 		{
@@ -72,8 +62,7 @@ int	day_left(void)
 		}
 		else
 			month--;
-		days_in_month = number_of_days(year, month);
-		days_left = (days_in_month - 1) - (days_in_month - 27) - current_day;
+		days_left = (number_of_days(year, month) - 1) - (number_of_days(year, month) - 27) - tm->tm_mday;
 	}
 	return (days_left);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_stats.c                                      :+:      :+:    :+:   */
+/*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/23 11:18:35 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/18 15:31:20 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/scholarship_logtime.h"
 
-size_t	count_words(char const *str, char c)
+static size_t	count_words(char const *str, char c)
 {
 	size_t	count;
 
@@ -32,7 +32,7 @@ size_t	count_words(char const *str, char c)
 	return (count);
 }
 
-char	*cpy_to_tab(char const *str, size_t size)
+static char	*cpy_to_tab(const char *str, size_t size)
 {
 	char	*tab;
 	size_t	i;
@@ -50,7 +50,7 @@ char	*cpy_to_tab(char const *str, size_t size)
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**ft_split(const char *s, char c)
 {
 	char	**tab;
 	size_t	j;
@@ -79,16 +79,19 @@ char	**ft_split(char const *s, char c)
 	return (tab - count);
 }
 
-int	trim_tab(char **tab)
+static int	trim_tab(char **tab)
 {
 	int		i;
-	size_t	len;
+	int		k;
 
 	i = 0;
 	while (tab[i])
 	{
-		len = 20;
-		tab[i] = ft_substr(tab[i], len);
+		k = 0;
+		while (tab[i][k] && k < 20)
+			k++;
+		tab[i][k++] = '"';
+		tab[i][k] = 0;
 		i++;
 	}
 	return (i);
@@ -101,25 +104,20 @@ int	main(void)
 	char	*str;
 	char	**res;
 
-	fd = open("texts/text_file.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Could not open text_file.txt !");
-		return (-1);
-	}
+	fd = open("dates.txt", O_RDONLY);
 	str = get_next_line(fd);
 	close(fd);
 	res = ft_split(str, ' ');
 	free(str);
 	i = trim_tab(res);
-	fd = open("texts/text_file.txt", O_WRONLY | O_TRUNC);
+	fd = open("dates.txt", O_WRONLY | O_TRUNC);
 	free(res[i]);
 	i--;
 	while (i > 0)
 	{
 		ft_putstr_fd(res[i], fd);
+		write(fd, "\n", 1);
 		free(res[i]);
-		ft_putstr_fd("\n", fd);
 		i--;
 	}
 	free(res[i]);
