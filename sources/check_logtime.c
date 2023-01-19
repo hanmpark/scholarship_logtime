@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:27:13 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:14:44 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,22 @@ static void	incomplete_logtime(int *ttlog)
 	printf("%sTime left: %s%dh %dmin %ds%s\n", BOLD, GREEN,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
 	printf("%sDays left: %s%d days%s\n", BOLD, GREEN, dleft, DEF);
-	printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, GREEN,
-		hours_left, minutes_left, seconds_left, DEF);
+	if (hours_left < 15)
+	{
+		printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, GREEN,
+			hours_left, minutes_left, seconds_left, DEF);
+	}
+	else if (hours_left < 24)
+	{
+		printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, YELLOW,
+			hours_left, minutes_left, seconds_left, DEF);
+	}
+	else
+	{
+		printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, RED,
+			hours_left, minutes_left, seconds_left, DEF);
+		printf("%s%s\t   sorry it's impossible%s\n", ITALIC, RED, DEF);
+	}
 }
 
 void	check_logtime(int month, int *stdlog, int *ttlog)
