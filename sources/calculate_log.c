@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 15:41:49 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 04:27:45 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ccl_time(char **date, int time)
 
 	i = -1;
 	res = 0;
-	while (date[++i])
+	while (date && date[++i])
 	{
 		k = 0;
 		while (k < 2)
@@ -65,9 +65,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 	}
 	else if (bnlog[2] >= 210)
 	{
-		bnlog[0] = 0;
-		bnlog[1] = 0;
 		bnlog[2] = 70;
+		bnlog[1] = 0;
+		bnlog[0] = 0;
 		printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
 		printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
@@ -81,12 +81,15 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 	}
 }
 
-static int	*ccl_total_time(char **date, int *stdlog, int *bnlog)
+static int	*ccl_total_time(int *stdlog, int *bnlog)
 {
 	int	*ttlog;
 
 	set_bnlog(stdlog, bnlog);
-	ttlog = ccl_log(date);
+	ttlog = malloc(3 * sizeof(int));
+	ttlog[2] = stdlog[2];
+	ttlog[1] = stdlog[1];
+	ttlog[0] = stdlog[0];
 	ttlog[0] += bnlog[0];
 	if (ttlog[0] > 59)
 	{
@@ -104,29 +107,49 @@ static int	*ccl_total_time(char **date, int *stdlog, int *bnlog)
 	return (ttlog);
 }
 
-void	parse_calculation(char **date, char **bonus_date)
+static int	set_hdlog(int month, int lastmonth)
+{
+	char	**holidays;
+	int		fd;
+	int		hdlog;
+
+	fd = open("holidays.txt", O_RDONLY);
+	holidays = parse_month(month, lastmonth, fd);
+	close(fd);
+	hdlog = 0;
+	while (holidays && holidays[hdlog])
+		hdlog++;
+	hdlog *= 7;
+	if (holidays)
+		free_date(holidays);
+	return (hdlog);
+}
+
+void	parse_calculation(int month, int lastmonth, char **date, char **bonus_date)
 {
 	int	*stdlog;
 	int	*bnlog;
 	int	*ttlog;
+	int	hdlog;
 	int	tthours;
 
 	stdlog = ccl_log(date);
-	if (bonus_date)
-		bnlog = ccl_log(bonus_date);
-	else
-	{
-		(void)bonus_date;
-		bnlog = malloc(3 * sizeof(int));
-		bnlog[0] = 0;
-		bnlog[1] = 0;
-		bnlog[2] = 0;
-	}
-	ttlog = ccl_total_time(date, stdlog, bnlog);
+	printf("month = %d lastmonth = %d\n", month, lastmonth);
+	hdlog = set_hdlog(month, lastmonth);
+	printf("hdlog = %d\n", set_hdlog(month, lastmonth));
+	stdlog[2] += hdlog;
+	bnlog = ccl_log(bonus_date);
+	month = lastmonth;
+	lastmonth = month - 1;
+	if (month == 1)
+		lastmonth = 12;
+	hdlog = set_hdlog(month, lastmonth);
+	bnlog[2] += hdlog;
+	ttlog = ccl_total_time(stdlog, bnlog);
 	tthours = ttlog[2];
 	printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
-	check_logtime(stdlog, ttlog);
+	check_logtime(month, stdlog, ttlog);
 	printf("%s%sProgress log:%s\t", UL, PURPLE, DEF);
 	print_progress(tthours, 140);
 	free(ttlog);

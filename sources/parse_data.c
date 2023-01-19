@@ -6,11 +6,11 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 15:31:20 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/18 23:09:41 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/scholarship_logtime.h"
+#include "../includes/scholarship_logtime.h"
 
 static size_t	count_words(char const *str, char c)
 {
@@ -50,7 +50,7 @@ static char	*cpy_to_tab(const char *str, size_t size)
 	return (tab);
 }
 
-static char	**ft_split(const char *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char	**tab;
 	size_t	j;
@@ -79,7 +79,7 @@ static char	**ft_split(const char *s, char c)
 	return (tab - count);
 }
 
-static int	trim_tab(char **tab)
+int	trim_tab(char **tab, int len)
 {
 	int		i;
 	int		k;
@@ -88,7 +88,7 @@ static int	trim_tab(char **tab)
 	while (tab[i])
 	{
 		k = 0;
-		while (tab[i][k] && k < 20)
+		while (tab[i][k] && k < len)
 			k++;
 		tab[i][k++] = '"';
 		tab[i][k] = 0;
@@ -97,7 +97,7 @@ static int	trim_tab(char **tab)
 	return (i);
 }
 
-int	main(void)
+void	parse_data(void)
 {
 	int		fd;
 	int		i;
@@ -109,7 +109,7 @@ int	main(void)
 	close(fd);
 	res = ft_split(str, ' ');
 	free(str);
-	i = trim_tab(res);
+	i = trim_tab(res, 20);
 	fd = open("dates.txt", O_WRONLY | O_TRUNC);
 	free(res[i]);
 	i--;
@@ -123,5 +123,4 @@ int	main(void)
 	free(res[i]);
 	close(fd);
 	free(res);
-	return (0);
 }

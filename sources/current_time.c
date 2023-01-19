@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 14:52:44 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:50:50 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ static int	number_of_days(int year, int month)
 
 	switch (month) {
 		case 0: days_in_month = 31; break;
-		case 1:
-			if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-				days_in_month = 29;
-			else
-				days_in_month = 28;
-			break ;
 		case 2: days_in_month = 31; break;
 		case 3: days_in_month = 30; break;
 		case 4: days_in_month = 31; break;
@@ -35,10 +29,17 @@ static int	number_of_days(int year, int month)
 		case 10: days_in_month = 30; break;
 		case 11: days_in_month = 31; break;
 	}
+	if (month == 1)
+	{
+		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+			days_in_month = 29;
+		else
+			days_in_month = 28;
+	}
 	return (days_in_month);
 }
 
-int	day_left(void)
+int	days_left(void)
 {
 	time_t		t;
 	struct tm	*tm;
@@ -48,7 +49,7 @@ int	day_left(void)
 	
 	time(&t);
 	tm = localtime(&t);
-	year = tm->tm_year + 1900;
+	year = current_year();
 	month = tm->tm_mon;
 	days_left = 0;
 	if (tm->tm_mday >= 27 && tm->tm_mday <= 31)
@@ -62,7 +63,7 @@ int	day_left(void)
 		}
 		else
 			month--;
-		days_left = (number_of_days(year, month) - 1) - (number_of_days(year, month) - 27) - tm->tm_mday;
+		days_left = (number_of_days(year, month) - 1) - (number_of_days(year, month) - 27) - tm->tm_mday + 1;
 	}
 	return (days_left);
 }
@@ -85,4 +86,14 @@ int	current_day(void)
 	time(&t);
 	tm = localtime(&t);
 	return (tm->tm_mday);
+}
+
+int	current_year(void)
+{
+	time_t		t;
+	struct tm	*tm;
+
+	time(&t);
+	tm = localtime(&t);
+	return (tm->tm_year + 1900);
 }

@@ -6,35 +6,53 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 11:47:55 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:33:18 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/scholarship_logtime.h"
-#include <string.h>
 
-static int	print_result(char **date, char **bonus_date)
+static void	set_currenthdlog(int month, int lastmonth)
 {
-	int	i;
+	char	**holidays;
+	int		fd;
+	int		hdlog;
 
+	fd = open("holidays.txt", O_RDONLY);
+	holidays = parse_month(month, lastmonth, fd);
+	close(fd);
+	hdlog = 0;
+	if (holidays)
+	{
+		printf("%s\nPUBLIC HOLIDAYS:\n%s", BLUE, DEF);
+		while (holidays && holidays[hdlog])
+		{
+			printf("  - %s", holidays[hdlog]);
+			hdlog++;
+		}
+		hdlog *= 7;
+		printf("  %s=> %s%d%s%s hours will be added%s\n\n", ITALIC, GREEN, hdlog, DEF, ITALIC, DEF);
+	}
+	free_date(holidays);
+}
+
+static void	print_result(int month, int lastmonth, char **date, char **bonus_date)
+{
+	int		i;
+
+	set_currenthdlog(month, lastmonth);
 	i = 0;
-	if (!date)
+	if (date)
 	{
-		printf("%sCouldn't find the month...\n\n%s", RED, DEF);
-		return (0);
+		printf("%s\nTHE CHOSEN MONTH'S LOGTIMES:\n%s", BLUE, DEF);
+		while (date[i])
+		{
+			printf("  - %s", date[i]);
+			i++;
+		}
+		printf("\n");
 	}
-	printf("%s\nTHE CHOSEN MONTH'S LOGTIMES:\n%s", BLUE, DEF);
-	while (date[i])
-	{
-		printf("  - %s", date[i]);
-		i++;
-	}
-	printf("\n");
-	parse_calculation(date, bonus_date);
-	if (bonus_date)
-		free_date(bonus_date);
-	free_date(date);
-	return (1);
+	parse_calculation(month, lastmonth, date, bonus_date);
 }
 
 static int	find_month(int argc, char *month)
@@ -67,7 +85,7 @@ static int	set_dates(int month, int lastmonth, char ***date, char ***bonus_date)
 	fd = open("dates.txt", O_RDONLY);
 	*date = parse_month(month, lastmonth, fd);
 	close(fd);
-	if (!date)
+	if (!*date)
 	{
 		printf("%sCan't calculate for this month...\n\n%s", RED, DEF);
 		return (0);
@@ -89,6 +107,8 @@ int	main(int argc, char **argv)
 	char	**date;
 	char	**bonus_date;
 
+	parse_data();
+	parse_holidays();
 	month = find_month(argc, argv[1]);
 	if (!month)
 	{
@@ -100,7 +120,9 @@ int	main(int argc, char **argv)
 		lastmonth = 12;
 	if (!(set_dates(month, lastmonth, &date, &bonus_date)))
 		return (-1);
-	if (!(print_result(date, bonus_date)))
-		return (-1);
+	print_result(month, lastmonth, date, bonus_date);
+	if (bonus_date)
+		free_date(bonus_date);
+	free_date(date);
 	return (0);
 }

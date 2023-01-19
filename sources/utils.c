@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 15:53:29 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:33:00 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_date(char **date)
 	int	i;
 
 	i = 0;
-	while (date[i])
+	while (i < 32)
 		free(date[i++]);
 	free(date);
 }

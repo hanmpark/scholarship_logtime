@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 15:29:31 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:23:43 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define BLUE "\033[1;34m"
 # define PURPLE "\033[1;35m"
 # define CYAN "\033[0;36m"
+# define GRAY "\033[2;37m"
 
 /* GET_NEXT_LINE */
 char	*get_next_line(int fd);
@@ -45,14 +46,19 @@ char	*ft_bufferjoin(char *s1, char *s2);
 char	*ft_linetrim(char *str);
 
 /* LOGTIME */
+void	parse_data(void);
+void	parse_holidays(void);
+char	**ft_split(const char *s, char c);
+int		trim_tab(char **tab, int len);
 void	free_date(char **date);
 void	print_progress(int tthours, int hours);
 void	ft_putstr_fd(char *str, int fd);
-void	parse_calculation(char **date, char **bonus_date);
-void	check_logtime(int *stdlog, int *ttlog);
+void	parse_calculation(int month, int lastmonth, char **date, char **bonus_date);
+void	check_logtime(int month, int *stdlog, int *ttlog);
 char	**parse_month(int month, int lastmonth, int fd);
-int		day_left(void);
+int		days_left(void);
 int		current_month(void);
 int		current_day(void);
+int		current_year(void);
 
 #endif
