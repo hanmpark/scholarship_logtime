@@ -106,6 +106,12 @@ Now go back to your terminal and add the following environment variables with th
 ```
 ## You are finally good to go !
 
+Don't forget to compile first:
+
+```bash
+  make all
+```
+
 Now execute the program by using the simple command line:
 
 ```bash

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:50:35 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:31:24 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:54:56 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static void	print_holidays(char **holidays, int *stdlog)
 	i = 0;
 	if (holidays)
 	{
-		printf("%sPUBLIC HOLIDAYS:\n%s", BLUE, DEF);
+		ft_printf("%sPUBLIC HOLIDAYS:\n%s", BLUE, DEF);
 		while (holidays[i])
 		{
-			printf("  - %s", holidays[i]);
+			ft_printf("  - %s", holidays[i]);
 			i++;
 		}
 		hdlog = set_hdlog(holidays);
-		printf("  => + %s%dh%s\n\n", GREEN, hdlog, DEF);
+		ft_printf("  => + %s%dh%s\n\n", GREEN, hdlog, DEF);
 		stdlog[2] += hdlog;
 	}
 }

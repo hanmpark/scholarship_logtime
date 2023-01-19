@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:05:41 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:24:11 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
-		printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
+		ft_printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
-		printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
+		ft_printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else if (bnlog[2] >= 210)
@@ -68,9 +68,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 		bnlog[2] = 70;
 		bnlog[1] = 0;
 		bnlog[0] = 0;
-		printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
+		ft_printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
-		printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
+		ft_printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else
@@ -119,10 +119,10 @@ void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date)
 	set_holidays(month, lastmonth, stdlog, bnlog);
 	ttlog = ccl_total_logtime(stdlog, bnlog);
 	tthours = ttlog[2];
-	printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
+	ft_printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
 	check_logtime(month, stdlog, ttlog);
-	printf("%s%sProgress log:%s\t", UL, PURPLE, DEF);
+	ft_printf("%s%sProgress log:\t%s", UL, PURPLE, DEF);
 	print_progress(tthours, 140);
 	free(ttlog);
 	free(stdlog);

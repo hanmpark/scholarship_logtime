@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 15:35:29 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 12:57:46 by hanmpark         ###   ########.fr       */
+/*   Created: 2022/12/05 07:20:08 by hanmpark          #+#    #+#             */
+/*   Updated: 2023/01/05 11:55:35 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "../../includes/get_next_line.h"
 
-int	ft_is_nl(char *str)
+static int	ft_is_nl(char *str)
 {
 	int		times;
 
@@ -28,7 +28,7 @@ int	ft_is_nl(char *str)
 	return (times);
 }
 
-char	*ft_read(int fd, char *stash, char *get_line)
+static char	*ft_read(int fd, char *stash, char *get_line)
 {
 	char	*buffer;
 	ssize_t	check;
@@ -54,7 +54,7 @@ char	*ft_read(int fd, char *stash, char *get_line)
 	return (get_line);
 }
 
-char	*ft_checktrim(char *not_trimmed_line)
+static char	*ft_checktrim(char *not_trimmed_line)
 {
 	char	*stash;
 	int		i;

@@ -5,49 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 15:46:43 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 14:42:11 by hanmpark         ###   ########.fr       */
+/*   Created: 2022/12/05 07:20:26 by hanmpark          #+#    #+#             */
+/*   Updated: 2023/01/19 18:33:36 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
-
-size_t	ft_strlen(char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
+#include "../../includes/get_next_line.h"
 
 void	ft_freeall(char *buf, char *line, char *stash)
 {
 	free(buf);
 	free(line);
 	free(stash);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	char	*tb;
-	size_t	len;
-	int		i;
-
-	if (count > SIZE_MAX)
-		return (NULL);
-	len = count * size;
-	tb = malloc(len);
-	if (!tb)
-		return (NULL);
-	i = 0;
-	while (len)
-	{
-		tb[i++] = 0;
-		len--;
-	}
-	return (tb);
 }
 
 char	*ft_bufferjoin(char *dest, char *src)

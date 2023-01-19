@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 14:53:12 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:16:50 by hanmpark         ###   ########.fr       */
+/*   Created: 2022/11/16 07:37:17 by hanmpark          #+#    #+#             */
+/*   Updated: 2023/01/05 11:28:11 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "../../includes/libft.h"
 
 static size_t	count_words(char const *str, char c)
 {
@@ -32,7 +32,7 @@ static size_t	count_words(char const *str, char c)
 	return (count);
 }
 
-static char	*cpy_to_tab(const char *str, size_t size)
+static char	*cpy_to_tab(char const *str, size_t size)
 {
 	char	*tab;
 	size_t	i;
@@ -50,7 +50,7 @@ static char	*cpy_to_tab(const char *str, size_t size)
 	return (tab);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	size_t	j;
@@ -68,7 +68,7 @@ char	**ft_split(const char *s, char c)
 		{
 			j = 0;
 			while (s[j] && s[j] != c)
-					j++;
+				j++;
 			*(tab++) = cpy_to_tab(s, j);
 			s += j;
 		}
@@ -77,35 +77,4 @@ char	**ft_split(const char *s, char c)
 	}
 	*tab = 0;
 	return (tab - count);
-}
-
-int	trim_tab(char **tab, int len)
-{
-	int		i;
-	int		k;
-
-	i = 0;
-	while (tab[i])
-	{
-		k = 0;
-		while (tab[i][k] && k < len)
-			k++;
-		tab[i][k++] = '"';
-		tab[i][k] = 0;
-		i++;
-	}
-	return (i);
-}
-
-void	free_holidays(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
 }

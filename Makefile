@@ -6,7 +6,7 @@
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 11:59:19 by hanmpark          #+#    #+#              #
-#    Updated: 2023/01/19 15:06:44 by hanmpark         ###   ########.fr        #
+#    Updated: 2023/01/19 18:56:40 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@
 H_DIR = includes/
 NAME = scholarship_logtime.a
 SRCS_DIR = sources/
+LIBFT = libft/
 
 # SOURCES / OBJECTS
-SRCS_FILES = get_next_line.c get_next_line_utils.c utils.c calculate_log.c \
-				check_logtime.c find_month.c current_time.c parse_api.c \
-				parse_utils.c set_holidays.c
+SRCS_FILES = check_logtime.c utils.c calculate_log.c find_month.c \
+				current_time.c parse_api.c set_holidays.c
 SRCS = ${addprefix ${SRCS_DIR}, ${SRCS_FILES}} main.c
 
 OBJS = ${SRCS:.c=.o}
@@ -34,13 +34,22 @@ CFLAGS = -Wall -Wextra -Werror
 all: ${NAME}
 
 ${NAME}: ${OBJS}
+	@echo "\n\033[3m\033[2;37m\t- Compiling...\033[0m"
+	@${MAKE} -C ${LIBFT}
+	@cp ${LIBFT}/libft.a ${NAME}
 	@ar rcs ${NAME} ${OBJS}
+	@echo "\033[3m\033[1;32m   - Compiled -\033[0m"
 
 clean:
+	@echo "\n\033[3m\033[2;37m\t- Cleaning objects...\033[0m"
+	@${MAKE} clean -C ${LIBFT}
 	@rm -f ${OBJS}
 
 fclean: clean
+	@echo "\033[3m\033[2;37m\t- Cleaning libraries...\033[0m"
 	@rm -f ${NAME}
+	@rm -f ${LIBFT}/libft.a
+	@echo "\033[3m\033[1;32m   - Cleaned -\033[0m"
 
 re: fclean all
 
