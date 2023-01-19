@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:35:29 by hanmpark          #+#    #+#             */
-/*   Updated: 2022/12/17 14:42:19 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:57:46 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*ft_checktrim(char *not_trimmed_line)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[4096];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -83,10 +83,10 @@ char	*get_next_line(int fd)
 	line = ft_calloc(1, sizeof(char));
 	if (!line)
 		return (NULL);
-	line = ft_read(fd, stash, line);
+	line = ft_read(fd, stash[fd], line);
 	if (!line)
 	{
-		stash = NULL;
+		stash[fd] = NULL;
 		return (NULL);
 	}
 	if (!*line)
@@ -94,6 +94,6 @@ char	*get_next_line(int fd)
 		free(line);
 		return (NULL);
 	}
-	stash = ft_checktrim(line);
+	stash[fd] = ft_checktrim(line);
 	return (line);
 }

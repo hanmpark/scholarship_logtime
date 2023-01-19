@@ -6,41 +6,16 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 03:33:18 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:38:44 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/scholarship_logtime.h"
 
-static void	set_currenthdlog(int month, int lastmonth)
-{
-	char	**holidays;
-	int		fd;
-	int		hdlog;
-
-	fd = open("holidays.txt", O_RDONLY);
-	holidays = parse_month(month, lastmonth, fd);
-	close(fd);
-	hdlog = 0;
-	if (holidays)
-	{
-		printf("%s\nPUBLIC HOLIDAYS:\n%s", BLUE, DEF);
-		while (holidays && holidays[hdlog])
-		{
-			printf("  - %s", holidays[hdlog]);
-			hdlog++;
-		}
-		hdlog *= 7;
-		printf("  %s=> %s%d%s%s hours will be added%s\n\n", ITALIC, GREEN, hdlog, DEF, ITALIC, DEF);
-	}
-	free_date(holidays);
-}
-
 static void	print_result(int month, int lastmonth, char **date, char **bonus_date)
 {
 	int		i;
 
-	set_currenthdlog(month, lastmonth);
 	i = 0;
 	if (date)
 	{

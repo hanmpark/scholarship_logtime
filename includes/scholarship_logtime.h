@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 03:23:43 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:38:24 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <time.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 22
+#  define BUFFER_SIZE 1
 # endif
 
 /* colors / sets */
@@ -53,6 +53,8 @@ int		trim_tab(char **tab, int len);
 void	free_date(char **date);
 void	print_progress(int tthours, int hours);
 void	ft_putstr_fd(char *str, int fd);
+char	**find_holidays(int month, int lastmonth);
+int		set_hdlog(char **holidays);
 void	parse_calculation(int month, int lastmonth, char **date, char **bonus_date);
 void	check_logtime(int month, int *stdlog, int *ttlog);
 char	**parse_month(int month, int lastmonth, int fd);
@@ -60,5 +62,6 @@ int		days_left(void);
 int		current_month(void);
 int		current_day(void);
 int		current_year(void);
+void	printset_holidays(int month, int lastmonth, int *stdlog, int *bnlog);
 
 #endif

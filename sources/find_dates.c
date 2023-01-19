@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 01:55:28 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:34:47 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**parse_month(int month, int lastmonth, int fd)
 	if (!date)
 		return (NULL);
 	*date = get_day(month, lastmonth, fd);
-	if (!*date || !date)
+	if (!*date)
 	{
 		free_date(date);
 		return (NULL);
