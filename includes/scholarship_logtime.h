@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 13:38:24 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:52:44 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int		trim_tab(char **tab, int len);
 void	free_date(char **date);
 void	print_progress(int tthours, int hours);
 void	ft_putstr_fd(char *str, int fd);
-char	**find_holidays(int month, int lastmonth);
-int		set_hdlog(char **holidays);
 void	parse_calculation(int month, int lastmonth, char **date, char **bonus_date);
 void	check_logtime(int month, int *stdlog, int *ttlog);
 char	**parse_month(int month, int lastmonth, int fd);

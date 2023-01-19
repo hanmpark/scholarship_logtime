@@ -6,7 +6,7 @@
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 11:59:19 by hanmpark          #+#    #+#              #
-#    Updated: 2023/01/18 23:10:28 by hanmpark         ###   ########.fr        #
+#    Updated: 2023/01/19 13:51:53 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS_DIR = sources/
 # SOURCES / OBJECTS
 SRCS_FILES = get_next_line.c get_next_line_utils.c utils.c calculate_log.c \
 				check_logtime.c find_dates.c current_time.c parse_data.c \
-				parse_holidays.c
+				parse_holidays.c print_holidays.c
 SRCS = ${addprefix ${SRCS_DIR}, ${SRCS_FILES}} main.c
 
 OBJS = ${SRCS:.c=.o}
