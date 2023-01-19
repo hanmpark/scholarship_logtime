@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_data.c                                       :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 23:09:41 by hanmpark         ###   ########.fr       */
+/*   Created: 2023/01/19 14:53:12 by hanmpark          #+#    #+#             */
+/*   Updated: 2023/01/19 15:16:50 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,30 +97,15 @@ int	trim_tab(char **tab, int len)
 	return (i);
 }
 
-void	parse_data(void)
+void	free_holidays(char **tab)
 {
-	int		fd;
-	int		i;
-	char	*str;
-	char	**res;
+	int	i;
 
-	fd = open("dates.txt", O_RDONLY);
-	str = get_next_line(fd);
-	close(fd);
-	res = ft_split(str, ' ');
-	free(str);
-	i = trim_tab(res, 20);
-	fd = open("dates.txt", O_WRONLY | O_TRUNC);
-	free(res[i]);
-	i--;
-	while (i > 0)
+	i = 0;
+	while (tab[i])
 	{
-		ft_putstr_fd(res[i], fd);
-		write(fd, "\n", 1);
-		free(res[i]);
-		i--;
+		free(tab[i]);
+		i++;
 	}
-	free(res[i]);
-	close(fd);
-	free(res);
+	free(tab);
 }

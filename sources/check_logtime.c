@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 02:49:13 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:27:13 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,30 @@ static void	ccl_timeleft(int *ttlog)
 	ttlog[2] = 140 - ttlog[2];
 }
 
+static int	set_days_off(void)
+{
+	int	days_off;
+
+	printf("%s%sThe number of days you want to take off from now on:%s%s ", ITALIC, GRAY, DEF, GREEN);
+	scanf("%d", &days_off);
+	if (days_off < 0 || days_off >= days_left())
+	{
+		printf("%s%s\t\tIncompatible days off%s\n", ITALIC, RED, DEF);
+		days_off = 0;
+	}
+	printf("%s%sDays off : %s%d%s\n", DEF, BOLD, GREEN, days_off, DEF);
+	return (days_off);
+}
+
 static void	incomplete_logtime(int *ttlog)
 {
 	int	dleft;
-	int	days_off;
 	int	hours_left;
 	int	minutes_left;
 	int	seconds_left;
 
 	ccl_timeleft(ttlog);
-	printf("%s%sThe number of days you want to take off from now on:%s%s ", ITALIC, GRAY, DEF, GREEN);
-	scanf("%d", &days_off);
-	printf("%s%sDays off : %s%d%s\n", DEF, BOLD, GREEN, days_off, DEF);
-	if (days_off < 0 || days_off >= days_left())
-	{
-		printf("%s%sIncompatible days off%s\n", ITALIC, GRAY, DEF);
-		days_off = 0;
-	}
-	dleft = days_left() - days_off;
-	if (dleft <= 0)
-		dleft = 1;
+	dleft = days_left() - set_days_off();
 	hours_left = ttlog[2] / dleft;
 	minutes_left = ((ttlog[2] % dleft) * 60 + ttlog[1]) / dleft;
 	seconds_left = ((((ttlog[2] % dleft) * 60 + ttlog[1]) % dleft) * 60 + ttlog[0]) / dleft;
@@ -59,31 +63,30 @@ static void	incomplete_logtime(int *ttlog)
 
 void	check_logtime(int month, int *stdlog, int *ttlog)
 {
+	printf("------------------------------------------------------\n");
 	if (ttlog[2] < 140 && month == current_month())
-	{
-		printf("------------------------------------------------------\n");
 		incomplete_logtime(ttlog);
-		printf("------------------------------------------------------\n\n");
-		return ;
-	}
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
-		printf("------------------------------------------------------\n");
 		printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
 		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
-		printf("------------------------------------------------------\n\n");
 	}
 	else if (stdlog[2] >= 210)
 	{
 		stdlog[2] = 70;
 		stdlog[1] = 0;
 		stdlog[0] = 0;
-		printf("------------------------------------------------------\n");
 		printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
 		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
-		printf("------------------------------------------------------\n\n");
 	}
+	else
+	{
+		printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
+		printf("%s\t\tNothing for next month%s\n", PURPLE, DEF);
+	}
+	printf("------------------------------------------------------\n\n");
+
 }

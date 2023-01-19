@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 13:38:06 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:05:41 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 	}
 }
 
-static int	*ccl_total_time(int *stdlog, int *bnlog)
+static int	*ccl_total_logtime(int *stdlog, int *bnlog)
 {
 	int	*ttlog;
 
@@ -107,7 +107,7 @@ static int	*ccl_total_time(int *stdlog, int *bnlog)
 	return (ttlog);
 }
 
-void	parse_calculation(int month, int lastmonth, char **date, char **bonus_date)
+void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date)
 {
 	int		*stdlog;
 	int		*bnlog;
@@ -116,8 +116,8 @@ void	parse_calculation(int month, int lastmonth, char **date, char **bonus_date)
 
 	stdlog = ccl_log(date);
 	bnlog = ccl_log(bonus_date);
-	printset_holidays(month, lastmonth, stdlog, bnlog);
-	ttlog = ccl_total_time(stdlog, bnlog);
+	set_holidays(month, lastmonth, stdlog, bnlog);
+	ttlog = ccl_total_logtime(stdlog, bnlog);
 	tthours = ttlog[2];
 	printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
 		ttlog[2], ttlog[1], ttlog[0], DEF);

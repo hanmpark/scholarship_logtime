@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_dates.c                                       :+:      :+:    :+:   */
+/*   find_month.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 13:34:47 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:22:01 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,38 @@ static int	find_time(char *src, int monthorday)
 	return (res);
 }
 
+static char	*browse_days(int month, int lmonth, int fd, int *fmonth, int *fday)
+{
+	char	*day;
+
+	day = get_next_line(fd);
+	if (!day)
+		return (NULL);
+	*fmonth = find_time(day, 5);
+	*fday = find_time(day, 8);
+	while ((*fmonth != month && *fmonth != lmonth)
+		|| (*fmonth == month && *fday > 26)
+		|| (*fmonth == lmonth && *fday > 27))
+	{
+		free(day);
+		day = get_next_line(fd);
+		if (!day)
+			return (NULL);
+		*fmonth = find_time(day, 5);
+		*fday = find_time(day, 8);
+	}
+	return (day);
+}
+
 static char	*get_day(int month, int lastmonth, int fd)
 {
 	int		found_month;
 	int		found_day;
 	char	*day;
 
-	day = get_next_line(fd);
+	day = browse_days(month, lastmonth, fd, &found_month, &found_day);
 	if (!day)
 		return (NULL);
-	found_month = find_time(day, 5);
-	found_day = find_time(day, 8);
-	while ((found_month != month && found_month != lastmonth)
-		|| (found_month == month && found_day > 26)
-		|| (found_month == lastmonth && found_day > 27))
-	{
-		free(day);
-		day = get_next_line(fd);
-		if (!day)
-			return (NULL);
-		found_month = find_time(day, 5);
-		found_day = find_time(day, 8);
-	}
 	if ((found_month != lastmonth && found_month != month)
 		|| (found_month == lastmonth && found_day < 27))
 	{
@@ -89,7 +99,7 @@ char	**parse_month(int month, int lastmonth, int fd)
 	*date = get_day(month, lastmonth, fd);
 	if (!*date)
 	{
-		free_date(date);
+		free_month(date);
 		return (NULL);
 	}
 	get_month(date, month, lastmonth, fd);

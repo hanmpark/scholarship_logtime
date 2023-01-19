@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/18 21:50:50 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:04:28 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,25 @@ static int	number_of_days(int year, int month)
 	return (days_in_month);
 }
 
-int	days_left(void)
+static struct tm	*set_tm(void)
 {
 	time_t		t;
+	struct tm	*tm;
+
+	time(&t);
+	tm = localtime(&t);
+	return (tm);
+}
+
+int	days_left(void)
+{
 	struct tm	*tm;
 	int			year;
 	int			month;
 	int			days_left;
 	
-	time(&t);
-	tm = localtime(&t);
-	year = current_year();
+	tm = set_tm();
+	year = tm->tm_year + 1900;
 	month = tm->tm_mon;
 	days_left = 0;
 	if (tm->tm_mday >= 27 && tm->tm_mday <= 31)
@@ -59,7 +67,7 @@ int	days_left(void)
 		if (month == 0)
 		{
 			month = 11;
-			year -= 1;
+			year--;
 		}
 		else
 			month--;
@@ -70,30 +78,24 @@ int	days_left(void)
 
 int	current_month(void)
 {
-	time_t		t;
 	struct tm	*tm;
 	
-	time(&t);
-	tm = localtime(&t);
+	tm = set_tm();
 	return (tm->tm_mon + 1);
 }
 
 int	current_day(void)
 {
-	time_t		t;
 	struct tm	*tm;
 
-	time(&t);
-	tm = localtime(&t);
+	tm = set_tm();
 	return (tm->tm_mday);
 }
 
 int	current_year(void)
 {
-	time_t		t;
 	struct tm	*tm;
 
-	time(&t);
-	tm = localtime(&t);
+	tm = set_tm();
 	return (tm->tm_year + 1900);
 }

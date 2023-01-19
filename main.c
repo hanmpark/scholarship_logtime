@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 13:38:44 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:59:01 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	print_result(int month, int lastmonth, char **date, char **bonus_dat
 		}
 		printf("\n");
 	}
-	parse_calculation(month, lastmonth, date, bonus_date);
+	ccl_logtime(month, lastmonth, date, bonus_date);
 }
 
 static int	find_month(int argc, char *month)
@@ -82,8 +82,8 @@ int	main(int argc, char **argv)
 	char	**date;
 	char	**bonus_date;
 
-	parse_data();
-	parse_holidays();
+	api_dates();
+	api_public_holidays();
 	month = find_month(argc, argv[1]);
 	if (!month)
 	{
@@ -97,7 +97,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	print_result(month, lastmonth, date, bonus_date);
 	if (bonus_date)
-		free_date(bonus_date);
-	free_date(date);
+		free_month(bonus_date);
+	free_month(date);
 	return (0);
 }

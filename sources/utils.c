@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 13:50:45 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:55:56 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <time.h>
 
 /* CLEAR DATE */
-void	free_date(char **date)
+void	free_month(char **date)
 {
 	int	i;
 

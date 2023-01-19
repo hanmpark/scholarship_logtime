@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_holidays.c                                   :+:      :+:    :+:   */
+/*   set_holidays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:50:35 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 13:52:19 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:31:24 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,40 @@ static int	set_hdlog(char **holidays)
 	while (holidays[hdlog])
 		hdlog++;
 	hdlog *= 7;
-	free_date(holidays);
+	free_month(holidays);
 	return (hdlog);
 }
 
-void	printset_holidays(int month, int lastmonth, int *stdlog, int *bnlog)
+static void	print_holidays(char **holidays, int *stdlog)
 {
-	int		hdlog;
-	char	**holidays;
+	int	i;
+	int	hdlog;
 
-	holidays = find_holidays(month, lastmonth);
-	hdlog = 0;
+	i = 0;
 	if (holidays)
 	{
 		printf("%sPUBLIC HOLIDAYS:\n%s", BLUE, DEF);
-		while (holidays[hdlog])
+		while (holidays[i])
 		{
-			printf("  - %s", holidays[hdlog]);
-			hdlog++;
+			printf("  - %s", holidays[i]);
+			i++;
 		}
-		hdlog *= 7;
-		printf("  %s=> %s%d%s%s hours will be added%s\n\n", ITALIC, GREEN, hdlog, DEF, ITALIC, DEF);
-		free_date(holidays);
+		hdlog = set_hdlog(holidays);
+		printf("  => + %s%dh%s\n\n", GREEN, hdlog, DEF);
+		stdlog[2] += hdlog;
 	}
-	stdlog[2] += hdlog;
+}
+
+void	set_holidays(int month, int lastmonth, int *stdlog, int *bnlog)
+{
+	char	**holidays;
+
+	holidays = find_holidays(month, lastmonth);
+	print_holidays(holidays, stdlog);
 	month = lastmonth;
 	lastmonth = month - 1;
 	if (month == 1)
 		lastmonth = 12;
 	holidays = find_holidays(month, lastmonth);
-	hdlog = set_hdlog(holidays);
-	bnlog[2] += hdlog;
+	bnlog[2] += set_hdlog(holidays);
 }
