@@ -5,16 +5,19 @@
 Hello there !
 
 Here's my first personal project which is a program that may be interesting to **GEN scholarship students**:  
-It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting bonus time from the previous month if there is any !
-The program also tells you how many days are left and how many hours per day you should do before the 26th. Else, it tells you the bonus hours that will apply for the next month.   
+It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting bonus time from the previous month if there is any !  
+It tells you the public holidays of the month and adds 7 hours automatically.  
+If you have chose the current month, the program also tells you:
+- how much time is left before the 27th
+- how many days are left before the 27th (counting days off if you have set any)
+- how much time you should do each day (counting days off if you have set any)
 
-**Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month !**
-
-**If the logs of the day are not displayed, you have to wait until midnight.**
-
-**The program doesn’t calculate manually added logtimes (not sure).**
-
-**You can't choose a month that is older than 4 months**
+NOTES:
+- **Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month**
+- **If the logs of the day are not displayed, you have to wait until midnight**
+- **The program doesn’t calculate manually added logtimes**
+- **You can't choose a month that is older than 4 months**
+- **If you do logtime during a public holiday, it will append 7 hours to the logtime**
 
 ## Prerequisite
 
@@ -54,7 +57,8 @@ _exec zsh_ again and now when you do _ruby -v_ you should get the version you ju
 
 ## Installation
 
-Git clone my repo !
+Only then you can git clone my repo  
+If you have cloned it already reclone it
 
 ```bash
   git clone https://github.com/Nonino42/scholarship_logtime.git
