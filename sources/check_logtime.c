@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 19:26:04 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 19:38:01 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,4 @@ void	check_logtime(int month, int *stdlog, int *ttlog)
 		ft_printf("%s\t\tNothing for next month%s\n", PURPLE, DEF);
 	}
 	ft_printf("------------------------------------------------------\n\n");
-
 }
