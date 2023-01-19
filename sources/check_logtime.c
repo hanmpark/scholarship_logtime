@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 18:24:30 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/19 19:26:04 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	incomplete_logtime(int *ttlog)
 	ft_printf("%sTime left: %s%dh %dmin %ds%s\n", BOLD, GREEN,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
 	ft_printf("%sDays left: %s%d days%s\n", BOLD, GREEN, dleft, DEF);
-	if (hours_left < 15)
+	if (hours_left < 13)
 	{
 		ft_printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, GREEN,
 			hours_left, minutes_left, seconds_left, DEF);
