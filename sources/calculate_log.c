@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 18:24:11 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:05:11 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	*ccl_log(char **date)
 
 	res = malloc(3 * sizeof(int));
 	if (!res)
-		return (NULL);
+		return (0);
 	res[0] = 0;
 	res[1] = 0;
 	res[2] = 0;
