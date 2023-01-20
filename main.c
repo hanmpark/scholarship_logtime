@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 19:02:31 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:26:07 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_result(int month, int lastmonth, char **date, char **bonus_dat
 	i = 0;
 	if (date)
 	{
-		printf("%s\nTHE CHOSEN MONTH'S LOGTIMES:\n%s", BLUE, DEF);
+		printf("%s\nTHE CHOSEN MONTH'S LOGTIMES:%s\n", BLUE, DEF);
 		while (date[i])
 		{
 			printf("  - %s", date[i]);
@@ -62,7 +62,7 @@ static int	set_dates(int month, int lastmonth, char ***date, char ***bonus_date)
 	close(fd);
 	if (!*date)
 	{
-		printf("%sCan't calculate for this month...\n\n%s", RED, DEF);
+		printf("%sCan't calculate for this month...%s\n\n", RED, DEF);
 		return (0);
 	}
 	month = lastmonth;
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	month = find_month(argc, argv[1]);
 	if (!month)
 	{
-		printf("%sMonth doesn't exist...\n\n%s", RED, DEF);
+		printf("%sMonth doesn't exist...%s\n\n", RED, DEF);
 		return (-1);
 	}
 	lastmonth = month - 1;

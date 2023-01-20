@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/20 13:29:39 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:25:03 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
-		ft_printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
+		ft_printf("%sBonus log: %s%dh %dmin %ds%s\n\n", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
-		ft_printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
+		ft_printf("%sWithout bonus = %s%dh %dmin %ds%s\n", CYAN, UL,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else if (bnlog[2] >= 210)
@@ -68,9 +68,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 		bnlog[2] = 70;
 		bnlog[1] = 0;
 		bnlog[0] = 0;
-		ft_printf("%sBonus log: %s%dh %dmin %ds\n\n%s", BOLD, GREEN,
+		ft_printf("%sBonus log: %s%dh %dmin %ds%s\n\n", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
-		ft_printf("%sWithout bonus = %s%dh %dmin %ds\n%s", CYAN, UL,
+		ft_printf("%sWithout bonus = %s%dh %dmin %ds%s\n", CYAN, UL,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else
