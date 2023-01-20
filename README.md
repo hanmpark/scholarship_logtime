@@ -1,27 +1,27 @@
 ![time banner](https://kiwiorthoticservices.com/wp-content/uploads/saving-time-banner.jpg)
 
-<h1 align="center"> scholarship_logtime</h1>
+<h1 align="center">scholarship_logtime</h1>
 
 Hello there !
 
 Here's my first personal project which is a program that may be interesting to **GEN scholarship students**:  
 It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting _*bonus time_ from the previous month if there is any !  
 It tells you the public holidays of the month and adds 7 hours automatically.  
-If you have chosen the current month, the program also tells you:
-* how much time is left before the 27th
-* how many days are left before the 27th (counting days off if you have set any)
-* how much time you should do each day (counting days off if you have set any)
 
-NOTES:
-* **Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month**
-* **If the logs of the day are not displayed, you have to wait until midnight**
-* **You can't choose a month that is older than 4 months**
-* **If you do logtime during a public holiday, it will append 7 hours to the logtime**
-
-**!! IT DOESN'T TELL THE EXACT LOGTIME !!**
-* **The program doesn't calculate manually added logtimes**
-* **My _bonus logtime_ is not the same as the real bonus logtime**
-* **If you have a doubt about your logtime, please asks to your staff**
+*  NOTES:
+   -  If you have chosen the current month, the program also tells you:
+      - how much time is left before the 27th
+      - how many days are left before the 27th (counting days off if you have set any)
+      - how much time you should do each day (counting days off if you have set any
+   - **Note that you can only cumulate up to _70 hours_ of bonus logtime and it's only applicable for the next month**
+   - **If the logs of the day are not displayed, you have to wait until midnight**
+   - **You can't choose a month that is older than 4 months**
+   - **If you do logtime during a public holiday, it will append 7 hours to the logtime**
+   
+*  **!! IT DOESN'T TELL THE EXACT LOGTIME !!**
+   - **The program doesn't calculate manually added logtimes**
+   - **My _bonus logtime_ is not the same as the real bonus logtime**
+   - **If you have a doubt about your logtime, please asks to your staff**
 
 ## Prerequisite
 
