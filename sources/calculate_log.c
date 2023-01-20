@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/20 12:05:11 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:29:39 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date)
 	ft_printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
 	check_logtime(month, stdlog, ttlog);
-	ft_printf("%s%sProgress log:\t%s", UL, PURPLE, DEF);
+	ft_printf("%s%sProgress log:%s\t", UL, PURPLE, DEF);
 	print_progress(tthours, 140);
 	free(ttlog);
 	free(stdlog);
