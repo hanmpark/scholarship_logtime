@@ -19,7 +19,7 @@ $DEF
 "
 
 ########## API ##########
-if [ $# != "3" ]
+if [ $# \> 3 ]
 then
 	printf "$RED - [ERROR] Wrong number of arguments\n$DEF"
 	exit 1
