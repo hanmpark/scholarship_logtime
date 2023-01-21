@@ -21,7 +21,7 @@ It tells you the public holidays of the month and adds 7 hours automatically.
 *  **!! IT DOESN'T TELL THE EXACT LOGTIME !!**
    - **The program doesn't calculate manually added logtimes**
    - **My _bonus logtime_ is not the same as the real bonus logtime**
-   - **If you have a doubt about your logtime, please asks to your staff**
+   - **If you have a doubt about your logtime, please ask your staff**
 
 ## Prerequisite
 

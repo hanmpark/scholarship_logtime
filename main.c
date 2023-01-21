@@ -6,13 +6,13 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/21 18:51:33 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:57:43 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/scholarship_logtime.h"
 
-static void	print_result(int month, int lastmonth, char **date, char **bonus_date, int show)
+static void	print_result(int month, int lmonth, char **date, char **bonus_date, int show)
 {
 	int		i;
 
@@ -26,7 +26,7 @@ static void	print_result(int month, int lastmonth, char **date, char **bonus_dat
 			i++;
 		}
 	}
-	ccl_logtime(month, lastmonth, date, bonus_date, show);
+	ccl_logtime(month, lmonth, date, bonus_date, show);
 }
 
 static int	find_month(char *month)
@@ -55,24 +55,24 @@ static int	find_month(char *month)
 	return (res);
 }
 
-static int	set_dates(int month, int lastmonth, char ***date, char ***bonus_date)
+static int	set_dates(int month, int lmonth, char ***date, char ***bonus_date)
 {
 	int	fd;
 
 	fd = open("dates.txt", O_RDONLY);
-	*date = parse_month(month, lastmonth, fd);
+	*date = parse_month(month, lmonth, fd);
 	close(fd);
 	if (!*date)
 	{
 		printf("%s- [ERROR] Can't calculate for this month...%s\n\n", RED, DEF);
 		return (0);
 	}
-	month = lastmonth;
-	lastmonth = month - 1;
+	month = lmonth;
+	lmonth = month - 1;
 	if (month == 1)
-		lastmonth = 12;
+		lmonth = 12;
 	fd = open("dates.txt", O_RDONLY);
-	*bonus_date = parse_month(month, lastmonth, fd);
+	*bonus_date = parse_month(month, lmonth, fd);
 	close(fd);
 	return (1);
 }
