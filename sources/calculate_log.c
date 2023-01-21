@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/20 15:25:03 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:37:16 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static int	*ccl_log(char **date)
 	res[0] = 0;
 	res[1] = 0;
 	res[2] = 0;
-	res[0] = ccl_time(date, 18);
+	res[0] = ccl_time(date, 20);
 	res[1] = res[0] / 60;
 	res[0] %= 60;
-	res[1] += ccl_time(date, 15);
+	res[1] += ccl_time(date, 17);
 	res[2] = res[1] / 60;
 	res[1] %= 60;
-	res[2] += ccl_time(date, 12);
+	res[2] += ccl_time(date, 14);
 	return (res);
 }
 
@@ -58,9 +58,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 	if (bnlog[2] >= 140 && bnlog[2] < 210)
 	{
 		bnlog[2] -= 140;
-		ft_printf("%sBonus log: %s%dh %dmin %ds%s\n\n", BOLD, GREEN,
+		ft_printf("\n%sBonus log: %s%dh %dmin %ds%s\n\n", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
-		ft_printf("%sWithout bonus = %s%dh %dmin %ds%s\n", CYAN, UL,
+		ft_printf("%sWithout bonus = %s%dh %dmin %ds%s", CYAN, UL,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else if (bnlog[2] >= 210)
@@ -68,9 +68,9 @@ static void	set_bnlog(int *stdlog, int *bnlog)
 		bnlog[2] = 70;
 		bnlog[1] = 0;
 		bnlog[0] = 0;
-		ft_printf("%sBonus log: %s%dh %dmin %ds%s\n\n", BOLD, GREEN,
+		ft_printf("\n%sBonus log: %s%dh %dmin %ds%s\n\n", BOLD, GREEN,
 			bnlog[2], bnlog[1], bnlog[0], DEF);
-		ft_printf("%sWithout bonus = %s%dh %dmin %ds%s\n", CYAN, UL,
+		ft_printf("%sWithout bonus = %s%dh %dmin %ds%s", CYAN, UL,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else
@@ -107,7 +107,7 @@ static int	*ccl_total_logtime(int *stdlog, int *bnlog)
 	return (ttlog);
 }
 
-void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date)
+void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date, int show)
 {
 	int		*stdlog;
 	int		*bnlog;
@@ -116,10 +116,10 @@ void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date)
 
 	stdlog = ccl_log(date);
 	bnlog = ccl_log(bonus_date);
-	set_holidays(month, lastmonth, stdlog, bnlog);
+	set_holidays(month, lastmonth, stdlog, bnlog, show);
 	ttlog = ccl_total_logtime(stdlog, bnlog);
 	tthours = ttlog[2];
-	ft_printf("%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
+	ft_printf("\n%s%sTotal logtime = %s%dh %dmin %ds%s\n\n", CYAN, BOLD, UL,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
 	check_logtime(month, stdlog, ttlog);
 	ft_printf("%s%sProgress log:%s\t", UL, PURPLE, DEF);

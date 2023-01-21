@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 18:57:43 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:29:43 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define BOLD "\033[1m"
 # define ITALIC "\033[3m"
 # define UL "\033[4m"
+# define BACK "\033[0K\r"
 
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
@@ -46,7 +47,7 @@ int		trim_tab(char **tab, int len);
 void	free_holidays(char **tab);
 
 /* set logtime */
-void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date);
+void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date, int show);
 void	check_logtime(int month, int *stdlog, int *ttlog);
 
 /* find month */
@@ -57,6 +58,6 @@ int		days_left(void);
 int		current_month(void);
 int		current_day(void);
 int		current_year(void);
-void	set_holidays(int month, int lastmonth, int *stdlog, int *bnlog);
+void	set_holidays(int month, int lastmonth, int *stdlog, int *bnlog, int show);
 
 #endif

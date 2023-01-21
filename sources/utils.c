@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 19:05:25 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 17:06:50 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,24 @@ void	free_holidays(char **tab)
 
 int	trim_tab(char **tab, int len)
 {
+	char	*firststr;
 	int		i;
 	int		k;
 
 	i = 0;
+	firststr = ft_substr(tab[i], 1, 22);
+	free(tab[i]);
+	tab[i] = firststr;
 	while (tab[i])
 	{
 		k = 0;
 		while (tab[i][k] && k < len)
 			k++;
-		tab[i][k++] = '"';
+		tab[i][k++] = '\n';
 		tab[i][k] = 0;
+		tab[i][0] = ' ';
+		tab[i][11] = ' ';
+		tab[i][13] = ' ';
 		i++;
 	}
 	return (i);

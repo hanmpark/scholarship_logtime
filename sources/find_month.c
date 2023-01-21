@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:22:01 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 17:04:57 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static char	*browse_days(int month, int lmonth, int fd, int *fmonth, int *fday)
 	day = get_next_line(fd);
 	if (!day)
 		return (NULL);
-	*fmonth = find_time(day, 5);
-	*fday = find_time(day, 8);
+	*fmonth = find_time(day, 6);
+	*fday = find_time(day, 9);
 	while ((*fmonth != month && *fmonth != lmonth)
 		|| (*fmonth == month && *fday > 26)
 		|| (*fmonth == lmonth && *fday > 27))
@@ -43,8 +43,8 @@ static char	*browse_days(int month, int lmonth, int fd, int *fmonth, int *fday)
 		day = get_next_line(fd);
 		if (!day)
 			return (NULL);
-		*fmonth = find_time(day, 5);
-		*fday = find_time(day, 8);
+		*fmonth = find_time(day, 6);
+		*fday = find_time(day, 9);
 	}
 	return (day);
 }
@@ -74,16 +74,16 @@ static void	get_month(char **date, int month, int lastmonth, int fd)
 	int	i;
 
 	i = 0;
-	found_month = find_time(date[i], 5);
-	found_day = find_time(date[i], 8);
+	found_month = find_time(date[i], 6);
+	found_day = find_time(date[i], 9);
 	while ((date[i] && found_month == month && found_day < 27)
 		|| (date[i] && found_month == lastmonth && found_day > 26))
 	{
 		date[++i] = get_next_line(fd);
 		if (!date[i])
 			break ;
-		found_month = find_time(date[i], 5);
-		found_day = find_time(date[i], 8);
+		found_month = find_time(date[i], 6);
+		found_day = find_time(date[i], 9);
 	}
 	free(date[i]);
 	date[i] = 0;

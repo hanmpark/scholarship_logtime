@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:22:28 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:47:16 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	print_holidays(char **tab, int year, int i, int fd)
 {
 	while (tab[i] && atoi(tab[i] + 2) == year)
 	{
+		write(fd, " ", 1);
 		tab[i] += 2;
 		tab[i][10] = ' ';
 		ft_putstr_fd(tab[i], fd);
@@ -45,15 +46,13 @@ static void	resort_dates(char **tab, int fd)
 {
 	int	i;
 
-	i = trim_tab(tab, 20);
-	free(tab[i]);
-	i--;
-	while (i > 0)
+	trim_tab(tab, 22);
+	i = 0;
+	while (tab[i])
 	{
 		ft_putstr_fd(tab[i], fd);
-		write(fd, "\n", 1);
 		free(tab[i]);
-		i--;
+		i++;
 	}
 	free(tab[i]);
 	free(tab);
@@ -84,7 +83,7 @@ void	api_dates(void)
 	fd = open("dates.txt", O_RDONLY);
 	str = get_next_line(fd);
 	close(fd);
-	res = ft_split(str, ' ');
+	res = ft_split(str, ',');
 	free(str);
 	fd = open("dates.txt", O_WRONLY | O_TRUNC);
 	resort_dates(res, fd);
