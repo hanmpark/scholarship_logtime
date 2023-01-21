@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/21 18:57:43 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/21 19:08:27 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static void	set_info(int argc, char **argv, int *month, int *show)
 				*show = 1;
 			i++;
 		}
+		if (!*month)
+			*month = find_month(argv[1]);
 	}
 	else if (argc == 2)
 	{
