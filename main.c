@@ -122,7 +122,7 @@ int	main(int argc, char **argv)
 	if (month == 1)
 		lastmonth = 12;
 	if (!(set_dates(month, lastmonth, &date, &bonus_date)))
-		return (-1);
+		return (1);
 	print_result(month, lastmonth, date, bonus_date, show);
 	if (bonus_date)
 		free_month(bonus_date);
