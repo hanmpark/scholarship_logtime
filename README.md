@@ -45,11 +45,11 @@ You can skip the other cases
 
 Now you should have your **_UID_** and your **_SECRET_**
 
-Now go back to your terminal and add the following environment variables with the _export_ command:
+Now go back to your terminal and set your application's UID and SECRET in _sslog.sh_ file
 
 ```bash
-  export UID_42="UID_of_your_application"
-  export SECRET_42="SECRET_of_your_application"
+  UID_42="your_application_UID"
+  SECRET_42="your_application_SECRET"
 ```
 ## You are finally good to go !
 
