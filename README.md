@@ -18,7 +18,7 @@ It calculates the total logtime a person has done from the 27th to the 26th of t
    - **During public holidays, it will append 7 hours to the total logtime automatically**
    - **If you do logtime during a public holiday, it will append to the 7 hours**
    
-*  **!! IT DOESN'T TELL THE EXACT LOGTIME !!**
+### !! IT DOESN'T TELL THE EXACT LOGTIME !!
    - **The program doesn't calculate manually added logtimes**
    - **My _bonus logtime_ is not the same as the real bonus logtime**
    - **If you have a doubt about your logtime, please ask your staff**
