@@ -1,7 +1,10 @@
 #!/bin/sh
-clear
 
-########## COLORS ###########
+# SETTINGS
+UID_42="your_application_UID"
+SECRET_42="your_aaplication_SECRET"
+
+# DISPLAYING
 RED="\033[1;31m"
 DEF="\033[0m"
 BOLD="\033[1m"
@@ -9,6 +12,7 @@ PURPLE="\033[1;35m"
 GRAY="\033[2;37m"
 BACK="\033[0K\r"
 
+clear
 printf "
 $PURPLE
 █▀ █▀▀ █ █ █▀█ █   ▄▀█ █▀█ █▀ █ █ █ █▀█  █   █▀█ █▀▀ ▀█▀ █ █▀▄▀█ █▀▀
@@ -18,7 +22,7 @@ $DEF
 
 "
 
-########## API ##########
+# API
 if [ $# \> 3 ]
 then
 	printf "$RED - [ERROR] Wrong number of arguments\n$DEF"
@@ -47,6 +51,8 @@ else
 	printf "$BACK$GRAY- [INFO] Login:$DEF $1\n"
 fi
 
+
+# RUNNING PROGRAM
 gcc scholarship_logtime.a 2> /dev/null
 if [ $? != 0 ]
 then
