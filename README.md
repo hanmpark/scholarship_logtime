@@ -23,82 +23,25 @@ It tells you the public holidays of the month and adds 7 hours automatically.
    - **My _bonus logtime_ is not the same as the real bonus logtime**
    - **If you have a doubt about your logtime, please ask your staff**
 
-## Prerequisite
-
-First of all, to run this project, you will have to install Ruby if it's not installed yet. Note that on mac it is already pre-installed. To check it, do:
-
-```bash
-  which ruby
-```
-
-You should get something like
-
-```bash
-  /usr/bin/ruby
-```
-
-Else, follow [this link](https://www.ruby-lang.org/en/documentation/installation/)
-
-**Note that at school, you don't have permission to change versions, or add and install gems so please follow the next command lines to install rbenv:**
-
-```bash
-  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
-```
-
-Once you have installed rbenv, it should tell you how to configure your shell to load rbenv and the command should look **_something like this_**:
-```bash
-  echo 'eval "$(~/.rbenv/bin/rbenv init - zsh)"' >> ~/.zshrc
-```
-Or if you don't find the command please follow this [link](https://github.com/rbenv/rbenv)
-
-Then restart your terminal or simply _exec zsh_ and do
-```bash
-  rbenv install 2.6.10
-  rbenv global 2.6.10
-```
-
-_exec zsh_ again and now when you do _ruby -v_ you should get the version you just installed.
-
 ## Installation
 
-Only then you can git clone my repo  
-If you have cloned it already reclone it
+Git clone my repo
 
 ```bash
   git clone https://github.com/Nonino42/scholarship_logtime.git
 ```
 
-Go to the project directory
-
-```bash
-  cd scholarship_logtime
-```
-
-Once you have it, run the following command line in scholarship_logtime/ to create your **Gemfile**:
-
-```bash
-  bundle init
-```
-
-Now we need the **Gemfile.lock** to add dependencies we need in our program.
-
-```bash
-  bundle add oauth2
-  bundle add scanf
-  bundle install
-```
-
 ### API
 
-As the program needs to access the 42 API, you will have to create an application v2 in your intra.
+As the program needs to access the 42 API, you will have to create an application v2 in your intra
 
-For that, go on your intra, click on your profile, settings, API, register a new app at the top right on your screen.
+For that, go on your intra, click on your profile, settings, API, register a new app at the top right on your screen
 
 - **Name** = _scholarship_logtime_
 
 - **Redirect URI** = _https://profile.intra.42.fr/_
 
-The others you can skip.
+You can skip the other cases
 
 Now you should have your **_UID_** and your **_SECRET_**
 
@@ -119,10 +62,11 @@ Don't forget to compile first:
 Now execute the program by using the simple command line:
 
 ```bash
-  ./sslog.sh your_42_login chosen_month
+  ./sslog.sh your_42_login chosen_month -s
 ```
 
-If you don't put anything for the chosen_month, it will automatically choose the current month.
+If you don't put anything for the chosen_month, it will automatically choose the current month  
+If you put the "-s" flag it will show you the dates
 
 ## Documentation
 
