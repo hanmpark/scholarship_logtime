@@ -16,11 +16,11 @@ static void	print_holidays(char **tab, int year, int i, int fd)
 {
 	while (tab[i] && ft_atoi(tab[i] + 2) == year)
 	{
-		write(fd, " ", 1);
+		ft_putchar_fd(' ', fd);
 		tab[i] += 2;
 		tab[i][10] = ' ';
 		ft_putstr_fd(tab[i], fd);
-		write(fd, "\n", 1);
+		ft_putchar_fd('\n', fd);
 		tab[i] -= 2;
 		i--;
 	}
