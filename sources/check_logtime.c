@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/20 12:05:48 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:44:22 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static int	set_days_off(void)
 {
 	int		days_off;
 
-	ft_printf("%s%sThe number of days you want to take off from now on:%s%s ", ITALIC, GRAY, DEF, GREEN);
+	printf("%s%sThe number of days you want to take off from now on:%s%s ", ITALIC, GRAY, DEF, GREEN);
 	scanf("%d", &days_off);
 	if (days_off < 0 || days_off >= days_left())
 	{
-		ft_printf("%s%s\t\tIncompatible days off%s\n", ITALIC, RED, DEF);
+		printf("%s%s\t\tIncompatible days off%s\n", ITALIC, RED, DEF);
 		days_off = 0;
 	}
-	ft_printf("%s%sDays off : %s%d%s\n", DEF, BOLD, GREEN, days_off, DEF);
+	printf("%s%sDays off : %s%d%s\n", DEF, BOLD, GREEN, days_off, DEF);
 	return (days_off);
 }
 
@@ -54,37 +54,37 @@ static void	incomplete_logtime(int *ttlog)
 	hours_left = ttlog[2] / dleft;
 	minutes_left = ((ttlog[2] % dleft) * 60 + ttlog[1]) / dleft;
 	seconds_left = ((((ttlog[2] % dleft) * 60 + ttlog[1]) % dleft) * 60 + ttlog[0]) / dleft;
-	ft_printf("%sTime left: %s%dh %dmin %ds%s\n", BOLD, GREEN,
+	printf("%sTime left: %s%dh %dmin %ds%s\n", BOLD, GREEN,
 		ttlog[2], ttlog[1], ttlog[0], DEF);
-	ft_printf("%sDays left: %s%d days%s\n", BOLD, GREEN, dleft, DEF);
+	printf("%sDays left: %s%d days%s\n", BOLD, GREEN, dleft, DEF);
 	if (hours_left < 13)
 	{
-		ft_printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, GREEN,
+		printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, GREEN,
 			hours_left, minutes_left, seconds_left, DEF);
 	}
 	else if (hours_left < 24)
 	{
-		ft_printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, YELLOW,
+		printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, YELLOW,
 			hours_left, minutes_left, seconds_left, DEF);
 	}
 	else
 	{
-		ft_printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, RED,
+		printf("%sTo do log: %s%dh %dmin %ds / day%s\n", BOLD, RED,
 			hours_left, minutes_left, seconds_left, DEF);
-		ft_printf("%s%s\t   sorry it's impossible%s\n", ITALIC, RED, DEF);
+		printf("%s%s\t   sorry it's impossible%s\n", ITALIC, RED, DEF);
 	}
 }
 
 void	check_logtime(int month, int *stdlog, int *ttlog)
 {
-	ft_printf("------------------------------------------------------\n");
+	printf("------------------------------------------------------\n");
 	if (ttlog[2] < 140 && month == current_month())
 		incomplete_logtime(ttlog);
 	else if (stdlog[2] >= 140 && stdlog[2] < 210)
 	{
 		stdlog[2] -= 140;
-		ft_printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
-		ft_printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN,
+		printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
+		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else if (stdlog[2] >= 210)
@@ -92,11 +92,11 @@ void	check_logtime(int month, int *stdlog, int *ttlog)
 		stdlog[2] = 70;
 		stdlog[1] = 0;
 		stdlog[0] = 0;
-		ft_printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
-		ft_printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN,
+		printf("%s%s\t\t     LOGTIME OK !%s\n\n", GREEN, ITALIC, DEF);
+		printf("%sNext month bonus: %s%dh %dmin %ds%s\n", PURPLE, GREEN,
 			stdlog[2], stdlog[1], stdlog[0], DEF);
 	}
 	else
-		ft_printf("%s\t\tNothing for next month%s\n", PURPLE, DEF);
-	ft_printf("------------------------------------------------------\n\n");
+		printf("%s\t\tNothing for next month%s\n", PURPLE, DEF);
+	printf("------------------------------------------------------\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/21 17:04:57 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:42:22 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**parse_month(int month, int lastmonth, int fd)
 {
 	char	**date;
 
-	date = ft_calloc(32, sizeof(char *));
+	date = calloc(32, sizeof(char *));
 	if (!date)
 		return (NULL);
 	*date = get_day(month, lastmonth, fd);

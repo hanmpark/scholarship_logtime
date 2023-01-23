@@ -6,19 +6,18 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/21 18:29:43 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:01:10 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCHOLARSHIP_LOGTIME_H
 # define SCHOLARSHIP_LOGTIME_H
-# include "../libft/includes/ft_printf.h"
-# include "../libft/includes/get_next_line.h"
-# include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <string.h>
 # include <time.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 /* ------- colors / sets ------- */
 # define DEF "\033[0m"
@@ -36,15 +35,30 @@
 # define GRAY "\033[2;37m"
 
 /* ---------- LOGTIME ---------- */
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+/* get_next_line */
+char	*get_next_line(int fd);
+void	ft_freeall(char *buf, char *line, char *stash);
+char	*ft_bufferjoin(char *s1, char *s2);
+char	*ft_linetrim(char *str);
+
 /* parse api */
 void	api_dates(void);
 void	api_public_holidays(void);
+void	free_holidays(char **tab);
+int		trim_tab(char **tab, int len);
+char	**ft_split(char const *s, char c);
 
 /* utils */
 void	free_month(char **date);
 void	print_progress(int tthours, int hours);
-int		trim_tab(char **tab, int len);
-void	free_holidays(char **tab);
+void	ft_putstr_fd(char *s, int fd);
+int		ft_isdigit(int c);
+char	*ft_itoa(int n);
 
 /* set logtime */
 void	ccl_logtime(int month, int lastmonth, char **date, char **bonus_date, int show);

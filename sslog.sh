@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # SETTINGS
-UID_42="your_application_UID"
-SECRET_42="your_aaplication_SECRET"
+UID_42="u-s4t2ud-181a564c1457683b23956b69e779751ff829412d7ed6d9cdcbbfa741899f2750"
+SECRET_42="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"
 
 # DISPLAYING
 RED="\033[1;31m"
@@ -48,12 +48,13 @@ then
 	exit 1
 else
 	echo "$DATES" > dates.txt
-	printf "$BACK$GRAY- [INFO] Login:$DEF $1\n"
+	printf "$BACK$GRAY- [INFO] Login:$DEF $1      \n"
 fi
 
 
 # RUNNING PROGRAM
-gcc scholarship_logtime.a 2> /dev/null
+make
+gcc scholarship_logtime.a
 if [ $? != 0 ]
 then
 	printf "$BACK$RED- [ERROR] You need to compile first\n\n$DEF"
@@ -61,4 +62,5 @@ then
 fi
 
 ./a.out $2 $3
+make fclean
 rm a.out

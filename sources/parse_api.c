@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/21 18:47:16 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:47:54 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	print_holidays(char **tab, int year, int i, int fd)
 {
-	while (tab[i] && ft_atoi(tab[i] + 2) == year)
+	while (tab[i] && atoi(tab[i] + 2) == year)
 	{
-		ft_putchar_fd(' ', fd);
+		write(fd, " ", 1);
 		tab[i] += 2;
 		tab[i][10] = ' ';
 		ft_putstr_fd(tab[i], fd);
-		ft_putchar_fd('\n', fd);
+		write(fd, "\n", 1);
 		tab[i] -= 2;
 		i--;
 	}
@@ -31,12 +31,12 @@ static void	resort_holidays(char **tab, int fd)
 	int	i;
 
 	i = 0;
-	while (tab[i] && (ft_atoi(tab[i] + 2) != current_year()
-		|| ft_atoi(tab[i] + 7) != current_month()))
+	while (tab[i] && (atoi(tab[i] + 2) != current_year()
+		|| atoi(tab[i] + 7) != current_month()))
 		i++;
 	print_holidays(tab, current_year(), i, fd);
-	while (tab[i] && (ft_atoi(tab[i] + 2) != current_year() - 1
-		|| ft_atoi(tab[i] + 7) != 12))
+	while (tab[i] && (atoi(tab[i] + 2) != current_year() - 1
+		|| atoi(tab[i] + 7) != 12))
 		i++;
 	print_holidays(tab, current_year() - 1, i, fd);
 	free_holidays(tab);

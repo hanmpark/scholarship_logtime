@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/21 19:08:27 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:00:11 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static int	find_month(char *month)
 {
 	int	res;
 
-	if (month && ft_isdigit(*month) && (ft_atoi(month) >= 1 && ft_atoi(month) <= 12))
+	if (month && ft_isdigit(*month) && (atoi(month) >= 1 && atoi(month) <= 12))
 	{
 		res = atoi(month);
 		printf("%s%s- [INFO] Chosen month:%s %d\n", BACK, GRAY, DEF, res);
 	}
-	else if (month && ft_isdigit(*month) && (ft_atoi(month) < 1 || ft_atoi(month) > 12))
+	else if (month && ft_isdigit(*month) && (atoi(month) < 1 || atoi(month) > 12))
 	{
 		printf("%s%s- [ERROR] Month doesn't exist...%s\n\n", BACK, RED, DEF);
 		exit(1);
@@ -88,7 +88,7 @@ static void	set_info(int argc, char **argv, int *month, int *show)
 		i = 1;
 		while (argv[i])
 		{
-			if (!*month && ft_atoi(argv[i]))
+			if (!*month && atoi(argv[i]))
 				*month = find_month(argv[i]);
 			if (!strcmp(argv[i], "-s"))
 				*show = 1;
@@ -115,6 +115,7 @@ int	main(int argc, char **argv)
 	char	**bonus_date;
 	int		show;
 
+	setbuf(stdout, NULL);
 	api_dates();
 	api_public_holidays();
 	set_info(argc, argv, &month, &show);
