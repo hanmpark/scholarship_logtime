@@ -53,13 +53,7 @@ Now go back to your terminal and set your application's UID and SECRET in _sslog
 ```
 ## You are finally good to go !
 
-Don't forget to compile first:
-
-```bash
-  make all
-```
-
-Now execute the program by using the simple command line:
+Execute the program by doing like so:
 
 ```bash
   ./sslog.sh your_42_login chosen_month -s
