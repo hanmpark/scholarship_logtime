@@ -35,9 +35,6 @@ if [[ "$GET_TOKEN" == *error* ]]
 then
 	echo "$RED\rPlease set correct UID_42 SECRET_42\n$DEF"
 	exit 1
-else
-	printf "$GRAY- [INFO] Checking API...$DEF"
-	sleep 1
 fi
 
 TOKEN_42="${GET_TOKEN%%\"*}"
