@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 17:00:11 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:59:19 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ static int	set_dates(int month, int lmonth, char ***date, char ***bonus_date)
 	fd = open("dates.txt", O_RDONLY);
 	*date = parse_month(month, lmonth, fd);
 	close(fd);
-	if (!*date)
-	{
-		printf("%s- [ERROR] Can't calculate for this month...%s\n\n", RED, DEF);
-		return (0);
-	}
 	month = lmonth;
 	lmonth = month - 1;
 	if (month == 1)
@@ -122,11 +117,11 @@ int	main(int argc, char **argv)
 	lastmonth = month - 1;
 	if (month == 1)
 		lastmonth = 12;
-	if (!(set_dates(month, lastmonth, &date, &bonus_date)))
-		return (1);
+	set_dates(month, lastmonth, &date, &bonus_date);
 	print_result(month, lastmonth, date, bonus_date, show);
 	if (bonus_date)
 		free_month(bonus_date);
-	free_month(date);
+	if (date)
+		free_month(date);
 	return (0);
 }
