@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/27 13:59:19 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:51:33 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ static int	find_month(char *month)
 	{
 		res = current_month();
 		printf("%s%s- [INFO] Current month:%s %d\n", BACK, GRAY, DEF, res);
-		if (current_day() >= 27 && current_day() <= 31)
-			res++;
-		if (res == 13)
-			res = 1;
 	}
 	return (res);
 }

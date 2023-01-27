@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/19 15:04:28 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:40:55 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,15 @@ int	days_left(void)
 int	current_month(void)
 {
 	struct tm	*tm;
+	int			month;
 	
 	tm = set_tm();
-	return (tm->tm_mon + 1);
+	month = tm->tm_mon + 1;
+	if (current_day() >= 27 && current_day() <= 31)
+		month++;
+	if (month == 13)
+		month = 1;
+	return (month);
 }
 
 int	current_day(void)

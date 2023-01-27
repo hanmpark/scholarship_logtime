@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 16:47:54 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:16:48 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ static void	resort_holidays(char **tab, int fd)
 	int	i;
 
 	i = 0;
-	while (tab[i] && (atoi(tab[i] + 2) != current_year()
-		|| atoi(tab[i] + 7) != current_month()))
+	while (tab[i] && atoi(tab[i] + 2) != current_year())
+		i++;
+	while (tab[i] && atoi(tab[i] + 7) < current_month())
 		i++;
 	print_holidays(tab, current_year(), i, fd);
-	while (tab[i] && (atoi(tab[i] + 2) != current_year() - 1
-		|| atoi(tab[i] + 7) != 12))
+	while (tab[i] && atoi(tab[i] + 2) != current_year() - 1)
+		i++;
+	while (tab[i] && atoi(tab[i] + 7) != 12)
 		i++;
 	print_holidays(tab, current_year() - 1, i, fd);
 	free_holidays(tab);
