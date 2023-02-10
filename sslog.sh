@@ -33,7 +33,7 @@ GET_TOKEN=$(curl -s -X POST --data "grant_type=client_credentials&client_id=$UID
 curl -s -k "https://calendrier.api.gouv.fr/jours-feries/metropole.json" > holidays.txt
 if [[ "$GET_TOKEN" == *error* ]]
 then
-	echo "$RED\rPlease set correct UID_42 SECRET_42\n$DEF"
+	printf "$RED\rPlease set correct UID_42 SECRET_42\n$DEF"
 	exit 1
 fi
 
