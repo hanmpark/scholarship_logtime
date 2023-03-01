@@ -1,13 +1,13 @@
 ![time banner](https://kiwiorthoticservices.com/wp-content/uploads/saving-time-banner.jpg)
 
-<h1 align="center">scholarship_logtime</h1>
+<h1 align="center">⏱ scholarship_logtime ⏱</h1>
 
-Hello there !
+Hello there ! 🙌
 
 Here's my first personal project which is a program that may be interesting to **42 GEN scholarship students**:  
 It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting _*bonus time_ from the previous month if there is any !   
 
-## NOTES
+## NOTES 📝
    -  If you have chosen the current month, the program also tells you:
       - how much time is left before the 27th
       - how many days are left before the 27th (counting days off if you have set any)
@@ -18,12 +18,12 @@ It calculates the total logtime a person has done from the 27th to the 26th of t
    - **During public holidays, it will append 7 hours to the total logtime automatically**
    - **If you do logtime during a public holiday, it will append to the 7 hours**
    
-### !! IT DOESN'T TELL THE EXACT LOGTIME !!
+### ‼️ IT DOESN'T TELL THE EXACT LOGTIME ‼️
    - **The program doesn't calculate manually added logtimes**
    - **My _bonus logtime_ is not the same as the real bonus logtime**
    - **If you have a doubt about your logtime, please ask your staff**
 
-## Installation
+## Installation 💾
 
 Git clone my repo
 
@@ -31,7 +31,7 @@ Git clone my repo
   git clone https://github.com/Nonino42/scholarship_logtime.git
 ```
 
-### API
+### API 📡
 
 As the program needs to access the 42 API, you will have to create an application v2 in your intra
 
@@ -51,7 +51,7 @@ Now go back to your terminal and set your application's UID and SECRET in _sslog
   UID_42="your_application_UID"
   SECRET_42="your_application_SECRET"
 ```
-## You are finally good to go !
+## You are finally good to go ! 🤩
 
 Execute the program by doing like so:
 
@@ -62,12 +62,12 @@ Execute the program by doing like so:
 If you don't put anything for the chosen_month, it will automatically choose the current month  
 If you put the "-s" flag it will show you the dates
 
-## Documentation
+## Documentation 📕
 
 [Documentation](https://api.intra.42.fr/apidoc/guides/getting_started)
 
 
-## Authors
+## Authors 👨‍💻
 
 - [@Nonino42](https://www.github.com/Nonino42)
 
