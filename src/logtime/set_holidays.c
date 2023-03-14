@@ -6,11 +6,16 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:50:35 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 16:39:03 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:25:56 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "scholarship_logtime.h"
+#include "calculate_time.h"
+#include "find_time.h"
+#include "parse.h"
+#include "print.h"
+#include <fcntl.h>
 
 static char	**find_holidays(int month, int lastmonth)
 {
@@ -23,55 +28,20 @@ static char	**find_holidays(int month, int lastmonth)
 	return (holidays);
 }
 
-static int	set_hdlog(char **holidays)
-{
-	int	hdlog;
-
-	if (!holidays)
-		return (0);
-	hdlog = 0;
-	while (holidays[hdlog])
-		hdlog++;
-	hdlog *= 7;
-	free_month(holidays);
-	return (hdlog);
-}
-
-static void	print_holidays(char **holidays, int *stdlog, int show)
-{
-	int	i;
-	int	hdlog;
-
-	i = 0;
-	if (holidays && show)
-	{
-		printf("\n%sPUBLIC HOLIDAYS:%s\n", BLUE, DEF);
-		while (holidays[i])
-		{
-			printf("  - %s", holidays[i]);
-			i++;
-		}
-		hdlog = set_hdlog(holidays);
-		printf("  => + %s%dh%s\n", GREEN, hdlog, DEF);
-		stdlog[2] += hdlog;
-	}
-	else if (!show)
-	{
-		hdlog = set_hdlog(holidays);
-		stdlog[2] += hdlog;
-	}
-}
-
-void	set_holidays(int month, int lastmonth, int *stdlog, int *bnlog, int show)
+void	set_holidays(t_data *data, int *stdlog, int *bnlog)
 {
 	char	**holidays;
+	int		month;
+	int		last_month;
 
-	holidays = find_holidays(month, lastmonth);
-	print_holidays(holidays, stdlog, show);
-	month = lastmonth;
-	lastmonth = month - 1;
+	month = data->month;
+	last_month = data->last_month;
+	holidays = find_holidays(month, last_month);
+	print_holidays(holidays, stdlog, data->show_dates);
+	month = last_month;
+	last_month = month - 1;
 	if (month == 1)
-		lastmonth = 12;
-	holidays = find_holidays(month, lastmonth);
-	bnlog[2] += set_hdlog(holidays);
+		last_month = 12;
+	holidays = find_holidays(month, last_month);
+	bnlog[2] += ccl_hdlog(holidays);
 }

@@ -6,20 +6,35 @@
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 11:59:19 by hanmpark          #+#    #+#              #
-#    Updated: 2023/01/23 17:04:14 by hanmpark         ###   ########.fr        #
+#    Updated: 2023/03/14 00:45:13 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SETTINGS
-H_DIR = includes/
+HEADER_PATH = ./inc/
 NAME = scholarship_logtime.a
-SRCS_DIR = sources/
 
 # SOURCES / OBJECTS
-SRCS_FILES = check_logtime.c utils.c calculate_log.c find_month.c \
-				current_time.c parse_api.c set_holidays.c get_next_line.c \
-				get_next_line_utils.c parse_utils.c
-SRCS = ${addprefix ${SRCS_DIR}, ${SRCS_FILES}} main.c
+SRCS_PATH = ./src/
+SRCS_FILES = ${addprefix ${SRCS_PATH}, utils.c}
+
+GNL_PATH = ${SRCS_PATH}gnl/
+SRCS_GNL = ${addprefix ${GNL_PATH}, get_next_line.c \
+									get_next_line_utils.c}
+
+API_PATH = ${SRCS_PATH}parse_data/
+SRCS_API = ${addprefix ${API_PATH}, parse_api.c \
+									parse_utils.c \
+									parse_month.c}
+
+LOG_PATH = ${SRCS_PATH}logtime/
+SRCS_LOG = ${addprefix ${LOG_PATH}, calculate_time.c \
+									print_logtime.c \
+									check_logtime.c \
+									set_holidays.c \
+									current_time.c}
+
+SRCS = ${SRCS_FILES} ${SRCS_GNL} ${SRCS_API} ${SRCS_LOG} ./main.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -27,15 +42,14 @@ OBJS = ${SRCS:.c=.o}
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-%.o:%.c ${H_DIR}
-	@${CC} ${CFLAGS} -c -I ./${H_DIR} $< -o ${<:.c=.o}
+%.o:%.c ${HEADER_PATH}
+	@${CC} ${CFLAGS} -c -I ${HEADER_PATH} $< -o ${<:.c=.o}
 
 # RULES
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	@ar rc ${NAME} ${OBJS}
-	@ranlib ${NAME}
+	@ar rcs ${NAME} ${OBJS}
 
 clean:
 	@rm -f ${OBJS}
@@ -45,4 +59,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

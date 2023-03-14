@@ -6,11 +6,13 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 16:44:39 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 16:52:28 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:23:08 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "scholarship_logtime.h"
+#include <string.h>
+#include "parse.h"
 
 void	free_holidays(char **tab)
 {
@@ -113,10 +115,10 @@ static char	*cpy_to_tab(char const *str, size_t size)
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char	**tab;
-	size_t	j;
+	size_t	i;
 	size_t	count;
 
 	if (!s)
@@ -129,11 +131,11 @@ char	**ft_split(char const *s, char c)
 	{
 		if (*s && *s != c)
 		{
-			j = 0;
-			while (s[j] && s[j] != c)
-				j++;
-			*(tab++) = cpy_to_tab(s, j);
-			s += j;
+			i = 0;
+			while (s[i] && s[i] != c)
+				i++;
+			*(tab++) = cpy_to_tab(s, i);
+			s += i;
 		}
 		else
 			s++;

@@ -6,26 +6,14 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 16:44:22 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:25:18 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
-
-static void	ccl_timeleft(int *ttlog)
-{
-	if (ttlog[0] > 0)
-	{
-		ttlog[0] = 60 - ttlog[0];
-		ttlog[1]++;
-	}
-	if (ttlog[1] > 0)
-	{
-		ttlog[1] = 60 - ttlog[1];
-		ttlog[2]++;
-	}
-	ttlog[2] = 140 - ttlog[2];
-}
+#include "scholarship_logtime.h"
+#include "calculate_time.h"
+#include "find_time.h"
+#include "print.h"
 
 static int	set_days_off(void)
 {

@@ -6,11 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:10:24 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 17:01:07 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:18:01 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "scholarship_logtime.h"
+#include <unistd.h>
 
 void	free_month(char **date)
 {
@@ -87,49 +88,4 @@ char	*ft_itoa(int n)
 		nbr /= 10;
 	}
 	return (a);
-}
-
-static int	animated_bar(char *color, int prct, int printprct)
-{
-	int		i;
-	char	*prctstr;
-
-	i = 0;
-	printf("[");
-	while (i++ < 31)
-		printf("-");
-	printf("] %s%d%%", color, prct);
-	prctstr = ft_itoa(prct);
-	i += (int)strlen(prctstr) + 2;
-	free(prctstr);
-	while (i--)
-		printf("\b");
-	while (i++ < printprct && i < 31)
-	{
-		printf("%s▰%s", color, DEF);
-		usleep(50000);
-	}
-	return (i);
-}
-
-void	print_progress(int tthours, int hours)
-{
-	int		i;
-	int		prct;
-	int		printprct;
-	char	*color;
-
-	i = 0;
-	prct = 100 * tthours / hours;
-	printprct = 31 * prct / 100;
-	if (prct < 26)
-		color = RED;
-	else if (prct < 76)
-		color = YELLOW;
-	else
-		color = GREEN;
-	i = animated_bar(color, prct, printprct);
-	while (i++ < 31)
-		printf("-");
-	printf("] %s%d%%%s\n\n", color, prct, DEF);
 }

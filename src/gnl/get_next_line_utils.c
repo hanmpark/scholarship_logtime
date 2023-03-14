@@ -6,11 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 07:20:26 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/23 16:52:02 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:10:38 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "scholarship_logtime.h"
+#include "get_next_line.h"
 
 void	ft_freeall(char *buf, char *line, char *stash)
 {

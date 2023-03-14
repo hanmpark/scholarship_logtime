@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # SETTINGS
-UID_42="YOUR_APP_UID"
-SECRET_42="YOUR_APP_SECRET"
+UID_42="your_application_UID"
+SECRET_42="your_application_SECRET"
 
 # DISPLAYING
 RED="\033[1;31m"

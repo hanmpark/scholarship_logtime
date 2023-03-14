@@ -6,13 +6,16 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/02/14 17:32:11 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:21:02 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scholarship_logtime.h"
+#include "scholarship_logtime.h"
+#include "get_next_line.h"
+#include "find_time.h"
+#include "parse.h"
 
-static void	print_holidays(char **tab, int year, int i, int fd)
+static void	write_holidays(char **tab, int year, int i, int fd)
 {
 	while (tab[i] && atoi(tab[i] + 2) == year)
 	{
@@ -26,7 +29,7 @@ static void	print_holidays(char **tab, int year, int i, int fd)
 	}
 }
 
-static void	resort_holidays(char **tab, int fd)
+static void	sort_holidays(char **tab, int fd)
 {
 	int	i;
 
@@ -35,16 +38,16 @@ static void	resort_holidays(char **tab, int fd)
 		i++;
 	while (tab[i] && atoi(tab[i] + 7) < current_month())
 		i++;
-	print_holidays(tab, current_year(), i, fd);
+	write_holidays(tab, current_year(), i, fd);
 	while (tab[i] && atoi(tab[i] + 2) != current_year() - 1)
 		i++;
 	while (tab[i] && atoi(tab[i] + 7) != 12)
 		i++;
-	print_holidays(tab, current_year() - 1, i, fd);
+	write_holidays(tab, current_year() - 1, i, fd);
 	free_holidays(tab);
 }
 
-static void	resort_dates(char **tab, int fd)
+static void	sort_dates(char **tab, int fd)
 {
 	int	i;
 
@@ -60,34 +63,27 @@ static void	resort_dates(char **tab, int fd)
 	free(tab);
 }
 
-void	api_public_holidays(void)
+static void	parse_json(const char *txt_file, int dates)
 {
 	int		fd;
 	char	*str;
 	char	**res;
 
-	fd = open("holidays.txt", O_RDONLY);
+	fd = open(txt_file, O_RDONLY);
 	str = get_next_line(fd);
 	close(fd);
 	res = ft_split(str, ',');
 	free(str);
-	fd = open("holidays.txt", O_WRONLY | O_TRUNC);
-	resort_holidays(res, fd);
+	fd = open(txt_file, O_WRONLY | O_TRUNC);
+	if (dates == HOLIDAYS)
+		sort_holidays(res, fd);
+	else if (dates == DATES)
+		sort_dates(res, fd);
 	close(fd);
 }
 
-void	api_dates(void)
+void	parse_api(void)
 {
-	int		fd;
-	char	*str;
-	char	**res;
-
-	fd = open("dates.txt", O_RDONLY);
-	str = get_next_line(fd);
-	close(fd);
-	res = ft_split(str, ',');
-	free(str);
-	fd = open("dates.txt", O_WRONLY | O_TRUNC);
-	resort_dates(res, fd);
-	close(fd);
+	parse_json("holidays.txt", HOLIDAYS);
+	parse_json("dates.txt", DATES);
 }

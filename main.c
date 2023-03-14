@@ -6,118 +6,72 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/01/27 16:51:33 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/14 01:28:06 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/scholarship_logtime.h"
+#include "scholarship_logtime.h"
+#include "print.h"
+#include "parse.h"
+#include <stdio.h>
+#include <string.h>
 
-static void	print_result(int month, int lmonth, char **date, char **bonus_date, int show)
-{
-	int		i;
-
-	i = 0;
-	if (date && show == 1)
-	{
-		printf("%s\nTHE CHOSEN MONTH'S LOGTIMES:%s\n", BLUE, DEF);
-		while (date[i])
-		{
-			printf("  - %s", date[i]);
-			i++;
-		}
-	}
-	ccl_logtime(month, lmonth, date, bonus_date, show);
-}
-
-static int	find_month(char *month)
-{
-	int	res;
-
-	if (month && ft_isdigit(*month) && (atoi(month) >= 1 && atoi(month) <= 12))
-	{
-		res = atoi(month);
-		printf("%s%s- [INFO] Chosen month:%s %d\n", BACK, GRAY, DEF, res);
-	}
-	else if (month && ft_isdigit(*month) && (atoi(month) < 1 || atoi(month) > 12))
-	{
-		printf("%s%s- [ERROR] Month doesn't exist...%s\n\n", BACK, RED, DEF);
-		exit(1);
-	}
-	else
-	{
-		res = current_month();
-		printf("%s%s- [INFO] Current month:%s %d\n", BACK, GRAY, DEF, res);
-	}
-	return (res);
-}
-
-static int	set_dates(int month, int lmonth, char ***date, char ***bonus_date)
-{
-	int	fd;
-
-	fd = open("dates.txt", O_RDONLY);
-	*date = parse_month(month, lmonth, fd);
-	close(fd);
-	month = lmonth;
-	lmonth = month - 1;
-	if (month == 1)
-		lmonth = 12;
-	fd = open("dates.txt", O_RDONLY);
-	*bonus_date = parse_month(month, lmonth, fd);
-	close(fd);
-	return (1);
-}
-
+/* treating flag(s) if there is/are any */
 static void	set_info(int argc, char **argv, int *month, int *show)
 {
 	int	i;
 
-	*show = 0;
 	*month = 0;
+	*show = 0;
 	if (argc == 3)
 	{
 		i = 1;
 		while (argv[i])
 		{
 			if (!*month && atoi(argv[i]))
-				*month = find_month(argv[i]);
+				*month = set_month(argv[i]);
 			if (!strcmp(argv[i], "-s"))
 				*show = 1;
 			i++;
 		}
 		if (!*month)
-			*month = find_month(argv[1]);
+			*month = set_month(argv[1]);
 	}
 	else if (argc == 2)
 	{
-		*month = find_month(argv[1]);
+		*month = set_month(argv[1]);
 		if (!strcmp(argv[1], "-s"))
 			*show = 1;
 	}
 	else
-		*month = find_month(argv[1]);
+		*month = set_month(argv[1]);
+}
+
+static void	init_data(t_data *data)
+{
+	data->bonus = NULL;
+	data->chosen = NULL;
+	data->last_month = 0;
+	data->month = 0;
+	data->show_dates = 0;
 }
 
 int	main(int argc, char **argv)
 {
-	int		month;
-	int		lastmonth;
-	char	**date;
-	char	**bonus_date;
-	int		show;
+	t_data	data;
 
-	setbuf(stdout, NULL);
-	api_dates();
-	api_public_holidays();
-	set_info(argc, argv, &month, &show);
-	lastmonth = month - 1;
-	if (month == 1)
-		lastmonth = 12;
-	set_dates(month, lastmonth, &date, &bonus_date);
-	print_result(month, lastmonth, date, bonus_date, show);
-	if (bonus_date)
-		free_month(bonus_date);
-	if (date)
-		free_month(date);
+	setbuf(stdout, NULL); // setting it for printf does not wait until its buffer reaches '\n'
+	parse_api();
+	init_data(&data);
+	set_info(argc, argv, &data.month, &data.show_dates);
+	data.last_month = data.month - 1;
+	if (data.month == 1)
+		data.last_month = 12;
+	set_dates(&data, data.month, data.last_month);
+	print_result(&data);
+	if (data.bonus)
+		free_month(data.bonus);
+	if (data.chosen)
+		free_month(data.chosen);
 	return (0);
 }
