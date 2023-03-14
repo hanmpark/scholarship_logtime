@@ -4,14 +4,14 @@
 
 <h4 align="center"><a href="https://github.com/Nonino42/scholarship_logtime/edit/main/README.md#installation-">[Installation]</a> • <a href="https://github.com/Nonino42/scholarship_logtime/edit/main/README.md#you-are-good-to-go--">[Start]</a> • <a href="https://github.com/Nonino42/scholarship_logtime/edit/main/README.md#notes-">[Notes]</a></h4>
 
-Hello there ! 🙌
+Hello there !
 
 Here's my first personal project which is a program that may be interesting to **42 GEN scholarship students**:  
 It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting **bonus time** from the previous month if there is any !   
 
 <a name="installation"/>
 
-## Installation 💾
+## Installation
 
 Git clone my repo
 
@@ -19,7 +19,7 @@ Git clone my repo
   git clone https://github.com/Nonino42/scholarship_logtime.git
 ```
 
-### API 📡
+### API
 
 As the program needs to access the 42 API, you will have to create an application v2 in your intra
 
@@ -42,7 +42,7 @@ Now go back to your terminal and set your application's UID and SECRET in _sslog
 
 <a name="start"/>
 
-## You are good to go ! 🤩
+## Start the program
 
 Execute the program by doing like so:
 
