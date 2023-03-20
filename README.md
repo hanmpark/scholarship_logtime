@@ -71,7 +71,7 @@ Execute the program by doing like so:
 <h3 align="center">‼️ IT DOESN'T TELL THE EXACT LOGTIME ‼️</h3>
 
 <div align="center">
-   <p><strong>My _bonus logtime_ is not the same as the real bonus logtime</strong></p>
+   <p><strong>My bonus logtime is not the same as the real bonus logtime</strong></p>
    <p><strong>If you have a doubt about your logtime, please ask your staff</strong></p>
 </div>
 
