@@ -2,7 +2,7 @@
 
 <h1 align="center">⏱ scholarship_logtime ⏱</h1>
 
-<h4 align="center"><a href="https://github.com/Nonino42/scholarship_logtime/edit/main/README.md#installation-">[Installation]</a> • <a href="https://github.com/Nonino42/scholarship_logtime/edit/main/README.md#you-are-good-to-go--">[Start]</a> • <a href="https://github.com/Nonino42/scholarship_logtime/edit/main/README.md#notes-">[Notes]</a></h4>
+<h4 align="center"><a href="https://github.com/Nonino42/scholarship_logtime#installation">[Installation]</a> • <a href="https://github.com/Nonino42/scholarship_logtime#start-the-program">[Start]</a> • <a href="https://github.com/Nonino42/scholarship_logtime#notes">[Notes]</a></h4>
 
 Hello there !
 
