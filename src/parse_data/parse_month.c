@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/14 01:16:25 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:06:05 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	find_time(char *src, int monthorday)
 	res = atoi(dest);
 	return (res);
 }
-
+#include <stdio.h>
 static char	*browse_days(int month, int lmonth, int fd, int *fmonth, int *fday)
 {
 	char	*day;
@@ -38,8 +38,8 @@ static char	*browse_days(int month, int lmonth, int fd, int *fmonth, int *fday)
 	*fmonth = find_time(day, 6);
 	*fday = find_time(day, 9);
 	while ((*fmonth != month && *fmonth != lmonth)
-		|| (*fmonth == month && *fday > 26)
-		|| (*fmonth == lmonth && *fday > 27))
+		&& ((*fmonth == month && *fday > 26)
+		|| (*fmonth == lmonth && *fday > 27)))
 	{
 		free(day);
 		day = get_next_line(fd);
