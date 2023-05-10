@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/14 01:24:47 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:43:10 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ static void	print_progressbar(int tthours, int hours)
 
 static void	print_info(t_data *data)
 {
-	int		*stdlog;
-	int		*bnlog;
-	int		*ttlog;
-	int		tthours;
+	int	*stdlog;
+	int	*bnlog;
+	int	*ttlog;
+	int	tthours;
 
 	stdlog = ccl_addlog(data->chosen);
 	bnlog = ccl_addlog(data->bonus);
@@ -137,7 +137,7 @@ static void	print_info(t_data *data)
 
 void	print_result(t_data *data)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (data->chosen && data->show_dates == 1)

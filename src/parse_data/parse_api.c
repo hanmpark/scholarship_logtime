@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/14 01:21:02 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:58:17 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "get_next_line.h"
 #include "find_time.h"
 #include "parse.h"
+#include "print.h"
 
 static void	write_holidays(char **tab, int year, int i, int fd)
 {
@@ -36,7 +37,10 @@ static void	sort_holidays(char **tab, int fd)
 	i = 0;
 	while (tab[i] && atoi(tab[i] + 2) != current_year())
 		i++;
-	while (tab[i] && atoi(tab[i] + 7) < current_month())
+	while (tab[i] && atoi(tab[i] + 7) < current_month()) {
+		i++;
+	}
+	while (tab[i] && atoi(tab[i + 1] + 7) == current_month())
 		i++;
 	write_holidays(tab, current_year(), i, fd);
 	while (tab[i] && atoi(tab[i] + 2) != current_year() - 1)
