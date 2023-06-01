@@ -2,7 +2,7 @@
 
 <h1 align="center">⏱ scholarship_logtime ⏱</h1>
 
-<h4 align="center"><a href="https://github.com/Nonino42/scholarship_logtime#installation">[Installation]</a> • <a href="https://github.com/Nonino42/scholarship_logtime#start-the-program">[Start]</a> • <a href="https://github.com/Nonino42/scholarship_logtime#notes">[Notes]</a></h4>
+<h4 align="center"><a href="https://github.com/hanmpark/scholarship_logtime#installation">[Installation]</a> • <a href="https://github.com/Nonino42/scholarship_logtime#start-the-program">[Start]</a> • <a href="https://github.com/Nonino42/scholarship_logtime#notes">[Notes]</a></h4>
 
 Hello there !
 
@@ -84,6 +84,6 @@ Execute the program by doing like so:
 
 ## Author 👨‍💻
 
-- [@Nonino42](https://www.github.com/Nonino42)
+- [@Nonino42](https://www.github.com/hanmpark)
 
 Feel free to contact me if you have anything to say about the program / bugs !
