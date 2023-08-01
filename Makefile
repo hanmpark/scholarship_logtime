@@ -34,7 +34,7 @@ SRCS_LOG = ${addprefix ${LOG_PATH}, calculate_time.c \
 									set_holidays.c \
 									current_time.c}
 
-SRCS = ${SRCS_FILES} ${SRCS_GNL} ${SRCS_API} ${SRCS_LOG} ./main.c
+SRCS = ${SRCS_FILES} ${SRCS_GNL} ${SRCS_API} ${SRCS_LOG} ${SRCS_PATH}/main.c
 
 OBJS = ${SRCS:.c=.o}
 

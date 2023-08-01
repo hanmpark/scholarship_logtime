@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scholarship_logtime.h"
-#include "print.h"
-#include "parse.h"
+#include "../inc/scholarship_logtime.h"
+#include "../inc/print.h"
+#include "../inc/parse.h"
 #include <stdio.h>
 #include <string.h>
 

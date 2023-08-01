@@ -33,21 +33,33 @@ You can skip the other cases
 
 Now you should have your **_UID_** and your **_SECRET_**
 
-Now go back to your terminal and set your application's UID and SECRET in _sslog.sh_ file
+Now go back to your terminal and set your application's UID and SECRET in _.env_ file
 
-```bash
+```env
   UID_42="your_application_UID"
   SECRET_42="your_application_SECRET"
+```
+
+**If you want to save the login for multiple uses without having to type it every time, you can set it in the file too**
+
+```env
+  LOGIN="your_42_login"
 ```
 
 <a name="start"/>
 
 ## Start the program
 
-Execute the program by doing like so:
+You can use the -h option to get informations about the program anything
+    
+```bash
+  ./sslog.sh -h
+```
+
+To start using it right away, you can use the -l option to specify your login and -m to specify the month you want to know the logtime
 
 ```bash
-  ./sslog.sh your_42_login chosen_month -s
+  ./sslog.sh -l your_42_login -m chosen_month -s
   
   #If you don't put anything for the chosen_month, it will automatically choose the current month
   #If you put the "-s" flag it will show you the dates
