@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 01:00:50 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/14 01:09:12 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:50:28 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-/* ------- colors / sets ------- */
+/* ------- COLORS / SETS ------- */
+
 # define DEF "\033[0m"
 # define BOLD "\033[1m"
 # define ITALIC "\033[3m"
@@ -31,10 +32,31 @@
 # define CYAN "\033[0;36m"
 # define GRAY "\033[2;37m"
 
-void	print_bnlog(int *stdlog, int *bnlog);
-void	print_holidays(char **holidays, int *stdlog, int show);
-void	print_result(t_data *data);
-int		set_month(char *month);
-void	check_logtime(int month, int *stdlog, int *ttlog);
+/* ------- PRINTS MESSAGES ------- */
+
+# define CHOSEN_MONTH BACK GRAY "- [INFO] Chosen month: " DEF "%d\n"
+# define NOEXIST_MONTH BACK RED "- [ERROR] Month does not exist...\n\n" DEF
+# define CURRENT_MONTH BACK GRAY "- [INFO] Current month: " DEF "%d\n"
+
+# define PRINT_MONTH BLUE "\nTHE CHOSEN MONTH'S LOGTIMES:\n" DEF
+# define PRINT_HD BLUE "\nPUBLIC HOLIDAYS:\n" DEF
+# define PRINT_BNLOG BOLD "\nBonus log: " GREEN "%dh %dmin %ds\n\n" DEF
+# define PRINT_WITHOUT_BN CYAN "Without bonus = " UL "%dh %dmin %ds" DEF
+
+# define PRINT_TOTAL_TIME CYAN BOLD "\nTotal logtime = " UL "%dh %dmin %ds\n\n" DEF
+# define PRINT_ASK_DAYSOFF ITALIC GRAY "The number of days you want to take off from now on: " DEF GREEN
+# define PRINT_INCOMPATIBLE_DAYSOFF ITALIC RED "\t\tIncompatible days off\n" DEF
+# define PRINT_DAYSOFF DEF BOLD "Days off : " GREEN "%d\n" DEF
+# define PRINT_TIME_LEFT BOLD "Time left: " GREEN "%dh %dmin %ds\n" DEF
+# define PRINT_DAYS_LEFT BOLD "Days left: " GREEN "%d days\n" DEF
+# define PRINT_TO_DO BOLD "To do log: %s%dh %dmin %ds / day\n" DEF 
+# define PRINT_NEXT_BONUS PURPLE "Next month bonus: " GREEN "%dh %dmin %ds\n" DEF
+
+# define LOGTIME_OK GREEN ITALIC "\t\t     LOGTIME OK !\n\n" DEF
+# define NOTHING PURPLE "\t\tNothing for next month\n" DEF
+
+void	print_logtime(t_data data);
+void	check_logtime(t_logtime *log);
+void	print_progressbar(int tthours, int hours);
 
 #endif

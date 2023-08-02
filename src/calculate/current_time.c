@@ -6,12 +6,12 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:20:20 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/14 01:13:24 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:36:40 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scholarship_logtime.h"
-#include "find_time.h"
+#include "get_time.h"
 
 static int	number_of_days(int year, int month)
 {

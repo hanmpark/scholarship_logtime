@@ -5,133 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/18 18:07:28 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/31 00:20:50 by hanmpark         ###   ########.fr       */
+/*   Created: 2023/08/01 14:41:04 by hanmpark          #+#    #+#             */
+/*   Updated: 2023/08/02 02:34:47 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scholarship_logtime.h"
 #include "get_next_line.h"
-#include "parse.h"
+#include "get_time.h"
 
-static int	find_time(char *src, int monthorday)
+static char	*find_potential_ref_date(int month, int last_month, int fd)
 {
-	char	dest[3];
-	int		res;
-	int		i;
+	char	*date;
 
-	i = 0;
-	while (i < 2)
-		dest[i++] = src[monthorday++];
-	dest[i] = 0;
-	res = atoi(dest);
-	return (res);
-}
-#include <stdio.h>
-static char	*browse_days(int month, int lmonth, int fd, int *fmonth, int *fday)
-{
-	char	*day;
-
-	day = get_next_line(fd);
-	if (!day)
-		return (NULL);
-	*fmonth = find_time(day, 6);
-	*fday = find_time(day, 9);
-	while (*fmonth != month && *fmonth != lmonth)
-	{
-		free(day);
-		day = get_next_line(fd);
-		if (!day)
-			return (NULL);
-		*fmonth = find_time(day, 6);
-		*fday = find_time(day, 9);
-	}
-	if (*fmonth == lmonth && *fday < 27)
-	{
-		free(day);
-		return (NULL);
-	}
-	while ((*fmonth == month && *fday > 26))
-	{
-		free(day);
-		day = get_next_line(fd);
-		if (!day)
-			return (NULL);
-		*fmonth = find_time(day, 6);
-		*fday = find_time(day, 9);
-	}
-	return (day);
-}
-
-static char	*get_day(int month, int lastmonth, int fd)
-{
-	int		found_month;
-	int		found_day;
-	char	*day;
-
-	day = browse_days(month, lastmonth, fd, &found_month, &found_day);
-	if (!day)
-		return (NULL);
-	if ((found_month != lastmonth && found_month != month)
-		|| (found_month == lastmonth && found_day < 27))
-	{
-		free(day);
-		return (NULL);
-	}
-	return (day);
-}
-
-static void	get_month_dates(char **date, int month, int lastmonth, int fd)
-{
-	int	found_month;
-	int	found_day;
-	int	i;
-
-	i = 0;
-	found_month = find_time(date[i], 6);
-	found_day = find_time(date[i], 9);
-	while ((date[i] && found_month == month && found_day < 27)
-		|| (date[i] && found_month == lastmonth && found_day > 26))
-	{
-		date[++i] = get_next_line(fd);
-		if (!date[i])
-			break ;
-		found_month = find_time(date[i], 6);
-		found_day = find_time(date[i], 9);
-	}
-	free(date[i]);
-	date[i] = 0;
-}
-
-char	**parse_month(int month, int lastmonth, int fd)
-{
-	char	**date;
-
-	date = calloc(32, sizeof(char *));
+	date = get_next_line(fd);
 	if (!date)
 		return (NULL);
-	*date = get_day(month, lastmonth, fd);
-	if (!*date)
+	while (find_time(date, TXT_MONTH) != month && find_time(date, TXT_MONTH) != last_month)
 	{
-		free_month(date);
-		return (NULL);
+		free(date);
+		date = get_next_line(fd);
+		if (!date)
+			return (NULL);
 	}
-	get_month_dates(date, month, lastmonth, fd);
 	return (date);
 }
 
-void	set_dates(t_data *data, int month, int last_month)
+static char	*get_reference_date(int month, int last_month, int fd)
 {
-	int	fd;
+	char	*date;
 
-	fd = open("dates.txt", O_RDONLY);
-	data->chosen = parse_month(month, last_month, fd);
+	date = find_potential_ref_date(month, last_month, fd);
+	if (!date)
+		return (NULL);
+	while ((find_time(date, TXT_MONTH) == month && find_time(date, TXT_DAY) > 26))
+	{
+		free(date);
+		date = get_next_line(fd);
+		if (!date)
+			return (NULL);
+	}
+	if (find_time(date, TXT_MONTH) == last_month && find_time(date, TXT_DAY) < 27)
+	{
+		free(date);
+		return (NULL);
+	}
+	return (date);
+}
+
+static char	**find_month_dates(int month, int last_month, int fd)
+{
+	char	**month_dates;
+	int		i;
+
+	month_dates = calloc(32, sizeof(char *));
+	if (!month_dates)
+		return (NULL);
+	i = 0;
+	month_dates[i] = get_reference_date(month, last_month, fd);
+	if (!month_dates[i])
+	{
+		free_array(month_dates);
+		return (NULL);
+	}
+	while (is_correct_date(month_dates[i], month, last_month))
+	{
+		month_dates[++i] = get_next_line(fd);
+		if (!month_dates[i])
+			break ;
+	}
+	free(month_dates[i]);
+	month_dates[i] = 0;
+	return (month_dates);
+}
+
+static char	**get_dates(const char *file, int month, int last_month)
+{
+	char	**month_dates;
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	month_dates = find_month_dates(month, last_month, fd);
 	close(fd);
+	return (month_dates);
+}
+
+void	set_dates(t_data *data)
+{
+	int	month;
+	int	last_month;
+
+	month = data->month;
+	last_month = data->last_month;
+	data->chosen = get_dates("dates.txt", month, last_month);
+	data->holidays = get_dates("holidays.txt", month, last_month);
 	month = last_month;
 	last_month = month - 1;
 	if (month == 1)
 		last_month = 12;
-	fd = open("dates.txt", O_RDONLY);
-	data->bonus = parse_month(month, last_month, fd);
-	close(fd);
+	data->bonus = get_dates("dates.txt", month, last_month);
+	data->bonus_holidays = get_dates("holidays.txt", month, last_month);
 }

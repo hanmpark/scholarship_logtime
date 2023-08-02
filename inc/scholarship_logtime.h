@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/04/03 14:39:43 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:21:31 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,37 @@
 # define SCHOLARSHIP_LOGTIME_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 
 # define HOLIDAYS 1
 # define DATES 0
 
-# define INFO_BONUS 1
+typedef struct s_logtime
+{
+	int	*log;
+	int	*bn_log;
+	int	hd_log;
+	int	bnhd_log;
+	int *total_log;
+	int	*time_left;
+	int	*avg_left;
+	int	dleft;
+}	t_logtime;
 
 typedef struct s_data
 {
-	char	**chosen;
-	char	**bonus;
-	int		month;
-	int		last_month;
-	int		show_dates;
+	char				**chosen;
+	char				**bonus;
+	char				**holidays;
+	char				**bonus_holidays;
+	struct s_logtime	*log;
+	int					month;
+	int					last_month;
+	bool				show;
 }	t_data;
 
-/* utils */
-void	free_month(char **date);
-void	ft_putstr_fd(char *s, int fd);
-int		ft_isdigit(int c);
-char	*ft_itoa(int n);
+bool	init_data(int argc, char **argv, t_data *data);
+void	free_structure(t_data data);
+void	free_array(char **array);
 
 #endif

@@ -6,17 +6,12 @@
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 11:59:19 by hanmpark          #+#    #+#              #
-#    Updated: 2023/03/14 00:45:13 by hanmpark         ###   ########.fr        #
+#    Updated: 2023/08/02 02:42:01 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# SETTINGS
-HEADER_PATH = ./inc/
-NAME = scholarship_logtime.a
-
-# SOURCES / OBJECTS
+# ---------------------------- SOURCES / OBJECTS ----------------------------- #
 SRCS_PATH = ./src/
-SRCS_FILES = ${addprefix ${SRCS_PATH}, utils.c}
 
 GNL_PATH = ${SRCS_PATH}gnl/
 SRCS_GNL = ${addprefix ${GNL_PATH}, get_next_line.c \
@@ -27,29 +22,45 @@ SRCS_API = ${addprefix ${API_PATH}, parse_api.c \
 									parse_utils.c \
 									parse_month.c}
 
-LOG_PATH = ${SRCS_PATH}logtime/
-SRCS_LOG = ${addprefix ${LOG_PATH}, calculate_time.c \
-									print_logtime.c \
-									check_logtime.c \
-									set_holidays.c \
-									current_time.c}
+CALCULATE_PATH = ${SRCS_PATH}calculate/
+SRCS_CALCULATE = ${addprefix ${CALCULATE_PATH}, calculate_logs.c \
+												get_logs.c \
+												current_time.c \
+												calculate_average.c}
 
-SRCS = ${SRCS_FILES} ${SRCS_GNL} ${SRCS_API} ${SRCS_LOG} ${SRCS_PATH}/main.c
+PRINT_PATH = ${SRCS_PATH}print/
+SRCS_PRINT = ${addprefix ${PRINT_PATH}, print_logtime.c \
+										check_logtime.c \
+										progress_bar.c}
+
+SRCS = ${SRCS_GNL} ${SRCS_API} ${SRCS_CALCULATE} ${SRCS_PRINT} ${SRCS_LOG} \
+		${SRCS_PATH}main.c ${SRCS_PATH}init_data.c
 
 OBJS = ${SRCS:.c=.o}
 
-# COMPILER
+# --------------------------------- COMPILER --------------------------------- #
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+
+ifdef DEBUG
+	CFLAGS += -fsanitize=address -g
+endif
+
+HEADER_PATH = ./inc/
 
 %.o:%.c ${HEADER_PATH}
 	@${CC} ${CFLAGS} -c -I ${HEADER_PATH} $< -o ${<:.c=.o}
 
-# RULES
+# ---------------------------------- RULES ----------------------------------- #
+NAME = calculator
+
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	@ar rcs ${NAME} ${OBJS}
+	@${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+
+debug:
+	@${MAKE} DEBUG=1
 
 clean:
 	@rm -f ${OBJS}
@@ -59,4 +70,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug

@@ -6,50 +6,19 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 16:44:39 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/03/14 01:23:08 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:33:32 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scholarship_logtime.h"
+#include "get_time.h"
+
 #include <string.h>
-#include "parse.h"
 
-void	free_holidays(char **tab)
+bool	is_correct_date(char *date, int month, int last_month)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-static char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*dest;
-	int		i;
-	int		gap;
-
-	if (!s)
-		return (0);
-	if (*s == 0 || start > strlen(s))
-		return (strdup(""));
-	gap = strlen(s) - start;
-	while ((size_t)gap > len)
-		gap--;
-	dest = calloc(gap + 1, sizeof(char));
-	if (!dest)
-		return (0);
-	i = 0;
-	while (i + start < strlen(s) && s[start + i] && i < gap)
-	{
-		dest[i] = s[start + i];
-		i++;
-	}
-	return (dest);
+	return ((date && find_time(date, TXT_MONTH) == month && find_time(date, TXT_DAY) < 27)
+		|| (date && find_time(date, TXT_MONTH) == last_month && find_time(date, TXT_DAY) > 26));
 }
 
 int	trim_tab(char **tab, int len)
@@ -59,7 +28,7 @@ int	trim_tab(char **tab, int len)
 	int		k;
 
 	i = 0;
-	firststr = ft_substr(tab[i], 1, 22);
+	firststr = strndup(tab[i] + 1, 23);
 	free(tab[i]);
 	tab[i] = firststr;
 	while (tab[i])

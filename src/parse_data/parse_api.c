@@ -6,24 +6,23 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 19:13:07 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/05/10 11:58:17 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:30:34 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scholarship_logtime.h"
 #include "get_next_line.h"
-#include "find_time.h"
-#include "parse.h"
+#include "get_time.h"
 #include "print.h"
 
-static void	write_holidays(char **tab, int year, int i, int fd)
+static void	write_holidays_to_fd(char **tab, int year, int i, int fd)
 {
-	while (tab[i] && atoi(tab[i] + 2) == year)
+	while (tab[i] && atoi(tab[i] + JSON_YEAR) == year)
 	{
 		write(fd, " ", 1);
 		tab[i] += 2;
 		tab[i][10] = ' ';
-		ft_putstr_fd(tab[i], fd);
+		dprintf(fd, "%s", tab[i]);
 		write(fd, "\n", 1);
 		tab[i] -= 2;
 		i--;
@@ -35,20 +34,19 @@ static void	sort_holidays(char **tab, int fd)
 	int	i;
 
 	i = 0;
-	while (tab[i] && atoi(tab[i] + 2) != current_year())
+ 	while (tab[i] && atoi(tab[i] + JSON_YEAR) != current_year())
 		i++;
-	while (tab[i] && atoi(tab[i] + 7) < current_month()) {
+	while (tab[i] && atoi(tab[i] + JSON_MONTH) < current_month())
 		i++;
-	}
-	while (tab[i] && atoi(tab[i + 1] + 7) == current_month())
+	while (tab[i] && atoi(tab[i + 1] + JSON_MONTH) == current_month())
 		i++;
-	write_holidays(tab, current_year(), i, fd);
-	while (tab[i] && atoi(tab[i] + 2) != current_year() - 1)
+	write_holidays_to_fd(tab, current_year(), i, fd);
+	while (tab[i] && atoi(tab[i] + JSON_YEAR) != current_year() - 1)
 		i++;
-	while (tab[i] && atoi(tab[i] + 7) != 12)
+	while (tab[i] && atoi(tab[i] + JSON_MONTH) != 12)
 		i++;
-	write_holidays(tab, current_year() - 1, i, fd);
-	free_holidays(tab);
+	write_holidays_to_fd(tab, current_year() - 1, i, fd);
+	free_array(tab);
 }
 
 static void	sort_dates(char **tab, int fd)
@@ -56,18 +54,18 @@ static void	sort_dates(char **tab, int fd)
 	int	i;
 
 	trim_tab(tab, 22);
-	i = 0;
-	while (tab[i])
-	{
-		ft_putstr_fd(tab[i], fd);
-		free(tab[i]);
-		i++;
-	}
-	free(tab[i]);
-	free(tab);
+	i = -1;
+	while (tab[++i])
+		dprintf(fd, "%s", tab[i]);
+	free_array(tab);
 }
 
-static void	parse_json(const char *txt_file, int dates)
+/* Format json:
+* - to be able to easily manipulate the data, splits the json line
+* and format it
+* - stock the formatted line in a file
+*/
+void	parse_json(const char *txt_file, int dates)
 {
 	int		fd;
 	char	*str;
@@ -84,10 +82,4 @@ static void	parse_json(const char *txt_file, int dates)
 	else if (dates == DATES)
 		sort_dates(res, fd);
 	close(fd);
-}
-
-void	parse_api(void)
-{
-	parse_json("holidays.txt", HOLIDAYS);
-	parse_json("dates.txt", DATES);
 }
