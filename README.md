@@ -1,15 +1,21 @@
-![time banner](https://kiwiorthoticservices.com/wp-content/uploads/saving-time-banner.jpg)
+# scholarship_logtime
 
-<h1 align="center">⏱ scholarship_logtime ⏱</h1>
+Introducing ***scholarship_logtime*** an exlusively designed program for **42 Nice GEN scholarship students**:  
+This tool is crafted to effortlessly calculate the cumulative logtime for individuals, spanning from the 27th to the 26th of the current month or any specified month. Notably, it even accounts for any bonus time earned in the preceding month, ensuring a comprehensive assessment of your dedicated efforts!
 
-<h4 align="center"><a href="https://github.com/hanmpark/scholarship_logtime#installation">[Installation]</a> • <a href="https://github.com/hanmpark/scholarship_logtime#start-the-program">[Start]</a> • <a href="https://github.com/hanmpark/scholarship_logtime#notes">[Notes]</a></h4>
+### Features
+***scholarship_logtime*** offers you comprehensive and personalized insights
+- **Time Remaining:** Discover precisely how much time remains until the 27th of the month, enabling you to plan your activities and optimize your logtime effectively.
+- **Days Remaining:** Get a clear count of the days left before the 27th, thoughtfully considering any set days off, ensuring you stay on track and make the most of every opportunity.
+- **Daily Target:** To help you pace your efforts intelligently, the program calculates the amount of time you should aim to complete each day, carefully accounting for any planned days off, so you can attain your scholarship goals.
 
-Hello there !
-
-Here's my first personal project which is a program that may be interesting to **42 GEN scholarship students**:  
-It calculates the total logtime a person has done from the 27th to the 26th of the current month or the month you chose, counting **bonus time** from the previous month if there is any !   
-
-<a name="installation"/>
+## FAQ
+| FAQ | ANSWER |
+| :-: | --- |
+| BONUS LOG | Note that you can cumulate up to **70 hours** of bonus logtime and it's only applicable for the following month |
+| LOGS NOT DISPLAYED YET | you have to wait until midnight ! |
+| CAN WE CHOOSE ANY MONTH | You can't choose a month that is older than 4 months |
+| PUBLIC HOLIDAYS | Automatically add 7 hours to your logtime counter. If you come that day, the logtime you complete will be added to this initial 7-hour base |
 
 ## Installation
 
@@ -46,17 +52,15 @@ Now go back to your terminal and set your application's UID and SECRET in _.env_
   LOGIN="your_42_login"
 ```
 
-<a name="start"/>
-
 ## Start the program
 
-You can use the -h option to get informations about the program anything
+You can use the -h option to get information about the program
     
 ```bash
   ./sslog.sh -h
 ```
 
-To start using it right away, you can use the -l option to specify your login and -m to specify the month you want to know the logtime
+To start using it right away, you can use the -l option to specify your login and -m to specify the month
 
 ```bash
   ./sslog.sh -l your_42_login -m chosen_month -s
@@ -65,37 +69,8 @@ To start using it right away, you can use the -l option to specify your login an
   #If you put the "-s" flag it will show you the dates
 ```
 
-<a name="notes"/>
-
-## NOTES 📝
-   -  If you have chosen the current month, the program also tells you:
-      - how much time is left before the 27th
-      - how many days are left before the 27th (counting days off if you have set any)
-      - how much time you should do each day (counting days off if you have set any)
-
-| FAQ | ANSWER |
-| :-: | --- |
-| BONUS LOG | Note that you can cumulate up to **70 hours** of bonus logtime and it's only applicable for the next month |
-| LOGS NOT DISPLAYED YET | you have to wait until midnight ! |
-| CAN WE CHOOSE ANY MONTH | You can't choose a month that is older than 4 months |
-| PUBLIC HOLIDAYS | Automatically add 7 hours; if you come that day, the logtime you will do will be appended to it |
-
-<h3 align="center">‼️ IT DOESN'T TELL THE EXACT LOGTIME ‼️</h3>
-
-<div align="center">
-   <p><strong>My bonus logtime is not the same as the real bonus logtime</strong></p>
-   <p><strong>If you have a doubt about your logtime, please ask your staff</strong></p>
-</div>
-
-<a name="documentation"/>
-
-## Documentation 📕
-
+## Documentation
 [Documentation](https://api.intra.42.fr/apidoc/guides/getting_started)
 
-
-## Author 👨‍💻
-
-- [@Nonino42](https://www.github.com/hanmpark)
-
-Feel free to contact me if you have anything to say about the program / bugs !
+## Contributing
+If you come up with any ideas/issues, feel free to contribute !
