@@ -1,7 +1,10 @@
 # scholarship_logtime
 
 Introducing ***scholarship_logtime*** an exlusively designed program for **42 Nice GEN scholarship students**:  
-This tool is crafted to effortlessly calculate the cumulative logtime for individuals, spanning from the 27th to the 26th of the current month or any specified month. Notably, it even accounts for any bonus time earned in the preceding month, ensuring a comprehensive assessment of your dedicated efforts!
+This tool is crafted to effortlessly calculate the cumulative logtime for individuals, spanning from the 27th to the 26th of the current month or any specified month. 
+
+> [!NOTE]
+> Notably, it even accounts for any bonus time earned in the preceding month, ensuring a comprehensive assessment of your dedicated efforts!
 
 ### Features
 ***scholarship_logtime*** offers you comprehensive and personalized insights
@@ -9,13 +12,11 @@ This tool is crafted to effortlessly calculate the cumulative logtime for indivi
 - **Days Remaining:** Get a clear count of the days left before the 27th, thoughtfully considering any set days off, ensuring you stay on track and make the most of every opportunity.
 - **Daily Target:** To help you pace your efforts intelligently, the program calculates the amount of time you should aim to complete each day, carefully accounting for any planned days off, so you can attain your scholarship goals.
 
-## FAQ
-| FAQ | ANSWER |
-| :-: | --- |
-| BONUS LOG | Note that you can cumulate up to **70 hours** of bonus logtime and it's only applicable for the following month |
-| LOGS NOT DISPLAYED YET | you have to wait until midnight ! |
-| CAN WE CHOOSE ANY MONTH | You can't choose a month that is older than 4 months |
-| PUBLIC HOLIDAYS | Automatically add 7 hours to your logtime counter. If you come that day, the logtime you complete will be added to this initial 7-hour base |
+> [!IMPORTANT]
+> - **BONUS LOG**: Note that you can cumulate up to **70 hours** of bonus logtime and it's only applicable for the following month
+> - **LOGS NOT DISPLAYED**: It refreshes at midnight
+> - **NOT ANY MONTH**: You can't choose a month that is older than 4 months
+> - **PUBLIC HOLIDAYS**: Automatically add 7 hours to your logtime counter. If you come that day, the logtime you complete will be added to this initial 7-hour base
 
 ## Installation
 
