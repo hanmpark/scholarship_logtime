@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 02:17:58 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:46:21 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 13:16:01 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,24 @@ static int	set_month(char *month)
 	return (current_month());
 }
 
-static bool	set_month_show(int argc, char **argv, t_data *data)
+static bool	set_month_show(char **argv, t_data *data)
 {
+	int	i;
+
 	data->month = set_month(argv[1]);
 	if (data->month == -1)
 		return (false);
-	if (argc > 1 && (!strcmp(argv[1], "-s") || !strcmp(argv[2], "-s")))
-		data->show = 1;
+	i = 0;
+	while (argv[++i])
+	{
+		if (!strcmp(argv[i], "-s"))
+			data->show = true;
+	}
 	return (true);
 }
 
 // Initializes the data structure
-bool	init_data(int argc, char **argv, t_data *data)
+bool	init_data(char **argv, t_data *data)
 {
 	setbuf(stdout, NULL);
 	parse_json("holidays.txt", HOLIDAYS);
@@ -57,7 +63,7 @@ bool	init_data(int argc, char **argv, t_data *data)
 	data->month = 0;
 	data->show = false;
 	data->log = NULL;
-	if (!set_month_show(argc, argv, data))
+	if (!set_month_show(argv, data))
 		return (false);
 	data->last_month = data->month - 1;
 	if (data->month == 1)

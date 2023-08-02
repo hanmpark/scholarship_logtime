@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:21:31 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 13:15:35 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_data
 	bool				show;
 }	t_data;
 
-bool	init_data(int argc, char **argv, t_data *data);
+bool	init_data(char **argv, t_data *data);
 void	free_structure(t_data data);
 void	free_array(char **array);
 

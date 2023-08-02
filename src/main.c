@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 22:25:52 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:31:00 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/02 13:15:42 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (!init_data(argc, argv, &data))
+	(void)argc;
+	if (!init_data(argv, &data))
 		return (1);
 	set_dates(&data);
 	data.log = get_logs(data);
