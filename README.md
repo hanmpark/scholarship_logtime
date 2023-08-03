@@ -15,7 +15,6 @@ This tool is crafted to effortlessly calculate the cumulative logtime for indivi
 > [!IMPORTANT]
 > - **BONUS LOG**: Note that you can cumulate up to **70 hours** of bonus logtime and it's only applicable for the following month
 > - **LOGS NOT DISPLAYED**: It refreshes at midnight
-> - **NOT ANY MONTH**: You can't choose a month that is older than 4 months
 > - **PUBLIC HOLIDAYS**: Automatically add 7 hours to your logtime counter. If you come that day, the logtime you complete will be added to this initial 7-hour base
 
 ## Installation

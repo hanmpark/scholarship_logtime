@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 01:00:50 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/03 23:38:30 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/04 00:00:00 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # define PRINT_MONTH BLUE "\nTHE CHOSEN MONTH'S LOGTIMES:\n" DEF
 # define PRINT_HD BLUE "\nPUBLIC HOLIDAYS:\n" DEF
-# define PRINT_HD_HOURS ITALIC GREEN "  +%d\n" DEF
+# define PRINT_HD_HOURS ITALIC GREEN "  +%dh\n" DEF
 # define PRINT_BNLOG BOLD "\nBonus log: " GREEN "%dh %dmin %ds\n\n" DEF
 # define PRINT_WITHOUT_BN CYAN "Without bonus = " UL "%dh %dmin %ds" DEF
 
