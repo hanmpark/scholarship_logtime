@@ -6,20 +6,18 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 01:05:09 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:48:10 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:41:37 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_TIME_H
 # define GET_TIME_H
 
-# define JSON_YEAR 2
-# define JSON_MONTH 7
-# define TXT_MONTH 6
-# define TXT_DAY 9
-# define TXT_SECONDS 20
-# define TXT_MINUTES 17
-# define TXT_HOURS 14
+# define TXT_MONTH 5
+# define TXT_DAY 8
+# define TXT_SECONDS 19
+# define TXT_MINUTES 16
+# define TXT_HOURS 13
 
 # define H 2
 # define MIN 1
@@ -28,11 +26,6 @@
 # include <time.h>
 
 void		set_dates(t_data *data);
-void		parse_json(const char *txt_file, int dates);
-int			trim_tab(char **tab, int len);
-char		**ft_split(const char *s, char c);
-bool		is_correct_date(char *date, int month, int last_month);
-
 int			days_left(void);
 int			current_month(void);
 int			current_day(void);

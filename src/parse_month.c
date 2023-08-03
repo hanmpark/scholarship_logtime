@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:41:04 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:34:47 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:47:34 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ static char	*get_reference_date(int month, int last_month, int fd)
 		return (NULL);
 	}
 	return (date);
+}
+
+static bool	is_correct_date(char *date, int month, int last_month)
+{
+	return ((date && find_time(date, TXT_MONTH) == month && find_time(date, TXT_DAY) < 27)
+		|| (date && find_time(date, TXT_MONTH) == last_month && find_time(date, TXT_DAY) > 26));
 }
 
 static char	**find_month_dates(int month, int last_month, int fd)

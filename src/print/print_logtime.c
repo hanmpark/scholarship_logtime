@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:20:10 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:51:00 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/03 23:38:38 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	print_bnlog(int *stdlog, int *bnlog)
 	printf(PRINT_WITHOUT_BN, stdlog[2], stdlog[1], stdlog[0]);
 }
 
-static void	print_month(char *title, char **dates)
+static void	print_month(char *title, char **dates, int holidays)
 {
 	int	i;
 
@@ -32,6 +32,8 @@ static void	print_month(char *title, char **dates)
 	printf("%s", title);
 	while (dates[++i])
 		printf("  - %s", dates[i]);
+	if (holidays)
+		printf(PRINT_HD_HOURS, holidays);
 }
 
 // Prints every important information
@@ -42,8 +44,8 @@ void	print_logtime(t_data data)
 	log = data.log;
 	if (data.show == true)
 	{
-		print_month(PRINT_MONTH, data.chosen);
-		print_month(PRINT_HD, data.holidays);
+		print_month(PRINT_MONTH, data.chosen, 0);
+		print_month(PRINT_HD, data.holidays, log->hd_log);
 	}
 	print_bnlog(log->log, log->bn_log);
 	printf(PRINT_TOTAL_TIME, log->total_log[H], log->total_log[MIN], log->total_log[S]);

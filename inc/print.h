@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 01:00:50 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:50:28 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/03 23:38:30 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,9 @@
 
 /* ------- PRINTS MESSAGES ------- */
 
-# define CHOSEN_MONTH BACK GRAY "- [INFO] Chosen month: " DEF "%d\n"
-# define NOEXIST_MONTH BACK RED "- [ERROR] Month does not exist...\n\n" DEF
-# define CURRENT_MONTH BACK GRAY "- [INFO] Current month: " DEF "%d\n"
-
 # define PRINT_MONTH BLUE "\nTHE CHOSEN MONTH'S LOGTIMES:\n" DEF
 # define PRINT_HD BLUE "\nPUBLIC HOLIDAYS:\n" DEF
+# define PRINT_HD_HOURS ITALIC GREEN "  +%d\n" DEF
 # define PRINT_BNLOG BOLD "\nBonus log: " GREEN "%dh %dmin %ds\n\n" DEF
 # define PRINT_WITHOUT_BN CYAN "Without bonus = " UL "%dh %dmin %ds" DEF
 
