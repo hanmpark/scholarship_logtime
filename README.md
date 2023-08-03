@@ -1,5 +1,4 @@
 # scholarship_logtime
-
 Introducing ***scholarship_logtime*** an exlusively designed program for **42 Nice GEN scholarship students**:  
 This tool is crafted to effortlessly calculate the cumulative logtime for individuals, spanning from the 27th to the 26th of the current month or any specified month. 
 
@@ -18,15 +17,16 @@ This tool is crafted to effortlessly calculate the cumulative logtime for indivi
 > - **PUBLIC HOLIDAYS**: Automatically add 7 hours to your logtime counter. If you come that day, the logtime you complete will be added to this initial 7-hour base
 
 ## Installation
-
 Git clone my repo
 
 ```bash
   git clone https://github.com/Nonino42/scholarship_logtime.git
 ```
 
-### API
+> [!IMPORTANT]  
+> To be able to run the program, you will have to install the `jq` command
 
+### API
 As the program needs to access the 42 API, you will have to create an application v2 in your intra
 
 For that, go on your intra, click on your profile, settings, API, register a new app at the top right on your screen

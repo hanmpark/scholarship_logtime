@@ -72,7 +72,6 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-
 if [[ -z "$month" ]]; then
 	month=$(date +%m)
 	printf "$CURRENT_MONTH$(write_month $month)\n"
