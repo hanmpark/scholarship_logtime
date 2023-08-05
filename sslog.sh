@@ -104,7 +104,7 @@ last_month=$(format_date $last_month)
 #                                   API CALL                                  #
 # *************************************************************************** #
 
-curl -s -k "$HOLIDAYS_API" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | sort -r > holidays.txt
+curl -s -k "$HOLIDAYS_API" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | sort -r | grep -E "(^$last_year-)|(^$year-)" > holidays.txt
 GET_TOKEN=$(curl -s -X POST --data "grant_type=client_credentials&client_id=$UID_42&client_secret=$SECRET_42" https://api.intra.42.fr/oauth/token | cut -b 18-)
 if [[ "$GET_TOKEN" == *error* ]]; then
 	printf "$US_42_MISSING" 1>&2
@@ -143,6 +143,6 @@ if [ $? != 0 ]; then
 	exit 1
 fi
 
-"./$SRC_FOLDER/calculator" $month $option_s
+"./$SRC_FOLDER/calculator" $month $year $option_s
 make fclean > /dev/null 2>&1
 rm "./$SRC_FOLDER/calculator" > /dev/null 2>&1

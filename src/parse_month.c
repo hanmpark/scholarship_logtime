@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:41:04 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/03 21:47:34 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:20:52 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,7 @@ void	set_dates(t_data *data)
 	data->chosen = get_dates("dates.txt", month, last_month);
 	data->holidays = get_dates("holidays.txt", month, last_month);
 	month = last_month;
-	last_month = month - 1;
-	if (month == 1)
-		last_month = 12;
+	last_month = GET_LAST_MONTH(month);
 	data->bonus = get_dates("dates.txt", month, last_month);
 	data->bonus_holidays = get_dates("holidays.txt", month, last_month);
 }

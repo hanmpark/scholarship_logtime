@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/03 21:45:36 by hanmpark         ###   ########.fr       */
+/*   Updated: 2023/08/06 01:13:46 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
-# define HOLIDAYS 1
-# define DATES 0
+# define GET_LAST_MONTH(month) (month == 1 ? 12 : month - 1)
+# define GET_LAST_YEAR(month, year) (month == 1 ? year - 1 : year)
 
 typedef struct s_logtime
 {
