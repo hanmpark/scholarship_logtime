@@ -56,7 +56,7 @@ while [[ $# -gt 0 ]]; do
 			fi
 			shift 2
 			;;
-		-s)
+		-s|--show)
 			option_s="-s"
 			shift
 			;;
@@ -72,29 +72,39 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
+year=$(date +%Y)
+last_year=$(date +%Y)
+current_day=$(date +%d)
+
 if [[ -z "$month" ]]; then
 	month=$(date +%m)
 	printf "$CURRENT_MONTH$(write_month $month)\n"
+	if [ "$current_day" -gt 26 ]; then
+		month=$(expr $month + 1)
+		if [ "$month" -gt 12 ]; then
+			month=1
+		fi
+	fi
 else
 	month=$(format_date $month)
-	if [ "$(expr "$month" \< 1)" -eq 1 ] || [ "$(expr "$month" \> 12)" -eq 1 ]; then
+	if [ "$month" -lt 1 ] || [ "$month" -gt 12 ]; then
 		printf "$NO_EXIST_MONTH" 1>&2
 		exit 1
 	else
 		printf "$CHOSEN_MONTH$(write_month $month)\n"
+		if [ "$month" -gt "$(date +%m)" ]; then
+			year=$(expr $year - 1)
+			last_year=$(expr $last_year - 1)
+		fi
 	fi
 fi
 
-year=$(date +%Y)
-last_year=$(date +%Y)
 last_month=$(expr $month - 2)
-if [ "$(expr "$month" \> $(date +%m))" -eq 1 ]; then
-	year=$(expr $year - 1)
-fi
-if [ "$(expr $last_month \<= 0)" -eq 1 ]; then
+
+if [ "$last_month" -le 0 ]; then
 	last_month=$(expr 12 + $last_month)
 fi
-if [ "$(expr "$month" \> $(date +%m))" -eq 1 ] || [ "$(expr $last_month \> $month)" -eq 1 ]; then
+if [ "$last_month" -gt "$month" ] && [ "$last_year" -eq "$(date +%Y)" ]; then
 	last_year=$(expr $last_year - 1)
 fi
 
