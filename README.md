@@ -39,16 +39,16 @@ You can skip the other cases
 
 Now you should have your **_UID_** and your **_SECRET_**
 
-Now go back to your terminal and set your application's UID and SECRET in _.env_ file
+Now go back to your terminal and set your application's UID and SECRET in _env_sslog_ file
 
-```env
+```bash
   UID_42="your_application_UID"
   SECRET_42="your_application_SECRET"
 ```
 
 **If you want to save the login for multiple uses without having to type it every time, you can set it in the file too**
 
-```env
+```bash
   LOGIN="your_42_login"
 ```
 

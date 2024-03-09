@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if ! test -f settings; then
-	printf "Settings are not set. Starting ./init"
-	init
+	printf "Settings are not set. Starting ./init_sslog"
+	init_sslog
 fi
 
 source settings
-source env
-source functions
+source env_sslog
+source functions_sslog
 
 # -------------------------------------------------------- Retrieve data ------------------------------------------------------- #
 SRC_FOLDER="$PR_PATH/src"
@@ -77,7 +77,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [ -z "$login" ]; then # Check if a login is in argument
-	if [ -z "$LOGIN" ]; then # if not, check if a login is in .env
+	if [ -z "$LOGIN" ]; then # if not, check if a login is in .env_sslog
 		printf "$SET_LOGIN" 1>&2
 		exit 1
 	else
