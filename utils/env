@@ -1,7 +1,3 @@
-UID_42="your_application_UID"
-SECRET_42="your_application_SECRET"
-LOGIN="your_42_login"
-
 # *************************************************************************** #
 #                                  DISPLAYING                                 #
 # *************************************************************************** #
@@ -29,5 +25,3 @@ SET_LOGIN="$RED$UP  [ERROR] Please set a login\n\n$DEF"
 EXIST_LOGIN="$RED$UP  [ERROR] Please set an existing login\n\n$DEF"
 LOGIN_IS="$GRAY  [INFO] Login: $DEF"
 ERR_COMPILE="$RED$UP$BACK$UP  [ERROR] A problem occurred while trying to compile the code\n\n$DEF"
-
-HOLIDAYS_API="https://calendrier.api.gouv.fr/jours-feries/metropole.json"

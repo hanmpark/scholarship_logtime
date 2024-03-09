@@ -1,0 +1,68 @@
+#!/bin/bash
+
+source ./utils/env
+clear
+printf "
+$PURPLE
+█▀ █▀▀ █ █ █▀█ █   ▄▀█ █▀█ █▀ █ █ █ █▀█  █   █▀█ █▀▀ ▀█▀ █ █▀▄▀█ █▀▀
+▄█ █▄▄ █▀█ █▄█ █▄▄ █▀█ █▀▄ ▄█ █▀█ █ █▀▀  █▄▄ █▄█ █▄█  █  █ █ ▀ █ ██▄
+____________________________________________________________________
+$DEF
+
+╭─────────────────────────────────────────────────────────────╮
+│                                                             │
+│    First create a 42 application following this link:       │
+│    https://api.intra.42.fr/apidoc/guides/getting_started    │
+│                                                             │
+╰─────────────────────────────────────────────────────────────╯
+
+"
+
+printf "${GRAY}Paste your application UID:${DEF} "
+read -p "" UID_42 
+printf "${GRAY}Paste your application SECRET:${DEF} "
+read -p "" SECRET_42
+printf "${DEF}\n"
+
+# ---------------------------------------- Obtain an access token ---------------------------------------- #
+RESPONSE=$(curl -s --request POST \
+		--url "https://api.intra.42.fr/oauth/token" \
+		--header "content-type: application/json" \
+		--data "{
+				\"grant_type\": \"client_credentials\",
+				\"client_id\": \"$UID_42\",
+				\"client_secret\": \"$SECRET_42\"
+		}")
+if [[ "$RESPONSE" == *"error"* ]]; then
+		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET)\n${DEF}"
+		exit 1
+fi
+
+ACCESS_TOKEN=$(echo $RESPONSE | jq -r '.access_token')
+if [ -z "$ACCESS_TOKEN" ]; then
+		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET)\n${DEF}"
+		exit 1
+fi
+
+# ---------------------------------------- Get Basic User Info ---------------------------------------- #
+while : ; do
+		printf "${GRAY}Type your login to fetch campus information:${DEF} "
+		read -p "" LOGIN
+		USER_DATA=$(curl -g -s -H "Authorization: Bearer $ACCESS_TOKEN" "https://api.intra.42.fr/v2/users/$LOGIN")
+		if [[ "$USER_DATA" == "{}" ]]; then
+				printf "${RED}Couldn't find user in 42 Database$DEF\n"
+		else
+				break;
+		fi
+done
+
+printf "\n"
+PR_PATH=$(pwd)
+
+printf "
+# VARIABLES
+UID_42=\"$UID_42\"
+SECRET_42=\"$SECRET_42\"
+PR_PATH=\"$PR_PATH\"
+LOGIN=\"$LOGIN\"
+" > settings

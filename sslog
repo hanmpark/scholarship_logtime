@@ -1,11 +1,15 @@
 #!/bin/bash
 
-source .env
-source functions.sh
+if ! test -f settings; then
+	printf "Settings are not set. Starting ./init"
+	./init
+fi
 
-# *************************************************************************** #
-#                                RETRIEVE DATA                                #
-# *************************************************************************** #
+source ./settings
+source ./utils/env
+source ./utils/functions
+
+# -------------------------------------------------------- Retrieve data ------------------------------------------------------- #
 SRC_FOLDER="src"
 
 clear
@@ -31,7 +35,7 @@ option_s=""
 while [[ $# -gt 0 ]]; do
 	case "$1" in
 		-l|--login)
-			if [[ -z "$2" ]]; then # Checks if the following argument exist or not
+			if [[ -z "$2" ]]; then # Checks if the following argument exists or not
 				printf "$MISSING_LOGIN" 1>&2
 				exit 1
 			fi
@@ -72,6 +76,18 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
+if [ -z "$login" ]; then # Check if a login is in argument
+	if [ -z "$LOGIN" ]; then # if not, check if a login is in .env
+		printf "$SET_LOGIN" 1>&2
+		exit 1
+	else
+		LOGIN=$LOGIN
+	fi
+else
+	LOGIN=$login
+fi
+
+# --------------------------------------------------- Calculate current date --------------------------------------------------- #
 year=$(date +%Y)
 last_year=$(date +%Y)
 current_day=$(date +%d)
@@ -110,27 +126,27 @@ fi
 
 last_month=$(format_date $last_month)
 
-# *************************************************************************** #
-#                                   API CALL                                  #
-# *************************************************************************** #
+# ---------------------------------------------------------- API CALL ---------------------------------------------------------- #
+curl -s -k "https://calendrier.api.gouv.fr/jours-feries/metropole.json" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | \
+	sort -r | grep -E "(^$last_year-)|(^$year-)" > $PR_PATH/holidays.txt
 
-curl -s -k "$HOLIDAYS_API" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | sort -r | grep -E "(^$last_year-)|(^$year-)" > holidays.txt
-GET_TOKEN=$(curl -s -X POST --data "grant_type=client_credentials&client_id=$UID_42&client_secret=$SECRET_42" https://api.intra.42.fr/oauth/token | cut -b 18-)
-if [[ "$GET_TOKEN" == *error* ]]; then
-	printf "$US_42_MISSING" 1>&2
-	exit 1
-fi
-TOKEN_42="${GET_TOKEN%%\"*}"
-
-if [ -z "$login" ]; then # Check if a login is in argument
-	if [ -z "$LOGIN" ]; then # if not, check if a login is in .env
-		printf "$SET_LOGIN" 1>&2
+RESPONSE=$(curl -s --request POST \
+		--url "https://api.intra.42.fr/oauth/token" \
+		--header "content-type: application/json" \
+		--data "{
+				\"grant_type\": \"client_credentials\",
+				\"client_id\": \"$UID_42\",
+				\"client_secret\": \"$SECRET_42\"
+		}")
+if [[ "$RESPONSE" == *"error"* ]]; then
+		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET)\n${DEF}"
 		exit 1
-	else
-		LOGIN=$LOGIN
-	fi
-else
-	LOGIN=$login
+fi
+
+TOKEN_42=$(echo $RESPONSE | jq -r '.access_token')
+if [ -z "$TOKEN_42" ]; then
+		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET)\n${DEF}"
+		exit 1
 fi
 
 DATES=$(curl -s -H "Authorization: Bearer $TOKEN_42" "https://api.intra.42.fr/v2/users/$LOGIN/locations_stats?begin_at=$last_year-$last_month-27&end_at=$year-$month-26" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | cut -c 1-21)
@@ -142,9 +158,7 @@ else
 	printf "$LOGIN_IS$LOGIN\n"
 fi
 
-# *************************************************************************** #
-#                               RUNNING PROGRAM                               #
-# *************************************************************************** #
+# ------------------------------------------------------- PROGRAM LAUNCH ------------------------------------------------------- #
 make > /dev/null 2>&1
 mv calculator "$SRC_FOLDER"/calculator > /dev/null 2>&1
 
