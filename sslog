@@ -2,15 +2,15 @@
 
 if ! test -f settings; then
 	printf "Settings are not set. Starting ./init"
-	./init
+	init
 fi
 
-source ./settings
-source ./utils/env
-source ./utils/functions
+source settings
+source env
+source functions
 
 # -------------------------------------------------------- Retrieve data ------------------------------------------------------- #
-SRC_FOLDER="src"
+SRC_FOLDER="$PR_PATH/src"
 
 clear
 printf "
@@ -159,14 +159,14 @@ else
 fi
 
 # ------------------------------------------------------- PROGRAM LAUNCH ------------------------------------------------------- #
-make > /dev/null 2>&1
-mv calculator "$SRC_FOLDER"/calculator > /dev/null 2>&1
+make -C $PR_PATH > /dev/null 2>&1
+mv $PR_PATH/calculator $SRC_FOLDER/calculator > /dev/null 2>&1
 
 if [ $? != 0 ]; then
 	printf "$ERR_COMPILE" 1>&2
 	exit 1
 fi
 
-"./$SRC_FOLDER/calculator" $month $year $option_s
-make fclean > /dev/null 2>&1
-rm "./$SRC_FOLDER/calculator" > /dev/null 2>&1
+$SRC_FOLDER/calculator $month $year $option_s
+make -C $PR_PATH fclean > /dev/null 2>&1
+rm $SRC_FOLDER/calculator > /dev/null 2>&1

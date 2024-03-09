@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./utils/env
+source env
+
 clear
 printf "
 $PURPLE
