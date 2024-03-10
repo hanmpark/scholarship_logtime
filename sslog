@@ -132,7 +132,7 @@ last_month=$(format_date $last_month)
 
 # ---------------------------------------------------------- API CALL ---------------------------------------------------------- #
 curl -s -k "https://calendrier.api.gouv.fr/jours-feries/metropole.json" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | \
-	sort -r | grep -E "(^$last_year-)|(^$year-)" > $SL_PATH/holidays.txt
+	sort -r | grep -E "(^$last_year-)|(^$year-)" > $SCRIPT_DIR/holidays.txt
 
 RESPONSE=$(curl -s --request POST \
 		--url "https://api.intra.42.fr/oauth/token" \
