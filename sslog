@@ -1,18 +1,22 @@
 #!/bin/bash
 
-if ! test -f settings; then
-	printf "Settings are not set. Starting ./init_sslog"
-	init_sslog
+clear
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+
+source ${SCRIPT_DIR}/env_sslog
+
+if ! test -f "$SCRIPT_DIR/settings"; then
+	printf "${RED}The settings have not been configured. Executing ./init_sslog.\n${DEF}"
+	$SCRIPT_DIR/init_sslog
 fi
 
-source settings
-source env_sslog
-source functions_sslog
+source $SCRIPT_DIR/settings
+source $SCRIPT_DIR/functions_sslog
 
 # -------------------------------------------------------- Retrieve data ------------------------------------------------------- #
-SRC_FOLDER="$PR_PATH/src"
+SRC_FOLDER="$SCRIPT_DIR/src"
 
-clear
 printf "
 $PURPLE
 █▀ █▀▀ █ █ █▀█ █   ▄▀█ █▀█ █▀ █ █ █ █▀█  █   █▀█ █▀▀ ▀█▀ █ █▀▄▀█ █▀▀
@@ -128,7 +132,7 @@ last_month=$(format_date $last_month)
 
 # ---------------------------------------------------------- API CALL ---------------------------------------------------------- #
 curl -s -k "https://calendrier.api.gouv.fr/jours-feries/metropole.json" | jq -r 'to_entries[] | "\(.key) : \(.value)"' | \
-	sort -r | grep -E "(^$last_year-)|(^$year-)" > $PR_PATH/holidays.txt
+	sort -r | grep -E "(^$last_year-)|(^$year-)" > $SL_PATH/holidays.txt
 
 RESPONSE=$(curl -s --request POST \
 		--url "https://api.intra.42.fr/oauth/token" \
@@ -154,13 +158,13 @@ if [[ -z "$DATES" ]]; then
 	printf "$EXIST_LOGIN" 1>&2
 	exit 1
 else
-	echo "$DATES" > dates.txt
+	echo "$DATES" > $SCRIPT_DIR/dates.txt
 	printf "$LOGIN_IS$LOGIN\n"
 fi
 
 # ------------------------------------------------------- PROGRAM LAUNCH ------------------------------------------------------- #
-make -C $PR_PATH > /dev/null 2>&1
-mv $PR_PATH/calculator $SRC_FOLDER/calculator > /dev/null 2>&1
+make -C $SCRIPT_DIR > /dev/null 2>&1
+mv $SCRIPT_DIR/calculator $SRC_FOLDER/calculator > /dev/null 2>&1
 
 if [ $? != 0 ]; then
 	printf "$ERR_COMPILE" 1>&2
@@ -168,5 +172,5 @@ if [ $? != 0 ]; then
 fi
 
 $SRC_FOLDER/calculator $month $year $option_s
-make -C $PR_PATH fclean > /dev/null 2>&1
+make -C $SCRIPT_DIR fclean > /dev/null 2>&1
 rm $SRC_FOLDER/calculator > /dev/null 2>&1

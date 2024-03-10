@@ -1,8 +1,9 @@
 #!/bin/bash
 
-source env_sslog
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
-clear
+source ${SCRIPT_DIR}/env_sslog
+
 printf "
 $PURPLE
 █▀ █▀▀ █ █ █▀█ █   ▄▀█ █▀█ █▀ █ █ █ █▀█  █   █▀█ █▀▀ ▀█▀ █ █▀▄▀█ █▀▀
@@ -58,12 +59,10 @@ while : ; do
 done
 
 printf "\n"
-PR_PATH=$(pwd)
 
 printf "
 # VARIABLES
 UID_42=\"$UID_42\"
 SECRET_42=\"$SECRET_42\"
-PR_PATH=\"$PR_PATH\"
 LOGIN=\"$LOGIN\"
-" > settings
+" > $SCRIPT_DIR/settings
