@@ -143,13 +143,13 @@ RESPONSE=$(curl -s --request POST \
 				\"client_secret\": \"$SECRET_42\"
 		}")
 if [[ "$RESPONSE" == *"error"* ]]; then
-		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET)\n${DEF}"
+		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET / execute ./init_sslog)\n${DEF}"
 		exit 1
 fi
 
 TOKEN_42=$(echo $RESPONSE | jq -r '.access_token')
 if [ -z "$TOKEN_42" ]; then
-		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET)\n${DEF}"
+		printf "${BOLD}${RED}Error: Failed to obtain access token (check UID and SECRET / execute ./init_sslog)\n${DEF}"
 		exit 1
 fi
 
