@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 02:17:58 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/06 01:13:57 by hanmpark         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:56:06 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void	init_data(char **argv, t_data *data)
 	data->bonus = NULL;
 	data->holidays = NULL;
 	data->bonus_holidays = NULL;
-	data->month = atoi(argv[1]);
+	data->month = atoi(argv[2]);
 	data->show = false;
 	data->log = NULL;
 	set_show_flag(argv, data);
 	data->last_month = GET_LAST_MONTH(data->month);
+	data->script_dir = ft_strdup(argv[1]);
 }
 
 // Frees an array of strings
@@ -72,4 +73,5 @@ void	free_structure(t_data data)
 	if (data.log->time_left)
 		free(data.log->time_left);
 	free(data.log);
+	free(data.script_dir);
 }

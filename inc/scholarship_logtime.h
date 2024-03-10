@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:56:48 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/06 01:13:46 by hanmpark         ###   ########.fr       */
+/*   Updated: 2024/03/10 22:00:12 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ typedef struct s_data
 	int					month;
 	int					last_month;
 	bool				show;
+	char				*script_dir;
 }	t_data;
 
 void	init_data(char **argv, t_data *data);
 void	free_structure(t_data data);
 void	free_array(char **array);
+
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

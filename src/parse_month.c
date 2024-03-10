@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:41:04 by hanmpark          #+#    #+#             */
-/*   Updated: 2024/03/10 19:13:42 by hanmpark         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:55:56 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,21 @@ static char	**get_dates(const char *file, int month, int last_month)
 
 void	set_dates(t_data *data)
 {
-	int	month;
-	int	last_month;
+	int		month;
+	int		last_month;
+	char	*dir_dates;
+	char	*dir_holidays;
 
 	month = data->month;
 	last_month = data->last_month;
-	data->chosen = get_dates("dates.txt", month, last_month);
-	data->holidays = get_dates("holidays.txt", month, last_month);
+	dir_dates = ft_strjoin(data->script_dir, "/dates.txt");
+	dir_holidays = ft_strjoin(data->script_dir, "/holidays.txt");
+	data->chosen = get_dates(dir_dates, month, last_month);
+	data->holidays = get_dates(dir_holidays, month, last_month);
 	month = last_month;
 	last_month = GET_LAST_MONTH(month);
-	data->bonus = get_dates("dates.txt", month, last_month);
-	data->bonus_holidays = get_dates("holidays.txt", month, last_month);
+	data->bonus = get_dates(dir_dates, month, last_month);
+	data->bonus_holidays = get_dates(dir_holidays, month, last_month);
+	free(dir_dates);
+	free(dir_holidays);
 }

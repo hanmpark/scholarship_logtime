@@ -6,7 +6,7 @@
 #    By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 11:59:19 by hanmpark          #+#    #+#              #
-#    Updated: 2024/03/10 19:09:40 by hanmpark         ###   ########.fr        #
+#    Updated: 2024/03/10 21:54:57 by hanmpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS_PATH = ./src/
 
 SRCS_SRCS = ${addprefix ${SRCS_PATH}, main.c \
 										init_data.c \
-										parse_month.c}
+										parse_month.c \
+										utils.c}
 
 GNL_PATH = ${SRCS_PATH}gnl/
 SRCS_GNL = ${addprefix ${GNL_PATH}, get_next_line.c \
