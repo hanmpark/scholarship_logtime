@@ -1,6 +1,6 @@
 # scholarship_logtime
-Introducing ***scholarship_logtime*** an exlusively designed program for **42 Nice GEN scholarship students**:  
-This tool is crafted to effortlessly calculate the cumulative logtime for individuals, spanning from the 27th to the 26th of the current month or any specified month. 
+Introducing ***scholarship_logtime*** an exlusively designed program for **42 Nice GEN scholarship students**: <br>
+This tool is crafted to effortlessly calculate the cumulative logtime for individuals, spanning from the 27th to the 26th of the current month or any specified month. <br>
 
 > [!NOTE]
 > Notably, it even accounts for any bonus time earned in the preceding month, ensuring a comprehensive assessment of your dedicated efforts!
@@ -39,22 +39,11 @@ You can skip the other cases
 
 Now you should have your **_UID_** and your **_SECRET_**
 
-Now go back to your terminal and set your application's UID and SECRET in _env_sslog_ file
-
-```bash
-  UID_42="your_application_UID"
-  SECRET_42="your_application_SECRET"
-```
-
-**If you want to save the login for multiple uses without having to type it every time, you can set it in the file too**
-
-```bash
-  LOGIN="your_42_login"
-```
+Now go back to your terminal and launch the executable `init_sslog`. It will ask you to put the important information such as the UID and the SECRET of your application
 
 ## Start the program
 
-You can use the -h option to get information about the program
+You can use the -h (or --help) option to get information about the program
     
 ```bash
   ./sslog.sh -h
