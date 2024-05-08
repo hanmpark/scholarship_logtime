@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:35:46 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:53:32 by hanmpark         ###   ########.fr       */
+/*   Updated: 2024/05/08 10:15:36 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static void	incomplete_logtime(t_logtime *log)
 	printf(PRINT_TO_DO, get_color(log->avg_left[H]), log->avg_left[H], log->avg_left[MIN], log->avg_left[S]);
 }
 
-/* Checks the logtime
-* - if some time is still left to do the minimum of hours,
-* prints useful information to be able to fulfill them
-* - else checks if it can store bonus hours for next month or not
-*/
+/**
+ * Checks the logtime
+ * - if some time is still left to do the minimum of hours,
+ * prints useful information to be able to fulfill them
+ * - else checks if it can store bonus hours for next month or not
+ */
 void	check_logtime(t_logtime *log)
 {
 	printf("------------------------------------------------------\n");

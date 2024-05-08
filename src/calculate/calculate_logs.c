@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:55:38 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:45:14 by hanmpark         ###   ########.fr       */
+/*   Updated: 2024/05/08 10:16:14 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ static int	get_sum_of_time(char **date, int time_type)
 	return (sum);
 }
 
-/* Calculates the total of time done during the month:
-* - get the sum of seconds, minutes and hours
-* - store the sum in an array of 3 integers
-*/
+/**
+ * Calculates the total of time done during the month:
+ * - get the sum of seconds, minutes and hours
+ * - store the sum in an array of 3 integers
+ */
 int	*ccl_addlog(char **month)
 {
 	int	*sum;

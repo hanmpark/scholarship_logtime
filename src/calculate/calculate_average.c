@@ -6,7 +6,7 @@
 /*   By: hanmpark <hanmpark@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 02:42:05 by hanmpark          #+#    #+#             */
-/*   Updated: 2023/08/02 02:44:37 by hanmpark         ###   ########.fr       */
+/*   Updated: 2024/05/08 10:17:38 by hanmpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	set_days_off(void)
 {
-	int		days_off;
+	int	days_off;
 
 	printf(PRINT_ASK_DAYSOFF);
 	scanf("%d", &days_off);
